@@ -1,0 +1,27 @@
+{% extends 'main.html' %}{% load crispy_forms_tags %} {% block content %}
+<form method="POST" enctype="multipart/form-data">
+ 
+    <div class="container" style="width: 50%; height:auto;">
+        {% csrf_token %}
+    <center>    <h1>Upload Farm Product </h1> </center>
+        <hr>
+        <div class="card-body">
+            {% if messages %} {% for message in messages %}
+            <div class="alert alert-{{message.tags}}">{{ message }}</div>
+            {% endfor %} {% endif %}
+        </div>  
+        {% if request.session.rmv == 0 %}
+                                <fieldset class="form-group">                                                                             
+                                  <b>Farmer Name:</b>  &nbsp;  {{request.session.fname}}<br>
+                                  <b>Trader Name:</b>  &nbsp;  {{request.session.tame}}<br>
+                                  <b>Product Name:</b> &nbsp;  {{request.session.pname}}<br><br>
+                                    {{form|crispy}}
+                                    <br>
+                                    <button type="submit" class="btn btn-success" id="submit">submit</button>&nbsp;&nbsp;
+                                    <button type="reset" class="btn btn-primary" id="reset">reset</button>
+                                </fieldset>
+                                {% endif %}
+                            </div>
+
+                        </form>
+{% endblock %}

@@ -1,0 +1,310 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+ <head>
+   <title>Test</title>
+   <style>
+     h1 {
+       text-align: center;
+     }
+
+     table {
+       border: 1px solid;
+       margin: 0 auto;
+       width: 70%;
+     }
+
+     td, th {
+       text-align: center;
+       border: 1px solid;
+     }
+   </style>
+ </head>
+ <body>
+   <h1 style="color: red">Farm Corner Bill</h1>
+   <table>   
+        {% if a == "flist" %}
+        <thead>
+            <tr>
+                <th>Farmer Name</th>
+                <th>Address</th>
+                <th>Mobile no.</th>
+                <th>District</th>
+                <th>Taluka</th>
+                <th>City</th>
+                <th>Email</th>
+                <th>Pincode</th>
+                <th>Area</th>
+                <th>Date</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+        {% for i in b %} 
+            <tr class="info">
+                <tr class="danger">
+                    <td>{{i.F_name}}</td>
+                    <td>{{i.Address}}</td>
+                    <td>{{i.Mobileno}}</td>
+                    <td>{{i.District}}</td>
+                    <td>{{i.Taluka}}</td>
+                    <td>{{i.City}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.Pincode}}</td>
+                    <td>{{i.Area}}</td>    
+                    <td>{{i.mydate}}</td> 
+                </tr>               
+            </tr>  
+        {% endfor %}       
+        </tbody>
+
+     {% elif a == "tlist" %}
+     <thead>
+        <tr>
+            <th>Trader Name</th>
+            <th>Address</th>
+            <th>Mobile no.</th>
+            <th>District</th>
+            <th>Taluka</th>
+            <th>City</th>
+            <th>Email</th>
+            <th>Pincode</th>
+            <th>Date</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in b %} 
+        <tr class="danger">
+            <td>{{i.T_name}}</td>
+            <td>{{i.Address}}</td>
+            <td>{{i.Mobileno}}</td>
+            <td>{{i.District}}</td>
+            <td>{{i.Taluka}}</td>
+            <td>{{i.City}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.Pincode}}</td>
+            <td>{{i.mydate}}</td>   
+        </tr> 
+        {% endfor %}
+        </tbody>
+
+        {% elif a == "ehlist" %}
+     <thead>
+        <tr>
+            <th>equipmentholder Name</th>
+            <th>Shop Name</th>
+            <th>Address</th>
+            <th>Mobile no.</th>
+            <th>District</th>
+            <th>Taluka</th>
+            <th>City</th>
+            <th>Email</th>
+            <th>Pincode</th>
+            <th>Date</th>                                   
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in b %} 
+        <tr class="danger">
+            <td>{{i.H_name}}</td>
+            <td>{{i.shop_name}}</td>
+            <td>{{i.Address}}</td>
+            <td>{{i.Mobileno}}</td>
+            <td>{{i.District}}</td>
+            <td>{{i.Taluka}}</td>
+            <td>{{i.City}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.Pincode}}</td>
+            <td>{{i.mydate}}</td>   
+        </tr>
+        {% endfor %}
+        </tbody>
+
+        {% elif a == "fplist" %}
+     <thead>
+        <tr>
+            <th>Image</th>
+            <th>Farmer Name</th>
+            <th>Product Name</th>
+            <th>Mobile no.</th>
+            <th>City</th>
+            <th>Email</th>
+            <th>Quantity/mann</th>  
+            <th>Date</th>                                 
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in b %} 
+        <tr class="danger">
+            <td><img src="{{ i.Image.url }}" class="img-responsive" style="width: 100%; height:150px; " /></td>
+            <td>{{i.F_name}}</td>
+            <td>{{i.P_name}}</td>
+            <td>{{i.Mobileno}}</td>
+            <td>{{i.City}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.Quantity}} mann</td>
+            <td>{{i.mydate}}</td>                       
+        </tr> 
+        {% endfor %}
+        </tbody>
+
+        {% elif a == "tplist" %}
+     <thead>
+        <tr>
+            <th>Holder Name</th>
+            <th>Equipment Name</th>                                   
+            <th>Price/Rs</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in b %} 
+        <tr class="danger">
+            <td>{{i.T_name}}</td>
+            <td>{{i.P_name}}</td>                                    
+            <td>{{i.Price}}/Rs</td>
+            <td>{{i.mydate}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+
+        {% elif a == "helist" %}
+     <thead>
+        <tr>
+            <th>Image</th> 
+            <th>Holder Name</th>
+            <th>Equipment Name</th>
+            <th>Category</th>
+            <th>mobile no.</th>
+            <th>City</th>
+            <th>Email</th>
+            <th>Prices/Rs</th>   
+            <th>Date</th>                                                                   
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in b %} 
+        <tr class="danger">
+            <td><img src="{{ i.Image.url }}" class="img-responsive" style="width: 100%; height:160px;  float:inline-start;" /></td>
+            <td>{{i.H_name}}</td>
+            <td>{{i.E_name}}</td>
+            <td>{{i.Category}}</td>
+            <td>{{i.Mobileno}}</td>
+            <td>{{i.City}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.Rent_price}}</td> 
+            <td>{{i.mydate}}</td>
+               
+        </tr>
+        {% endfor %}
+        </tbody>
+
+        {% elif a == "frlist" %}
+     <thead>
+        <tr>
+            <th>Farmer Name</th>
+            <th>Address</th>   
+            <th>Equipment Name</th>                              
+            <th>mobile no.</th>
+            <th>City</th>
+            <th>Email</th>
+            <th>Pincode</th>   
+            <th>Start Date</th>     
+            <th>End Date</th>                                                            
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in b %} 
+        <tr class="danger">                        
+            <td>{{i.Name}}</td>
+            <td>{{i.Address}}</td>
+            <td>{{j.E_name}}</td>
+            <td>{{i.Mobileno}}</td>
+            <td>{{i.City}}</td>
+            <td>{{i.Email}}</td>
+            <td>{{i.Pincode}}</td>  
+            <td>{{i.startdate}}</td>  
+            <td>{{i.enddate}}</td>   
+        </tr>
+        {% endfor %}
+        </tbody>
+
+        {% elif a == "buylist" %}
+     <thead>
+        <tr>
+            <th>Farmer Name</th>
+            <th>Trader Name</th>                                 
+            <th>Product Name</th>
+            <th>Trader Email</th>
+            <th>Qyantity/Mann</th>
+            <th>Total Price/Rs</th>      
+            <th>Date</th>                                                                                                
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in b %} 
+        <tr class="danger">                        
+            <td>{{i.F_name}}</td>
+            <td>{{i.T_name}}</td>
+            <td>{{i.P_name}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.Quantity}} Mann</td>
+            <td>{{i.Price}} Rs</td>    
+            <td>{{i.mydate}}</td>                                  
+        </tr>
+        {% endfor %}
+        </tbody>
+        
+        {% elif a == "billlist" %}
+     <thead>
+        <tr>
+            <th>Equipment Name</th>
+            <th>Holder Name</th>
+            <th>Total Rs</th>
+            <th>Date</th>               
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in b %} 
+        <tr class="danger">                        
+            <tr class="danger">
+                <td>{{i.Name}}</td>
+                <td>{{i.H_name}}</td>
+                <td>{{i.Total}} Rs</td> 
+                <td>{{i.mydate}}</td>    
+                </tr>                                  
+        </tr>
+        {% endfor %}
+        </tbody>
+
+        {% elif a == "tradbill" %}
+        <center>  <h3 style="color: green"><b>Trader Buy Products</b></h3></center>
+        <hr>
+        <thead>
+        <tr>
+                  <th>Trader Name</th>
+                  <th>Product Name</th>
+                  <th>Email</th>
+                  <th>Quantity/Mann</th>
+                  <th>Price/Rs</th>
+                  <th>Date</th>   
+        </tr>
+            </thead>
+              {% for i in b %}
+            <tbody>
+              <tr class="danger">
+                  <td>{{i.T_name}}</td>
+                  <td>{{i.P_name}}</td>                                  
+                  <td>{{i.email}}</td>
+                  <td>{{i.Quantity}} Mann</td>
+                  <td>{{i.Price}} Rs</td>
+                  <td>{{i.mydate}}</td>                    
+              </tr>
+            </tbody>
+              {% endfor %}
+           
+     {% endif %}
+   </table>
+ </body>
+</html>

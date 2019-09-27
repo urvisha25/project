@@ -1,0 +1,66 @@
+{% extends 'main.html' %} {% block content %} {% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .ena,
+        h4,
+        .close {
+            background-color: #5cb85c;
+            color: white !important;
+            text-align: center;
+            font-size: 30px;
+        }
+       
+        
+        .modal-footer {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="container">
+            <!-- Modal content-->
+            <center>
+                <div class="modal-content" style="margin-top: 50px; width:50%;">
+                      <div class="ena" style="padding:35px 50px;">
+                       <h4><i class="fa fa-lock" aria-hidden="true"></i> Login</h4>
+                    </div>
+                    <div class="modal-body" style="padding:40px 50px;">
+                        {% if messages %} {% for message in messages %}
+                        <div class="alert alert-{{message.tags}}">{{ message }}</div>
+                        {% endfor %} {% endif %}
+                        <form role="form">                           
+                            <div class="form-group">
+                                <label for="email"><i class="fa fa-envelope" aria-hidden="true"></i>
+                                    Email</label>
+                                <input type="text" class="form-control" name="email" id="usrname" placeholder="Enter email">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="psw"><span class="fa fa-key"></span> Password</label>
+                                <input type="password" class="form-control" id="psw" name="password" placeholder="Enter password">
+                            </div>
+                            <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+                            
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                         <p>Forgot <a href="forgotpassword" style="color:cornflowerblue;"><b>Password?</b></a></p>
+                    </div>
+                </div>
+            </center>
+        </div>
+        </div>
+        </div>
+    </form>
+</body>
+
+</html>
+{% endblock %}

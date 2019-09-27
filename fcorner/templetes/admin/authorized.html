@@ -1,0 +1,138 @@
+{% extends 'main.html' %} {% load render_table from django_tables2 %} {% render_table table %} {% block content %} {% load static %}
+<div class="message" style="margin-top: 160px">
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-{{message.tags}}">
+        {{message}}
+    </div>
+    {% endfor %} {% endif %}</div>
+
+<div class="table-responsive" style="font-size: 15px;">
+
+    <!--Farmer Upload Products -->
+
+    {% if request.session.lgnt != null %}
+    <table class="table table-hover">
+        <center>
+            <h3 style="color: green">Farmer Upload Products Table</h3>
+        </center>
+        <tr>
+            <th>Product Image</th>
+            <th>Farmer Name</th>
+            <th>Product Name</th>
+            <th>Mobile no.</th>
+            <th>City</th>
+            <th>Email</th>
+            <th>Quantity</th>
+            <th>Buy</th>
+            <th>Cancel</th>
+        </tr>
+        {% for i in fupld %}
+        <tr class="danger">
+            <td><img src="{{ i.Image.url }}" class="img-responsive" style="width: 70%; height:150px;margin-left: 20px; " /></td>
+            <td>{{i.F_name}}</td>
+            <td>{{i.P_name}}</td>
+            <td>{{i.Mobileno}}</td>
+            <td>{{i.City}}</td>
+            <td>{{i.email}}</td>           
+            <td>{{i.Quantity}}</td>          
+            <td><a href="buy{{i.S_id}}"><button type="submit" value="{{i.S_id}}" id="submit" class="btn btn-success" >BUY</button></a></td>          
+            <td><a href="authorized{{i.S_id}}"><button type="reset" value="{{i.S_id}}" id="cancel" class="btn btn-danger" >Cancel</button></a></td>
+            
+        </tr>
+         {% endfor %}
+    </table>
+    <br>
+    <br>
+    <!--Farmer  -->
+
+    {% else %}
+    <table class="table table-hover">
+        <center>
+            <h3 style="color: green">Farmer Tabel</h3>
+        </center>
+        <tr>
+            <th>Farmer Name</th>
+            <th>Address</th>
+            <th>District</th>
+            <th>City</th>
+            <th>Email</th>
+            <th>Approve</th>
+            <th>Reject</th>
+        </tr>
+        {% for i in istekler %} {% if i.status == 0 %}
+        <tr class="danger">
+            <td>{{i.F_name}}</td>
+            <td>{{i.Address}}</td>
+            <td>{{i.District}}</td>
+            <td>{{i.City}}</td>
+            <td>{{i.email}}</td>
+            <td><a href="accept{{i.F_id}}"><button type="submit" value="{{i.F_id}}" id="submit" class="btn btn-success" ><i class="fas fa-check"></i></button></a></td>
+            <td><a href="authorized{{i.F_id}}"><button type="submit" value="{{i.F_id}}" id="cancel" class="btn btn-danger" ><i class="fas fa-times"></i></button></a></td>
+        </tr>
+        {% endif %} {% endfor %}
+    </table>
+    <br>
+    <br>
+    <!--Holder -->
+
+    <table class="table table-hover">
+        <center>
+            <h3 style="color: green">Holder Tabel</h3>
+        </center>
+        <tr>
+            <th>Holder Name</th>
+            <th>Shop Name</th>
+            <th>Address</th>
+            <th>District</th>
+            <th>City</th>
+            <th>Email</th>
+            <th>Approve</th>
+            <th>Reject</th>
+        </tr>
+        {% for i in holderacp %} {% if i.status == 0 %}
+        <tr class="danger">
+            <td>{{i.H_name}}</td>
+            <td>{{i.shop_name}}</td>
+            <td>{{i.Address}}</td>
+            <td>{{i.District}}</td>
+            <td>{{i.City}}</td>
+            <td>{{i.email}}</td>
+            <td><a href="accept{{i.H_id}}"><button type="submit" value="{{i.H_id}}" id="submit" class="btn btn-success" ><i class="fas fa-check"></i></button></a></td>
+            <td><a href="authorized{{i.H_id}}"><button type="submit" value="{{i.H_id}}" id="cancel" class="btn btn-danger" ><i class="fas fa-times"></i></button></a></td>
+        </tr>
+        {% endif %} {% endfor %}
+    </table>
+    <br>
+    <br>
+    <!--Trader -->
+
+    <table class="table table-hover">
+        <center>
+            <h3 style="color: green">Trader Tabel</h3>
+        </center>
+        <tr>
+            <th>Trader Name</th>
+            <th>Address</th>
+            <th>District</th>
+            <th>City</th>
+            <th>Email</th>
+            <th>Approve</th>
+            <th>Reject</th>
+        </tr>
+        {% for i in trader %} {% if i.status == 0 %}
+        <tr class="danger">
+            <td>{{i.T_name}}</td>
+            <td>{{i.Address}}</td>
+            <td>{{i.District}}</td>
+            <td>{{i.City}}</td>
+            <td>{{i.email}}</td>
+            <td><a href="accept{{i.T_id}}"><button type="submit" value="{{i.T_id}}" id="submit" class="btn btn-success" ><i class="fas fa-check"></i></button></a></td>
+            <td><a href="authorized{{i.T_id}}"><button type="submit" value="{{i.T_id}}" id="cancel" class="btn btn-danger" ><i class="fas fa-times"></i></button></a></td>
+        </tr>
+        {% endif %} {% endfor %}
+    </table>
+
+    {% endif %}
+</div>
+
+{% endblock %}

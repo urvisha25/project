@@ -1,0 +1,59 @@
+{% extends 'main.html' %} {% load render_table from django_tables2 %} {% render_table table %} {% block content %} {% load static %}
+<div class="message" style="margin-top: 160px">
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-{{message.tags}}">
+        {{message}}
+    </div>
+    {% endfor %} {% endif %}</div>
+
+<div class="table-responsive" style="font-size: 15px;">
+
+    <!--Farmer Rent Products --> 
+    <table class="table table-hover">
+        <center>
+            <h3 style="color: green">Farmer Rent form Tabel</h3>
+        </center>  
+        {{request.session.ty}}      
+        <tr>
+            <th>Farmer Name</th>   
+            <th>Address</th>        
+            <th>Mobile no.</th>
+            <th>City</th>
+            <th>Email</th>
+            <th>Pincode</th>
+            <th>Startdate</th>
+            <th>Enddate</th>
+            
+        </tr>
+        {% for i in c %} 
+        <tr class="danger">
+            <td>{{i.Name}}</td> 
+            <td>{{i.Address}}</td>          
+            <td>{{i.Mobileno}}</td>
+            <td>{{i.City}}</td>
+            <td>{{i.Email}}</td>
+            <td>{{i.Pincode}}</td>
+            <td>{{i.startdate}}</td>
+            <td>{{i.enddate}}</td>
+            <td>{{i.Quantity}}</td>  
+            {% if i.status == 0 %}                     
+            <td>
+
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}                
+                                {{form}}   
+                                <input type="number" hidden value="{{i.R_id}}" name="rid" />                          
+                                <button type="submit" class="btn btn-success" id="submit">Bill</button>                        
+                    </form>            
+            </td>            
+            {% else %}
+            <td>Bill Sent</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <br>   
+</div>
+
+{% endblock %}

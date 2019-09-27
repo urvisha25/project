@@ -1,0 +1,74 @@
+{% extends 'main.html' %} {% load render_table from django_tables2 %} {% render_table table %} {% block content %} {% load static %}
+
+<div class="message" style="margin-top: 160px">
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-{{message.tags}}">
+        {{message}}
+    </div>
+    {% endfor %} {% endif %}
+</div>
+
+<div class="table-responsive" style="font-size: 15px;">
+    <!--Farmer Upload Products -->
+
+    <table class="table table-hover" id="example">
+        <center>
+            <h3 style="color: green">Farmer Upload Products List</h3>
+        </center>
+       <thead>
+        <tr>
+            <th>Farmer Name</th>
+            <th>Product Name</th>
+            <th>Mobile no.</th>
+            <th>City</th>
+            <th>Email</th>
+            <th>Quantity</th>
+            <th>Image</th>
+            
+        </tr>
+    </thead>
+      
+        {% for i in upld %} 
+        <tbody>       
+        <tr class="danger">
+            <td>{{i.F_name}}</td>
+            <td>{{i.P_name}}</td>
+            <td>{{i.Mobileno}}</td>
+            <td>{{i.City}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.Quantity}}</td>
+            <td><img src="{{ i.Image.url }}" class="img-responsive" style="width: 50%; height:150px; " /></td>           
+        </tr>  
+    </tbody>            
+        {% endfor %}    
+    </table>
+</div>
+   
+
+<!--*******************************************************************************************-->
+<!--Search the data and record find-->
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" language="javascript" src="//cdn.datatables.net/responsive/1.0.2/js/dataTables.responsive.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+<script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+<!-- DataTables Select JS -->
+<script href="js/addons/datatables-select.min.js" rel="stylesheet"></script>
+<script>
+ $('#example').dataTable({
+
+columnDefs: [{
+orderable: false,
+className: 'select-checkbox',
+targets: 0
+}],
+select: {
+style: 'os',
+selector: 'td:first-child'
+}
+});
+</script>
+
+
+{% endblock %}

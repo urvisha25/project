@@ -1,0 +1,195 @@
+{% extends 'main.html' %} {% load render_table from django_tables2 %} {% render_table table %} {% block content %} {% load static %}
+  
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+    .row.content {
+        height: auto;
+        margin-top: 50px;
+    }
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+       
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 700px) {
+      .sidenav {
+        height: auto;
+        padding: 10px;
+      }
+      .row.content {height: auto;} 
+    }
+  </style>
+
+<body>
+        <div style="margin-top: 180px; background-color: cornsilk;" class="container">
+                <center>   <h3 style="color:cornflowerblue">Search Date</h2></center>
+                   <form class="form-inline" style="margin-left: 350px;" method="POST">
+                     {% csrf_token %}
+                     <div class="form-group">
+                       <label for="date">Start date:</label>
+                       <input type="date" class="form-control" id="sdate" name="sdate">
+                     </div>&nbsp;&nbsp;&nbsp;
+                     <div class="form-group">
+                       <label for="date">End date:</label>
+                       <input type="date" class="form-control" id="ldate" name="ldate">&nbsp;  &nbsp;  
+                       <button type="submit" class="btn btn-success">Submit</button>      
+                     </div>      
+                   </form> 
+                 </div>
+        {% if request.session.lgnf %}
+                 <div class="container-fluid">
+                        <div class="row content">
+                          <div class="col-sm-3 sidenav">
+                          <CENTER>  <h4>All List</h4> </CENTER>
+                            <ul style="width: 130px" class="nav nav-pills nav-stacked">
+                              <li style="margin-bottom: 5px;margin-left: 25px;"><a href="transaction{{9}}"><button type="button" id="{{1}}" class="btn btn-info" style="width: 230px">Rent Transaction</button></a></li>
+                              <li style="margin-bottom: 5px; margin-left: 25px;"><a href="transaction{{10}}"><button type="button" id="{{2}}" class="btn btn-info" style="width: 230px">Trader Buy Product</button></a></li>                             
+                            </ul>
+                          <br>      
+                          </div>
+
+                          <div class="col-sm-9">
+                                <div class="table-responsive" style="font-size: 15px;">
+                                        <table class="table table-hover" id="example">
+                                       
+                                      <center>   <h2><small>All Data Lists</small></h2></center>
+                                    <hr>
+                          <!----Rent in equipments and generate bill list---->
+                          {% if request.session.alistt == "translist" %}
+                                  <center> <h3 style="color: green">Rent in equipments and generate bill list</h3></center>
+                                <hr>
+                                <thead>
+                                  <tr>
+                                        <th>Equipment Name</th>
+                                        <th>Holder Name</th>
+                                        <th>Total Rs</th>
+                                        <th>Date</th>               
+                                    </tr>
+                                </thead>
+                                    {% for i in translst %}
+                                <tbody>
+                                    <tr class="danger">
+                                        <td>{{i.Name}}</td>
+                                        <td>{{i.H_name}}</td>
+                                        <td>{{i.Total}} Rs</td> 
+                                        <td>{{i.mydate}}</td>    
+                                        {% if i.status == 0 %}
+                                        <td><button type="submit" class="btn btn-success" id="submit">Pay</button> </td>
+                                        {% else %}
+                                        <td>Paid</td>
+                                        {% endif %}
+                                        <td><a href="GeneratePDF{{9}}" target="_blank"><button type="submit" class="btn btn-success" id="submit">Print</button></a> </td>           
+                                    </tr>
+                                </tbody>
+                                    {% endfor %}
+
+                                <!----TRADER REGISTER---->
+
+                        {% elif request.session.alistt == "prolist" %}
+                        <center>  <h3 style="color: green"><b>Trader Buy Products</b></h3></center>
+                        <hr>
+                        <thead>
+                        <tr>
+                                  <th>Trader Name</th>
+                                  <th>Product Name</th>
+                                  <th>Email</th>
+                                  <th>Quantity/Mann</th>
+                                  <th>Price/Rs</th>
+                                  <th>Date</th>   
+                        </tr>
+                            </thead>
+                              {% for i in tproductlst %}
+                            <tbody>
+                              <tr class="danger">
+                                  <td>{{i.T_name}}</td>
+                                  <td>{{i.P_name}}</td>                                  
+                                  <td>{{i.email}}</td>
+                                  <td>{{i.Quantity}} Mann</td>
+                                  <td>{{i.Price}} Rs</td>
+                                  <td>{{i.mydate}}</td>   
+                                  <td><a href="GeneratePDF{{10}}" target="_blank"><button type="submit" class="btn btn-success" id="submit">Print</button></a> </td>           
+                                 
+                              </tr>
+                            </tbody>
+                              {% endfor %}
+                            {% endif %}
+                        </table> 
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+                    </body>
+
+  {% elif request.session.lgnt %}
+        
+<div class="col-sm-10">
+        <div class="table-responsive" style="font-size: 15px;">
+            <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">   
+        <center>
+            <h3 style="color: green">Trader Product Buy List</h3>
+        </center>
+      <thead>
+        <tr>
+            <th>Farmer Name</th>
+            <th>Product Name</th>  
+            <th>Quantity/Mann</th>         
+            <th>Price/Rs</th>
+            <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for i in tprotlst %}
+        <tr class="danger">
+            <td>{{i.F_name}}</td>
+            <td>{{i.P_name}}</td> 
+            <td>{{i.Quantity}} Mann</td>            
+            <td>{{i.Price}} Rs</td>
+            <td>{{i.mydate}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+        </table>
+    </div>
+</div>
+
+{% endif %}
+<!--*******************************************************************************************-->
+<!--Search the data and record find-->
+
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/responsive/1.0.2/js/dataTables.responsive.js"></script>
+    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/plug-ins/a5734b29083/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+    <script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <!-- DataTables CSS -->
+    <link href="css/addons/datatables.min.css" rel="stylesheet">
+    <!-- DataTables JS -->
+    <script href="js/addons/datatables.min.js" rel="stylesheet"></script>
+
+    <!-- DataTables Select CSS -->
+    <link href="css/addons/datatables-select.min.css" rel="stylesheet">
+    <!-- DataTables Select JS -->
+    <script href="js/addons/datatables-select.min.js" rel="stylesheet"></script>
+                <script>
+                $('#example').dataTable({
+
+                columnDefs: [{
+                orderable: false,
+                className: 'select-checkbox',
+                targets: 0
+                }],
+                select: {
+                style: 'os',
+                selector: 'td:first-child'
+                }
+                });
+                </script>
+{% endblock %}
