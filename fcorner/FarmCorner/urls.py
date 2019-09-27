@@ -14,7 +14,7 @@ urlpatterns=[
     # Logins, forgotpassword  
     path("hlogin",views.hlogin, name='holderlogin'),
     path("forgotpassword",views.forgotpass, name='forgot password'), 
-
+   
     # Registrations    
     path("fregis",views.farmerregis, name='fregister'),
     path("holderregister",views.holderregis, name='Hregister'),
@@ -58,9 +58,7 @@ urlpatterns=[
     # Buy Product, bill generate
     path('buy<int:id>',views.buyprod, name='Buy Product'),
     path('rentbill',views.rentprolist, name='rent bill generate'),
-    path('transaction<int:id>',views.transactionlist, name='rent bill list'),
-    path('pdff',views.send_pdf, name='rent bill generate'),
-    path('pdf',views.pdf, name='rent bill generate'),
+    path('transaction<int:id>',views.transactionlist, name='rent bill list'), 
     path('GeneratePDF<int:id>',views.GeneratePDF, name='rent bill generate'),
     path('rentbill<int:id>',views.rentbill, name='rent bill print(PDF)'),
 ] #+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

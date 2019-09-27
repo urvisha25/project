@@ -43,13 +43,21 @@ district=(
    ('Valsad','Valsad'),
    ('Vadodara','Vadodara'), 
 )
+
+class districts(models.Model):
+   D_id = models.AutoField(primary_key=True)
+   District=models.CharField(max_length=15, default="")
+
+   def __str__(self):
+        return self.District
+
 # Farmer Registration form
 class Farmerreg(models.Model):
    F_id= models.AutoField(primary_key=True)
    F_name= models.CharField(max_length=20)
    Address= models.CharField(max_length=70, default="")
    Mobileno= models.CharField(max_length=13, default="")
-   District= models.CharField(max_length=15,choices=district, default="")
+   District= models.CharField(max_length=15, default="")
    Taluka= models.CharField(max_length=15, default="")
    City= models.CharField(max_length=15, default="")  
    email= models.EmailField(max_length=50, default="")
@@ -69,7 +77,7 @@ class eholder(models.Model):
        shop_name= models.CharField(max_length=30, default="")
        Address= models.CharField(max_length=70, default="")
        Mobileno= models.CharField(max_length=13, default="")
-       District= models.CharField(max_length=15,choices=district, default="")
+       District= models.CharField(max_length=15, default="")
        Taluka= models.CharField(max_length=15, default="")
        City= models.CharField(max_length=15, default="") 
        email= models.EmailField(max_length=50, default="") 
@@ -119,7 +127,7 @@ class traderreg(models.Model):
        T_name= models.CharField(max_length=20, default="")       
        Address= models.CharField(max_length=70, default="")
        Mobileno= models.CharField(max_length=13, default="")
-       District= models.CharField(max_length=15,choices=district,default="")
+       District= models.CharField(max_length=15, default="")
        Taluka= models.CharField(max_length=15, default="")
        City= models.CharField(max_length=15, default="") 
        email= models.EmailField(max_length=50, default="") 
@@ -174,7 +182,6 @@ class uproduct(models.Model):
    def __str__(self):
       return self.P_name
 
-
 class rentequipment(models.Model):
    R_id=models.AutoField(primary_key=True)
    F_id= models.IntegerField(default=0)    
@@ -213,6 +220,7 @@ class transaction(models.Model):
    T_id=models.IntegerField(default=0) 
    F_id=models.IntegerField(default=0)
    H_id=models.IntegerField(default=0) 
+   B_id=models.IntegerField(default=0)
    R_id=models.IntegerField(default=0)  
    P_id=models.IntegerField(default=0) 
    E_id=models.IntegerField(default=0) 

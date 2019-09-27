@@ -25,21 +25,6 @@ from datetime import *
 from dateutil import parser
 # Create your views here..
 
-def send_pdf(request):
-    if 'pdf' in request.POST:
-            response = HttpResponse(content_type='application/pdf')
-            today = date.today()
-            filename = 'pdf_demo' + today.strftime('%Y-%m-%d')
-            response['Content-Disposition'] = 'attachement; filename={0}.pdf'.format(filename)
-            buffer = BytesIO()
-            report = PdfPrint(buffer, 'A4')
-            pdf = report.report(weather_period, 'Weather statistics data')
-            response.write(pdf)
-            return response
-    return HttpResponse(pdf, 'application/pdf')
-
-def pdf(request):      
-      return render(request,'pdf.html')
 # Home page 
 def home(request):
       plist= uploadequip.objects.all()
@@ -51,7 +36,7 @@ def home(request):
 # Farmer Registration 
 
 def farmerregis(request):
-   
+    a= districts.objects.all()
     if request.method=="POST":      
       name= request.POST.get('name','')   
       address= request.POST.get('address','')
@@ -128,13 +113,14 @@ def farmerregis(request):
               return render(request,'registration/fregis.html')
       else:  
           messages.error(request,'email already exists!')   
-          return render(request,'registration/fregis.html')
+          return render(request,'registration/fregis.html',locals())
     else:       
-        return render(request,'registration/fregis.html')
+        return render(request,'registration/fregis.html',locals())
 
 # Trader Registration
 
-def traderegis(request):    
+def traderegis(request): 
+    a= districts.objects.all()   
     if request.method=="POST":      
       name= request.POST.get('name','')   
       address= request.POST.get('address','')
@@ -210,13 +196,14 @@ def traderegis(request):
             return render(request,'registration/traderregis.html') 
       else: 
           messages.error(request,'Password not matching!')
-          return render(request,'registration/traderregis.htmt')  
+          return render(request,'registration/traderregis.htmt',locals())  
     else:       
-        return render(request,'registration/traderregis.html')
+        return render(request,'registration/traderregis.html',locals())
 
 # Equipmentholder Registration
 
 def holderregis(request):   
+    a= districts.objects.all()
     if request.method=="POST":     
       name= request.POST.get('hname','')
       shopname= request.POST.get('shopname','')
@@ -292,9 +279,9 @@ def holderregis(request):
             return render(request,'registration/holderregister.html')
       else:
         messages.warning(request,'Password not matching!')
-        return render(request,'registration/holderregister.html')
+        return render(request,'registration/holderregister.html',locals())
     else:       
-      return render(request,'registration/holderregister.html')
+      return render(request,'registration/holderregister.html',locals())
 
 # Equipmentholder,Trader,Farmer,Admin Login
 
@@ -426,7 +413,6 @@ def logout(request):
     request.session.flush()
     request.session.modified = True
     return redirect('home.html')
-
 
 # upload equipment
 
@@ -643,11 +629,6 @@ def tpricelistt(request):
                         messages.success(request,'booking successfully!')
             return render(request, 'admin/tpricelist.html', locals())
 
-
-def pay(request):
-      pricel=uploadprice.objects.all()   
-      return render(request, 'pay.html', locals())      
-
 # All equipments list in home page
 
 def tractors(request,id):
@@ -839,20 +820,6 @@ def buyprod(request,id):
       return render(request, 'buy.html', {'form' : form}) 
       return render(request,'buy.html')
 
-def transactions(request):
-      if request.method =='POST': 
-            form = rentbill(request.POST, request.FILES)
-            if form.is_valid():
-                  transactions = form.save(commit = False) 
-                  
-                  transactions.save() 
-                  return HttpResponse("data submitted successfully") 
-            else: 
-                  return render(request, "rentbill.html", {'form':details}) 
-      else: 
-            form = rentbill(None)    
-            return render(request, 'rentbill.html', {'form':form}) 
-
 # List Rent product by farmer
 
 def rentprolist(request):
@@ -977,21 +944,7 @@ def GeneratePDF(request,id,*args, **kwargs):
             context = {
                 'a':a,
                 'b':b
-            }  
-        elif id == 9:            
-            a ="billlist"
-            b = transaction.objects.all() 
-            context = {
-                'a':a,
-                'b':b
-            } 
-        elif id == 10:            
-            a ="tradbill"
-            b = buyproduct.objects.all() 
-            context = {
-                'a':a,
-                'b':b
-            }  
+            }         
         template = get_template('pdf.html')      
         html = template.render(context)
         pdf = render_to_pdf('pdf.html', context)
@@ -1006,17 +959,31 @@ def GeneratePDF(request,id,*args, **kwargs):
             return response
         return HttpResponse("Not found")
 
-def rentbill(request,id):
-      a= rentequipment.objects.get(R_id=id)
+def rentbill(request,id):     
+      a=""
+      b=""
+      x=""
+      if  transaction.objects.filter(Rb_id=id).exists(): 
+            a ="billlist"
+            b = transaction.objects.get(Rb_id=id)   
+
+      elif buyproduct.objects.filter(B_id=id).exists() :
+            a ="tradbill"
+            b = buyproduct.objects.get(B_id=id)
+            x = traderreg.objects.get(T_id=b.T_id)
+             
       context = {
-            'a':a
-      }
-      template = get_template('pdf.html')      
+            'a':a,
+            'b':b,
+            'x':x,
+            'date':datetime.now()
+      }  
+      template = get_template('rentbill.html')      
       html = template.render(context)
       pdf = render_to_pdf('rentbill.html', context)
       if pdf:
             response = HttpResponse(pdf, content_type='application/pdf')
-            filename = "Alllist_%s.pdf" %("12341231")
+            filename = "Alllist_%s.pdf" %("1")
             content = "inline; filename='%s'" %(filename)
             download = request.GET.get("download")
             if download:

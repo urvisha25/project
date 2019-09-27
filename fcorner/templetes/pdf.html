@@ -254,55 +254,7 @@
             <td>{{i.mydate}}</td>                                  
         </tr>
         {% endfor %}
-        </tbody>
-        
-        {% elif a == "billlist" %}
-     <thead>
-        <tr>
-            <th>Equipment Name</th>
-            <th>Holder Name</th>
-            <th>Total Rs</th>
-            <th>Date</th>               
-        </tr>
-    </thead>
-    <tbody>
-        {% for i in b %} 
-        <tr class="danger">                        
-            <tr class="danger">
-                <td>{{i.Name}}</td>
-                <td>{{i.H_name}}</td>
-                <td>{{i.Total}} Rs</td> 
-                <td>{{i.mydate}}</td>    
-                </tr>                                  
-        </tr>
-        {% endfor %}
-        </tbody>
-
-        {% elif a == "tradbill" %}
-        <center>  <h3 style="color: green"><b>Trader Buy Products</b></h3></center>
-        <hr>
-        <thead>
-        <tr>
-                  <th>Trader Name</th>
-                  <th>Product Name</th>
-                  <th>Email</th>
-                  <th>Quantity/Mann</th>
-                  <th>Price/Rs</th>
-                  <th>Date</th>   
-        </tr>
-            </thead>
-              {% for i in b %}
-            <tbody>
-              <tr class="danger">
-                  <td>{{i.T_name}}</td>
-                  <td>{{i.P_name}}</td>                                  
-                  <td>{{i.email}}</td>
-                  <td>{{i.Quantity}} Mann</td>
-                  <td>{{i.Price}} Rs</td>
-                  <td>{{i.mydate}}</td>                    
-              </tr>
-            </tbody>
-              {% endfor %}
+        </tbody>              
            
      {% endif %}
    </table>

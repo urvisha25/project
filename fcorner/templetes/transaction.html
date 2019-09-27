@@ -85,7 +85,7 @@
                                         {% else %}
                                         <td>Paid</td>
                                         {% endif %}
-                                        <td><a href="GeneratePDF{{9}}" target="_blank"><button type="submit" class="btn btn-success" id="submit">Print</button></a> </td>           
+                                        <td><a href="rentbill{{i.Rb_id}}" target="_blank"><button type="submit" class="btn btn-success" id="submit">Print</button></a> </td>           
                                     </tr>
                                 </tbody>
                                     {% endfor %}
@@ -114,7 +114,7 @@
                                   <td>{{i.Quantity}} Mann</td>
                                   <td>{{i.Price}} Rs</td>
                                   <td>{{i.mydate}}</td>   
-                                  <td><a href="GeneratePDF{{10}}" target="_blank"><button type="submit" class="btn btn-success" id="submit">Print</button></a> </td>           
+                                  <td><a href="rentbill{{i.B_id}}" target="_blank"><button type="submit" class="btn btn-success" id="submit">Print</button></a> </td>           
                                  
                               </tr>
                             </tbody>

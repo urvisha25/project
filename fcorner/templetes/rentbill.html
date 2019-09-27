@@ -1,59 +1,97 @@
-{% extends 'main.html' %} {% load render_table from django_tables2 %} {% render_table table %} {% block content %} {% load static %}
-<div class="message" style="margin-top: 160px">
-    {% if messages %} {% for message in messages %}
-    <div class="alert alert-{{message.tags}}">
-        {{message}}
-    </div>
-    {% endfor %} {% endif %}</div>
 
+<style>
+    .header{
+        width: 100%;
+        height: 20%;              
+    }
+    .h4{
+        margin-top: 0px;
+       margin-bottom: 0px;
+       padding-top: 0px;
+       padding-bottom: 0px; 
+    }   
+    
+    </style>
+     
 <div class="table-responsive" style="font-size: 15px;">
-
     <!--Farmer Rent Products --> 
-    <table class="table table-hover">
-        <center>
-            <h3 style="color: green">Farmer Rent form Tabel</h3>
-        </center>  
-        {{request.session.ty}}      
-        <tr>
-            <th>Farmer Name</th>   
-            <th>Address</th>        
-            <th>Mobile no.</th>
-            <th>City</th>
-            <th>Email</th>
-            <th>Pincode</th>
-            <th>Startdate</th>
-            <th>Enddate</th>
+    <!-- Header -->
+    <div class="header">
+        <div align="center" style="margin-bottom:0px;">
+           <h1><span style="color: black; margin-top: 0px;">FARM</span> <span style="color: red;margin-top: 0px;">CORNER</span></h1>  
+            </div> 
             
-        </tr>
-        {% for i in c %} 
-        <tr class="danger">
-            <td>{{i.Name}}</td> 
-            <td>{{i.Address}}</td>          
-            <td>{{i.Mobileno}}</td>
-            <td>{{i.City}}</td>
-            <td>{{i.Email}}</td>
-            <td>{{i.Pincode}}</td>
-            <td>{{i.startdate}}</td>
-            <td>{{i.enddate}}</td>
-            <td>{{i.Quantity}}</td>  
-            {% if i.status == 0 %}                     
-            <td>
+        <div align="right" style="margin-top: 0px;">
+            <span style="color: coral">Date: &nbsp;&nbsp;{{date|date:'d-m-Y'}}</span><br>
+            <span style="margin-left:150px;margin-top: 0px;">101, Common Girls Hostel <br /> Anand, AAU, Gujarat</span>
+        </div>  
+    </div>
+    <hr>
+    <br>
+<!-- Trader Details -->
+    <div>
+            <span style="color:orange; font-size:15px; font-weight: bold;" >Trader Details:</span><br><br>
+            <span><b>Trader Name:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>{{b.T_name}}</u></span>  <br /> 
+            <span><b>Address:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>{{x.Address}}</u></span>  <br> 
+            <span><b>Mobile Number:</b>&nbsp;&nbsp;<u>{{x.Mobileno}}</u></span>  
+    </div>   
+   <br>
+   <br>
+ 
+   <!-- Table Details -->
+    <table class="table table-hover">         
+        {% if a == "billlist" %}
+        <thead>
+           <tr>
+               <th>Equipment Name</th>
+               <th>Holder Name</th>
+               <th>Total Rs</th>
+               <th>Date</th>               
+           </tr>         
+       </thead>   
+       <hr>
+       <tbody>            
+           <tr class="danger">                        
+               <tr class="danger">
+                   <td>{{b.Name}}</td>
+                   <td>{{b.H_name}}</td>
+                   <td>{{b.Total}} Rs</td> 
+                   <td>{{b.mydate}}</td>    
+                   </tr>                                  
+           </tr>          
+           </tbody>
+         
 
-                    <form method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}                
-                                {{form}}   
-                                <input type="number" hidden value="{{i.R_id}}" name="rid" />                          
-                                <button type="submit" class="btn btn-success" id="submit">Bill</button>                        
-                    </form>            
-            </td>            
-            {% else %}
-            <td>Bill Sent</td>
+           {% elif a == "tradbill" %}
+           <hr>
+           <thead>
+           <tr style="border-bottom: 1px solid black; color: orange;">
+                     <th>Date</th> 
+                     <th>Product Name</th>                     
+                     <th>Quantity/Mann</th>
+                     <th>Price/Rs</th>
+                        
+           </tr>
+               </thead>             
+                <tbody >
+                <tr class="danger" style="padding: 5px;">                     
+                    <td align="center">{{b.mydate|date:'d-m-Y H:i'}}</td>  
+                    <td align="center">{{b.P_name}}</td> 
+                    <td align="center">{{b.Quantity}} Mann</td>
+                    <td align="center">{{b.Price}} Rs</td>                                        
+                </tr> 
+                </tbody>
             {% endif %}
-        </tr>
-        {% endfor %}
+
     </table>
+    <hr>
+
+    <!-- Signature -->
+    <div align="right" style="margin-right:50px; margin-top:70px;">
+        <span style="color: orange" ><b>Signature:</b></span><br><br>
+        <span>____________________</span>
+    </div>
     <br>
     <br>   
 </div>
 
-{% endblock %}

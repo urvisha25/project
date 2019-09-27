@@ -33,80 +33,51 @@
 
                                 <h1 class="card-title text-center">Equipmentholder Registration</h1>
                                 <form class="form-signin">
-                                    <div class="form-label-group">
+                                    <div class="form-group">
                                         <input type="text" id="inputUserame" class="form-control" placeholder="Username" name="hname" required autofocus>
                                     </div>
-                                    <div class="form-label-group">
+                                    <div class="form-group">
                                         <input type="text" class="form-control" id="shopname" name="shopname" placeholder="Enter shop name" required>
                                     </div>
-                                    <div class="form-label-group">
+                                    <div class="form-group">
                                         <textarea class="form-control" id="adrs" name="haddress" rows="3"></textarea>
                                     </div>
-                                    <div class="form-label-group">
+                                    <div class="form-group">
                                         <input type="tel" class="form-control" id="mn1" name="hmobileno" placeholder="Mobile number" maxlength="10" required>
                                     </div>
-                                    <div class="form-label-group">
+                                    <div class="form-group">
                                         <select class="form-control" id="district" name="hdist" placeholder="District" required>
-                                            <option>Ahmedabad</option>
-                                            <option>Anand</option>
-                                            <option>Aravalli</option>
-                                            <option>Amreli</option>
-                                            <option>Bharuch</option>
-                                            <option>Botad</option>
-                                            <option>Bhavnagar</option>
-                                            <option>Banaskantha</option>
-                                            <option>Chhota Udaipur</option>
-                                            <option>Dang</option>
-                                            <option>Devbhoomi Dwarka</option>
-                                            <option>Dahod</option>
-                                            <option>Gandhinagar</option>
-                                            <option>Gir Somnath</option>
-                                            <option>Jamnagar</option>
-                                            <option>Junagadh</option>
-                                            <option>Kachchh</option>
-                                            <option>Kheda</option>
-                                            <option>Morbi</option>
-                                            <option>Mehsana</option>
-                                            <option>Mahisagar</option>
-                                            <option>Mahisagar</option>
-                                            <option>Navsari</option>
-                                            <option>Panchmahal</option>
-                                            <option>Patan</option>
-                                            <option>Porbandar</option>
-                                            <option>Rajkot</option>
-                                            <option>Surat</option>
-                                            <option>Sabarkantha</option>
-                                            <option>Surendranagar</option>
-                                            <option>Tapi</option>
-                                            <option>Valsad</option>
-                                            <option>Vadodara</option>                                           
-                                          </select> </div>
-                                    <div class="form-label-group">
+                                            {% for i in a %}
+                                            <option>{{i.District}}</option>  
+                                            {% endfor %}                                            
+                                          </select>
+                                         </div>
+                                          <div class="form-group">
                                         <input type="text" class="form-control" id="taluka" name="htaluka" placeholder="Taluka name" pattern='[A-Za-z\\s]*' required>
 
                                     </div>
-                                    <div class="form-label-group">
+                                    <div class="form-group">
                                         <input type="text" class="form-control" id="city" name="hcity" placeholder="City/Village name" pattern='[A-Za-z\\s]*' required>
                                     </div>
-                                    <div class="form-label-group">
+                                    <div class="form-group">
                                         <input type="email" class="form-control" id="exampleInputEmail1" name="hemail" aria-describedby="emailHelp" placeholder="Enter email" required>
 
                                     </div>
-                                    <div class="form-label-group">
+                                    <div class="form-group">
                                         <input type="text" class="form-control" id="pnc" name="hpincode" placeholder="pincode" maxlength="6" required>
                                     </div>
 
                                     <hr>
-                                    <div class="form-label-group">
-                                        <input type="password" id="password" class="form-control" name="password" placeholder="Password" required>
+                                    <div class="form-group">
+                                        <input type="password" id="password" class="form-control" name="password" placeholder="Password"  required>
                                     </div>
 
-                                    <div class="form-label-group">
+                                    <div class="form-group">
                                         <input type="password"  id="confirm_password" class="form-control" name="password1" placeholder="Confirm Password" required>
                                         <span id='message'></span>
                                     </div>
-                                    <button class="btn btn-lg btn-primary  text-uppercase" type="submit">Submit</button>
-                                    <button class="btn btn-lg btn-primary text-uppercase" type="reset">Cancel</button>
+                                    <button class="btn btn-primary  text-uppercase" type="submit">Submit</button>
+                                    <button class="btn btn-primary text-uppercase" type="reset">Cancel</button>
                                     <a class="d-block text-center mt-2 small" href="hlogin">Sign In</a>
                                 </form>
                             </div>
@@ -126,4 +97,5 @@
         $('#message').html('Not Matching Password').css('color', 'red');
     });
     </script>
+
 {% endblock %}
