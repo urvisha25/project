@@ -73,7 +73,7 @@
                       {% if request.session.alist == "flist" %}
                   <center>   <h2><small>All Data Lists</small></h2></center>
                 <hr>
-      <!----FARMER REGISTER---->
+      <!-------------FARMER REGISTER 1---------->
       
               <center>  <h2 style="float:center"><small><b>FARMER REGISTER</b></small></h2></center>
                       <tr>
@@ -104,7 +104,8 @@
                         </tr>
                         {% endfor %}
                         <a href="GeneratePDF{{1}}" target="_blank"> <button id="button" name="submit">PRINT</button></a>
-    <!----TRADER REGISTER---->
+  
+                        <!----------TRADER REGISTER 2------------>
 
                         {% elif request.session.alist == "tlist" %}
                       <center>  <h2><small><b>TRADER REGISTER</b></small></h2></center>
@@ -134,7 +135,8 @@
                             </tr>
                             {% endfor %}
                             <a href="GeneratePDF{{2}}" target="_blank"> <button id="button" name="submit">PRINT</button></a>
-    <!----EQUIPMENTHOLDER REGISTER---->        
+   
+                      <!-----------EQUIPMENTHOLDER REGISTER 3----------->        
 
                             {% elif request.session.alist == "ehlist" %}
                            <center> <h2><small><b>EQUIPMENTHOLDER REGISTER</b></small></h2> </center>
@@ -165,7 +167,8 @@
                                 </tr>
                                 {% endfor %}
                                 <a href="GeneratePDF{{3}}" target="_blank"> <button id="button" name="submit">PRINT</button></a>
-    <!----FARMER UPLOAD PRODUCTS LIST---->
+   
+                        <!------------FARMER UPLOAD PRODUCTS LIST 4------------>
 
                             {% elif request.session.alist == "fplist" %}
                          <center>   <h2><small><b>FARMER UPLOAD PRODUCTS LIST</b></small></h2>  </center>
@@ -192,7 +195,8 @@
                                 </tr>
                             {% endfor %}
                             <a href="GeneratePDF{{4}}" target="_blank"> <button id="button" name="submit">PRINT</button></a>
-    <!----TRADER UPLOAD PRICE LIST---->
+  
+                        <!-----------TRADER UPLOAD PRICE LIST 5------------->
 
                             {% elif request.session.alist == "tplist" %}
                            <center> <h2><small><b>TRADER UPLOAD PRICE LIST</b></small></h2>  </center>
@@ -212,7 +216,8 @@
                                 </tr>
                             {% endfor %}
                             <a href="GeneratePDF{{5}}" target="_blank"> <button id="button" name="submit">PRINT</button></a>
-    <!----EQUIPMENTHOLDER UPLOAD EQUIPMENTS LIST----> 
+ 
+                        <!-----------EQUIPMENTHOLDER UPLOAD EQUIPMENTS LIST 6-------------> 
 
                             {% elif request.session.alist == "helist" %}
                            <center> <h2><small><b>EQUIPMENTHOLDER UPLOAD EQUIPMENTS LIST</b></small></h2>  </center>
@@ -243,7 +248,8 @@
                                 </tr>
                             {% endfor %}
                             <a href="GeneratePDF{{6}}" target="_blank"> <button id="button" name="submit">PRINT</button></a>
-    <!----FARMER RENT IN EQUIPMENT LIST---->
+    
+                          <!-------------FARMER RENT IN EQUIPMENT LIST 7--------------->
 
                             {% elif request.session.alist == "frlist" %}
                           <center>  <h2><small><b>FARMER RENT IN EQUIPMENT LIST</b></small></h2> </center>
@@ -258,7 +264,7 @@
                                     <th>Start Date</th>     
                                     <th>End Date</th>                                                            
                                 </tr>
-                        
+                                 
                                 {% for i in farentlst %}
                                 {% for j in fareqip %}
                                 {% if i.E_id == j.E_id %}
@@ -278,7 +284,7 @@
                             {% endfor %}
                             <a href="GeneratePDF{{7}}" target="_blank"> <button id="button" name="submit">PRINT</button></a>
  
-                            <!----TRADER BUY PRODUCT LIST---->
+                          <!-------------TRADER BUY PRODUCT LIST 8-------------->
 
                             {% elif request.session.alist == "buylist" %}
                           <center>  <h2><small><b>TRADER BUY PRODUCT LIST</b></small></h2> </center>
@@ -301,14 +307,14 @@
                                     <td>{{i.Quantity}} Mann</td>
                                     <td>{{i.Price}} Rs</td>    
                                     <td>{{i.mydate}}</td>                                  
-                                </tr>
+                                </tr>                                
                             {% endfor %}
                             <a href="GeneratePDF{{8}}" target="_blank"> <button id="button" name="submit">PRINT</button></a>
-                        {% endif %}
-      </table>
-
-    
-      </div>      
+                       
+                      {% endif %}
+                             
+                </table>    
+              </div>      
             </div>
           </div>
         </div>

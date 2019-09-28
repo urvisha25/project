@@ -8,41 +8,6 @@ from .render import validate_file_size
 from django.core.exceptions import ValidationError
 # Create your models here.
 # discribe district
-district=(
-   ('Ahmedabad','Ahmedabad'),
-   ('Anand','Anand'),
-   ('Aravalli','Aravalli'),
-   ('Amreli','Amreli'),
-   ('Bharuch','Bharuch'),
-   ('Botad',' Botad'),
-   ('Bhavnagar','Bhavnagar'),
-   ('Banaskantha','Banaskantha'),
-   ('Chhota Udaipur','Chhota Udaipur'),
-   ('Dang','Dang'),
-   ('Devbhoomi Dwarka','Devbhoomi Dwarka'),
-   ('Dahod','Dahod'),
-   ('Gandhinagar','Gandhinagar'),
-   ('Gir Somnath','Gir Somnath'),
-   ('Jamnagar','Jamnagar'),
-   ('Junagadh','Junagadh'),
-   ('Kachchh','Kachchh'),
-   ('Kheda','Kheda'),
-   ('Morbi','Morbi'),
-   ('Mehsana','Mehsana'),
-   ('Mahisagar','Mahisagar'),
-   ('Mahisagar','Narmada'),
-   ('Navsari','Navsari'),
-   ('Panchmahal','Panchmahal'),
-   ('Patan','Patan'),
-   ('Porbandar','Porbandar'),
-   ('Rajkot','Rajkot'),
-   ('Surat','Surat'),
-   ('Sabarkantha','Sabarkantha'),
-   ('Surendranagar','Surendranagar'),
-   ('Tapi','Tapi'),
-   ('Valsad','Valsad'),
-   ('Vadodara','Vadodara'), 
-)
 
 class districts(models.Model):
    D_id = models.AutoField(primary_key=True)

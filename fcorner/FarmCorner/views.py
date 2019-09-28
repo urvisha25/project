@@ -856,6 +856,8 @@ def rentprolist(request):
             return render(request, 'rentbill.html', locals(), {'form':form})    
       return render(request,'rentbill.html',locals())   
 
+# Transaction List show in Farmer
+
 def transactionlist(request,id):
       sdate= request.POST.get('sdate','')
       ldate = request.POST.get('ldate','')
@@ -864,10 +866,12 @@ def transactionlist(request,id):
             if id== 9:
                   request.session["alistt"] = "translist"
                   translst=transaction.objects.filter(F_id = request.session["idf"])
+                  #catlist= uploadequip.objects.all() 
                   return render(request,'transaction.html',locals())
             elif id == 10:
                   request.session["alistt"] = "prolist"
-                  tproductlst= buyproduct.objects.filter(F_id = request.session["idf"])            
+                  tproductlst= buyproduct.objects.filter(F_id = request.session["idf"])   
+                          
             return render(request,'transaction.html',locals())
 
       elif sdate== '' and ldate=='' and request.session["tid"] != 0:
@@ -888,69 +892,82 @@ def transactionlist(request,id):
             return render(request,'transaction.html',locals())
       return render(request,'transaction.html',locals())
 
+# Generate PDF 
+
 def GeneratePDF(request,id,*args, **kwargs):                
         if id == 1:           
             a = "flist"            
             b = Farmerreg.objects.all() 
+            
             context = {
                 'a':a,
-                'b':b
+                'b':b,
+                'date':datetime.now()
             }
         elif id == 2:
             a ="tlist"            
             b = traderreg.objects.all() 
             context = {
                 'a':a,
-                'b':b
+                'b':b,
+                'date':datetime.now()
             }  
         elif id == 3:           
             a =  "ehlist"
             b = eholder.objects.all() 
             context = {
                 'a':a,
-                'b':b
+                'b':b,
+                'date':datetime.now()
             } 
         elif id == 4:            
             a = "fplist"
             b = uproduct.objects.all() 
             context = {
                 'a':a,
-                'b':b
+                'b':b,
+                'date':datetime.now()
             } 
         elif id == 5:           
             a = "tplist"
             b = uploadprice.objects.all() 
             context = {
                 'a':a,
-                'b':b
+                'b':b,
+                'date':datetime.now()
             } 
         elif id == 6:            
             a = "helist"
             b = uploadequip.objects.all() 
             context = {
                 'a':a,
-                'b':b
+                'b':b,
+                'date':datetime.now()
             } 
         elif id == 7:            
             a = "frlist"
             b = rentequipment.objects.all() 
+            j = uploadequip.objects.all()
             context = {
                 'a':a,
-                'b':b
+                'b':b,
+                'j':j,
+                'date':datetime.now()
             } 
         elif id == 8:            
             a ="buylist"
             b = buyproduct.objects.all() 
             context = {
                 'a':a,
-                'b':b
+                'b':b,
+                'date':datetime.now()
             }         
         template = get_template('pdf.html')      
         html = template.render(context)
         pdf = render_to_pdf('pdf.html', context)
         if pdf:
             response = HttpResponse(pdf, content_type='application/pdf')
-            filename = "Alllist_%s.pdf" %("12341231")
+            filename = "Alllist_%s.pdf" %("1")
             content = "inline; filename='%s'" %(filename)
             download = request.GET.get("download")
             if download:
@@ -959,13 +976,19 @@ def GeneratePDF(request,id,*args, **kwargs):
             return response
         return HttpResponse("Not found")
 
+# Generate pdf for Rent bill and Trader Buy Product
+
 def rentbill(request,id):     
       a=""
       b=""
       x=""
+      y=""
+      z=""
       if  transaction.objects.filter(Rb_id=id).exists(): 
             a ="billlist"
-            b = transaction.objects.get(Rb_id=id)   
+            b = transaction.objects.get(Rb_id=id)  
+            y = Farmerreg.objects.get(F_id=b.F_id) 
+            z = uploadequip.objects.all()
 
       elif buyproduct.objects.filter(B_id=id).exists() :
             a ="tradbill"
@@ -976,6 +999,8 @@ def rentbill(request,id):
             'a':a,
             'b':b,
             'x':x,
+            'y':y,
+            'z':z,
             'date':datetime.now()
       }  
       template = get_template('rentbill.html')      
@@ -983,7 +1008,7 @@ def rentbill(request,id):
       pdf = render_to_pdf('rentbill.html', context)
       if pdf:
             response = HttpResponse(pdf, content_type='application/pdf')
-            filename = "Alllist_%s.pdf" %("1")
+            filename = "Bill_%s.pdf" %("1")
             content = "inline; filename='%s'" %(filename)
             download = request.GET.get("download")
             if download:
@@ -992,5 +1017,10 @@ def rentbill(request,id):
             return response
       return HttpResponse("Not found")
 
-      
+# Admin Upload Districts
+
+def updisttrict(request):
+       if request.method=="POST":      
+            district= request.POST.get('dist','') 
+       return render(request,'uplddistrict.html')  
       

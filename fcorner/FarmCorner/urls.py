@@ -52,8 +52,7 @@ urlpatterns=[
     path('rent<int:id>',views.rent, name='Rent'), 
     path('rentlist.html',views.rentlist, name='Rent1'), 
     path('acpt<int:id>',views.acptrent, name='acceptrent'),
-    path('rjct<int:id>',views.rjctrent, name='rejectrent'),     
-    path('list<int:id>',views.listall),
+    path('rjct<int:id>',views.rjctrent, name='rejectrent'),  
 
     # Buy Product, bill generate
     path('buy<int:id>',views.buyprod, name='Buy Product'),
@@ -61,4 +60,10 @@ urlpatterns=[
     path('transaction<int:id>',views.transactionlist, name='rent bill list'), 
     path('GeneratePDF<int:id>',views.GeneratePDF, name='rent bill generate'),
     path('rentbill<int:id>',views.rentbill, name='rent bill print(PDF)'),
+
+    # Admin upload Districts, and Show all list
+    path('list<int:id>',views.listall),
+    path('districtupld',views.updisttrict, name='Admin upload Districts'),
+    
+
 ] #+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
