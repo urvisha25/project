@@ -1,119 +1,60 @@
-<html>
-    <head>
-            <style>
-                    .header{
-                        width: 100%;
-                        height: 20%;              
-                    }
-                    .h4{
-                        margin-top: 0px;
-                       margin-bottom: 0px;
-                       padding-top: 0px;
-                       padding-bottom: 0px; 
-                    }   
-                    
-                    </style>
-    </head>
-
-<body>
+{% extends 'main.html' %} {% load render_table from django_tables2 %} {% render_table table %} {% block content %} {% load static %}
+<div class="message" style="margin-top: 160px">
+    {% if messages %} {% for message in messages %}
+    <div class="alert alert-{{message.tags}}">
+        {{message}}
+    </div>
+    {% endfor %} {% endif %}</div>
 
 <div class="table-responsive" style="font-size: 15px;">
-  
-    <!------ Header ------->
-    <div class="header">
-        <div align="center" style="margin-bottom:0px;">
-           <h1><span style="color: black; margin-top: 0px;">FARM</span> <span style="color: red;margin-top: 0px;">CORNER</span></h1>  
-            </div> 
-            
-        <div align="right" style="margin-top: 0px;">
-            <span style="color: coral">Date: &nbsp;&nbsp;{{date|date:'d-m-Y'}}</span><br>
-            <span style="margin-left:150px;margin-top: 0px;">101, Common Girls Hostel <br /> Anand, AAU, Gujarat</span>
-        </div>  
-    </div>
-    <hr>
-    <br>
 
-   <!--------- Table Details----------->
+    <!--Farmer Rent Products --> 
+    <table class="table table-hover">
+        <center>
+            <h3 style="color: green">Farmer Rent form Tabel</h3>
+        </center>        
+        <tr>
+            <th>Farmer Name</th>   
+            <th>Address</th>        
+            <th>Mobile no.</th>
+            <th>City</th>
+            <th>Email</th>
+            <th>Pincode</th>
+            <th>Startdate</th>
+            <th>Enddate</th>
+            <th>Approve</th>
+            <th>Reject</th>
+        </tr>
+        {% for i in c %} 
+        <tr class="danger">
+            <td>{{i.Name}}</td> 
+            <td>{{i.Address}}</td>          
+            <td>{{i.Mobileno}}</td>
+            <td>{{i.City}}</td>
+            <td>{{i.Email}}</td>
+            <td>{{i.Pincode}}</td>
+            <td>{{i.startdate}}</td>
+            <td>{{i.enddate}}</td>
+            <td>{{i.Quantity}}</td>  
+            {% if i.status != 1 %} 
+                    
+            <td>
 
-    <table class="table table-hover">         
-        {% if a == "billlist" %}
-
-        <!------- Farmer Details---------->
-    <div>
-            <span style="color:orange; font-size:15px; font-weight: bold;" >Farmer Details:</span><br><br>
-            <span><b>Farmer Name:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>{{b.F_name}}</u></span>  <br /> 
-            <span><b>Address:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>{{y.Address}}</u></span>  <br> 
-            <span><b>Mobile Number:</b>&nbsp;&nbsp;&nbsp;<u>{{y.Mobileno}}</u></span>  
-    </div>   
-   <br>
-   <br>
-        <thead>
-           <tr style="border-bottom: 1px solid black; color: orange;">
-               <th>Date</th>
-               <th>Holder Name</th>
-               <th>Equipment Category</th>
-               <th>Equipment Name</th>               
-               <th>Total Price</th>
-                              
-           </tr>         
-       </thead>   
-       <hr>
-       <tbody>            
-           <tr class="danger" style="padding: 5px;">                        
-               <tr class="danger">
-                   {% for z in z %}
-                   <td align="center">{{b.mydate|date:'d-m-Y H:i'}}</td> 
-                   <td align="center">{{b.H_name}}</td>
-                   <td align="center">{{z.Category}}</td>
-                   <td align="center">{{b.Name}}</td>                  
-                   <td align="center">{{b.Total}} Rs</td> 
-                      {% endfor %}
-                   </tr>                                  
-           </tr>          
-           </tbody>
-         
-
-           {% elif a == "tradbill" %}
-           <!-----------Trader Details------->
-    <div>
-            <span style="color:orange; font-size:15px; font-weight: bold;" >Trader Details:</span><br><br>
-            <span><b>Trader Name:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>{{b.T_name}}</u></span>  <br /> 
-            <span><b>Address:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>{{x.Address}}</u></span>  <br> 
-            <span><b>Mobile Number:</b>&nbsp;&nbsp;<u>{{x.Mobileno}}</u></span>  
-    </div>  
-    <br>
-   
-           <hr>
-           <thead>
-           <tr style="border-bottom: 1px solid black; color: orange;">
-                     <th>Date</th> 
-                     <th>Product Name</th>                     
-                     <th>Quantity/Mann</th>
-                     <th>Price/Rs</th>
-                        
-           </tr>
-               </thead>             
-                <tbody >
-                <tr class="danger" style="padding: 5px;">                     
-                    <td align="center">{{b.mydate|date:'d-m-Y H:i'}}</td>  
-                    <td align="center">{{b.P_name}}</td> 
-                    <td align="center">{{b.Quantity}} Mann</td>
-                    <td align="center">{{b.Price}} Rs</td>                                        
-                </tr> 
-                </tbody>
+                    <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}      
+                        <input type="number" name="rid" value="{{i.R_id}}" />          
+                                {{form}}                             
+                                <button type="submit" class="btn btn-success" id="submit">Bill</button>                        
+                    </form>            
+            </td>            
+            {% else %}
+            <td>Bill Sent</td>
             {% endif %}
-
+        </tr>
+        {% endfor %}
     </table>
-    <hr>
-
-    <!-- Signature -->
-    <div align="right" style="margin-right:50px; margin-top:70px;">
-        <span style="color: orange" ><b>Signature:</b></span><br><br>
-        <span>____________________</span>
-    </div>
     <br>
     <br>   
 </div>
 
-</body>
-</html>  
+{% endblock %}

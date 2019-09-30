@@ -1,18 +1,60 @@
 {% extends 'main.html' %}{% load crispy_forms_tags %} {% block content %}
-<form method="POST" enctype="multipart/form-data">
-    <div class="container" style="width: 50%; height:auto;">
+<html>
+    <head>
+            
+    </head>
+    <body>
+
+    
+<div class="container" align="center" style="width: 100%; margin-top: 200px;">
+    
+  <div class="col-md-8">     
             {% csrf_token %}
-        <center>    <h1>Upload Farm Product </h1> </center>
-            <hr>
+            <div class="panel-group col-md-12">
+                    <div class="panel panel-success">
+                            <div class="panel-heading">Upload District</div>  
+           
             <div class="card-body">
                 {% if messages %} {% for message in messages %}
                 <div class="alert alert-{{message.tags}}">{{ message }}</div>
                 {% endfor %} {% endif %}
-            </div>                                          
-                                <button type="submit" class="btn btn-success" id="submit">submit</button>&nbsp;&nbsp;
-                                                                        
-                                </div>
-    
-                            </form>
+            </div>  
+            <div class="panel-body">
+                    <form class="form-horizontal inline" role="form">
+                      <div class="form-group">
+                        <label class="col-md-3 control-label">Add District:</label>
+                        <div class="col-sm-7">
+                          <input type="text" class="form-control col-md-4" name="dist" />                                         
+                        <button type="submit" class="btn btn-info inline"  id="submit">submit</button>  
+                        </div>
+                      </div>  
+                    </form>          
+                </div>
+            </div>
+            </div>  
+    </div>
+ <br>
+
+<div class="col-md-8">
+        <div>
+                <table class="table table-hover">
+            <center>  <h3 style="float:center"><small><b>District List</b></small></h3></center>
+                <tr>
+                      <th>District</th>                     
+                      <th>Delete</th>
+                     
+                  </tr>
+                  {% for i in c %}
+                  <tr class="danger">
+                      <td>{{i.District}}</td>
+                      <td><a href="deletedis{{i.D_id}}"><button type="submit" class="btn btn-danger"><i class="fas fa-times"></i></button></a></td>
+                  </tr>
+                  {% endfor %}
+                  </table>
+            </div>
+</div>
+</div>
+</body>
+</html>
     {% endblock %}
     

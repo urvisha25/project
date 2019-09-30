@@ -66,61 +66,60 @@
                                   <center> <h3 style="color: green">Rent in equipments and generate bill list</h3></center>
                                 <hr>
                                 <thead>
-                                  <tr align="center"> 
-                                        <th>Holder Name</th>                                     
-                                        <th>Equipment Name</th>                                        
+                                  <tr>
+                                        <th>Equipment Name</th>
+                                        <th>Holder Name</th>
                                         <th>Total Rs</th>
                                         <th>Date</th>               
                                     </tr>
                                 </thead>
-                                    {% for i in translst %}                               
+                                    {% for i in translst %}
                                 <tbody>
                                     <tr class="danger">
-                                        <td align="center">{{i.H_name}}</td>                                        
-                                        <td align="center">{{i.Name}}</td>                                       
-                                        <td align="center">{{i.Total}} Rs</td> 
-                                        <td align="center">{{i.mydate}}</td>    
+                                        <td>{{i.Name}}</td>
+                                        <td>{{i.H_name}}</td>
+                                        <td>{{i.Total}} Rs</td> 
+                                        <td>{{i.mydate}}</td>    
                                         {% if i.status == 0 %}
                                         <td><button type="submit" class="btn btn-success" id="submit">Pay</button> </td>
                                         {% else %}
                                         <td>Paid</td>
                                         {% endif %}
-                                        <td><a href="rentbill{{i.Rb_id}}" target="_blank"><button type="submit" class="btn btn-success" id="submit">Print</button></a> </td>           
+                                        <td><a href="rentfarmlist{{i.Rb_id}}" target="_blank"><button type="submit" class="btn btn-success" id="submit">Print</button></a> </td>           
                                     </tr>
                                 </tbody>
-                             
                                     {% endfor %}
 
                                 <!----TRADER REGISTER---->
 
-                        {% elif request.session.alistt == "prolist" %}
-                        <center>  <h3 style="color: green"><b>Trader Buy Products</b></h3></center>
-                        <hr>
-                        <thead>
-                        <tr align="center">
-                                  <th>Trader Name</th>
-                                  <th>Product Name</th>
-                                  <th>Email</th>
-                                  <th>Quantity/Mann</th>
-                                  <th>Price/Rs</th>
-                                  <th>Date</th>   
-                        </tr>
-                            </thead>
-                              {% for i in tproductlst %}
-                            <tbody>
-                              <tr class="danger">
-                                  <td align="center">{{i.T_name}}</td>
-                                  <td align="center">{{i.P_name}}</td>                                  
-                                  <td align="center">{{i.email}}</td>
-                                  <td align="center">{{i.Quantity}} Mann</td>
-                                  <td align="center">{{i.Price}} Rs</td>
-                                  <td align="center">{{i.mydate}}</td>   
-                                  <td><a href="rentbill{{i.B_id}}" target="_blank"><button type="submit" class="btn btn-success" id="submit">Print</button></a> </td>           
-                                 
-                              </tr>
-                            </tbody>
-                              {% endfor %}
-                            {% endif %}
+                                {% elif request.session.alistt == "prolist" %}
+                                <center>  <h3 style="color: green"><b>Trader Buy Products</b></h3></center>
+                                <hr>
+                                <thead>
+                                <tr>
+                                          <th>Trader Name</th>
+                                          <th>Product Name</th>
+                                          <th>Email</th>
+                                          <th>Quantity/Mann</th>
+                                          <th>Price/Rs</th>
+                                          <th>Date</th>   
+                                </tr>
+                                    </thead>
+                                      {% for i in tproductlst %}
+                                    <tbody>
+                                      <tr class="danger">
+                                          <td>{{i.T_name}}</td>
+                                          <td>{{i.P_name}}</td>                                  
+                                          <td>{{i.email}}</td>
+                                          <td>{{i.Quantity}} Mann</td>
+                                          <td>{{i.Price}} Rs</td>
+                                          <td>{{i.mydate}}</td>   
+                                          <td><a href="rentfarmlist{{i.B_id}}" target="_blank"><button type="submit" class="btn btn-success" id="submit">Print</button></a> </td>           
+                                         
+                                      </tr>
+                                    </tbody>
+                                      {% endfor %}
+                                    {% endif %}
                         </table> 
                     </div>
                     </div>

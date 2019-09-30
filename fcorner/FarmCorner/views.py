@@ -467,10 +467,11 @@ def productupload(request,id):
                 productupload.save()    
                 request.session["rmv"]=1             
                 messages.success(request,'successfully Product Upload')
-                return render(request,'productupload.html')                 
+                return render(request,'productupload.html')   
+            else:
+                  messages.warning(request,'Not Upload Products!') 
       else: 
-            form = uploadproduct() 
-            messages.warning(request,'Not Upload Products!') 
+            form = uploadproduct()             
       return render(request, 'productupload.html', {'form' : form}) 
 
 # upload Trader  Products Prices
@@ -560,6 +561,7 @@ def reject(request, F_id):
       elif uploadequip.objects.filter(E_id=F_id).exists():
             uploadequip.objects.get(E_id=F_id).delete()  
             return redirect('equiplist.html0')
+      
       else:  
             uproduct.objects.get(S_id=F_id).delete()          
       messages.warning(request,'Rejected Successfully')
@@ -856,6 +858,20 @@ def rentprolist(request):
             return render(request, 'rentbill.html', locals(), {'form':form})    
       return render(request,'rentbill.html',locals())   
 
+def transactions(request):
+      if request.method =='POST': 
+            details = rentbill(request.POST, request.FILES)
+            if details.is_valid():
+                  post = details.save(commit = False) 
+                  post.save() 
+                  return HttpResponse("data submitted successfully") 
+            else: 
+                  return render(request, "rentbill.html", {'form':details}) 
+      else: 
+            form = rentbill(None)    
+            return render(request, 'rentbill.html', {'form':form}) 
+
+
 # Transaction List show in Farmer
 
 def transactionlist(request,id):
@@ -866,12 +882,10 @@ def transactionlist(request,id):
             if id== 9:
                   request.session["alistt"] = "translist"
                   translst=transaction.objects.filter(F_id = request.session["idf"])
-                  #catlist= uploadequip.objects.all() 
                   return render(request,'transaction.html',locals())
             elif id == 10:
                   request.session["alistt"] = "prolist"
-                  tproductlst= buyproduct.objects.filter(F_id = request.session["idf"])   
-                          
+                  tproductlst= buyproduct.objects.filter(F_id = request.session["idf"])            
             return render(request,'transaction.html',locals())
 
       elif sdate== '' and ldate=='' and request.session["tid"] != 0:
@@ -978,7 +992,7 @@ def GeneratePDF(request,id,*args, **kwargs):
 
 # Generate pdf for Rent bill and Trader Buy Product
 
-def rentbill(request,id):     
+def rentfarmlist(request,id):     
       a=""
       b=""
       x=""
@@ -1003,9 +1017,9 @@ def rentbill(request,id):
             'z':z,
             'date':datetime.now()
       }  
-      template = get_template('rentbill.html')      
+      template = get_template('rentfarmlist.html')      
       html = template.render(context)
-      pdf = render_to_pdf('rentbill.html', context)
+      pdf = render_to_pdf('rentfarmlist.html', context)
       if pdf:
             response = HttpResponse(pdf, content_type='application/pdf')
             filename = "Bill_%s.pdf" %("1")
@@ -1015,12 +1029,26 @@ def rentbill(request,id):
                 content = "attachment; filename='%s'" %(filename)
             response['Content-Disposition'] = content
             return response
-      return HttpResponse("Not found")
+      return HttpResponse("Not found") 
 
 # Admin Upload Districts
 
 def updisttrict(request):
-       if request.method=="POST":      
-            district= request.POST.get('dist','') 
-       return render(request,'uplddistrict.html')  
-      
+      c= districts.objects.all()           
+      if request.method=="POST":      
+                  district= request.POST.get('dist','') 
+                  if district != "":
+                        reg= districts(District=district)
+                        reg.save() 
+                        messages.success(request,'Upload Successfully')
+      return render(request,'uplddistrict.html',locals())  
+
+# Admin Delete Districts
+
+def deletedis(request,id):   
+            districts.objects.get(D_id=id).delete()
+            messages.success(request,'District Delete')
+            return redirect('districtupld.html')       
+
+def basic(request):
+      return render(request,'basic.html')

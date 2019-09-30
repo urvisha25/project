@@ -140,7 +140,7 @@ class uproduct(models.Model):
    City= models.CharField(max_length=15, default="")
    Image= models.ImageField(upload_to='Image', default="")
    email=models.EmailField(max_length=50, default="")   
-   Quantity= models.IntegerField(default=0) 
+   Quantity= models.IntegerField(default="") 
    status=models.IntegerField(default=0)
    mydate = models.DateTimeField(default=datetime.now())
 

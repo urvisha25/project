@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+  .navbar {
+  padding:0rem;
+  margin-bottom:2rem;
+}
+
+.dropdown .dropdown-menu {
+  border-radius:0;
+ }
+
+
+/* Medium devices (tablets, 768px and up) 
+The navbar toggle appears at this breakpoint */
+@media (min-width: 768px) {  
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0;
+  border-radius:0;
+ }
+}
+ 
+
+/*********************************
+3.6 Logo
+*********************************/
+
+.logo_container {
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: 15px;
+}
+
+.logo_container a {
+    font-size: 24px;
+    color: #1e1e27;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.logo_container a span {
+    color: #fe4c50;
+}
+
+
+
+</style>
+  </head>
+  <BODY>    
+      
+      <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <!-- One of the primary actions on mobile is to call a business - This displays a phone button on mobile only -->
+        <div class="navbar-toggler-right">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                  </button>
+        </div>   
+      
+        <div class="collapse navbar-collapse flex-column " id="navbar">
+      
+          <ul class="navbar-nav  w-100 justify-content-center px-3" >
+             <!-- Login-->
+             {% if request.session.lgnh == null and request.session.lgnf == null and request.session.lgnt == null and request.session.lgna == null %}
+                                  
+            <div>
+                  <div style="float: left; margin-left:700px; margin: 2px 0px 2px 1000px">                                            
+                          <a href="hlogin" style="color: white;"><button type="button" class="btn btn-primary">Login </button></a>
+                  </div> &nbsp;&nbsp;
+                  <!-- Sign Up-->
+                  <div class="dropdown" style="float: right;margin: 2px 0px 2px 0px ">
+                      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    Sign Up
+                  </button>
+                      <div class="dropdown-menu">
+                          <a class="dropdown-item" href="fregis">Farmer</a>
+                          <a class="dropdown-item" href="holderregister">Holder</a>
+                          <a class="dropdown-item" href="traderregis">Trader</a>
+                      </div>
+                  </div>
+              </div>   
+              {% endif %}
+          </ul>
+      
+          <ul class="navbar-nav justify-content-center w-100 bg-light px-3 " align="right" id="clr" style="height:100px;">
+            
+              <div class="logo_container">
+                  <a href="#">Farm<span>Corner</span></a>
+              </div>
+             
+                      <li style="margin: 100px 20px 0px 0px; color:blueviolet;font-size:24px; "></li>
+                      <li><a  style="margin-left:20px;" href="home.html">Home</a></li>
+                      <li><a  style="margin-left:20px;" href="">About</a></li>                                   
+                      <li><a style="margin-left:20px;" href="contact.html">contact</a></li>
+                      
+
+                      <!----Holder Navigationbar---->
+                      {% if request.session.lgnh != null %}                                    
+                      <li><a href="uploadequipment">Equipments</a></li>
+                      <li class="dropdown">
+                              <a class="dropdown-toggle" data-toggle="dropdown" href="#">All list</a>
+                              <ul class="dropdown-menu">
+                                      <li><a href="equiplist{{0}}">list</a></li> 
+                                      <li><a href="rentbill">Bill</a></li>                                        
+                              </ul>
+                          </li>   
+                      <li class="dropdown">
+                          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Profile</a>
+                          <ul class="dropdown-menu">
+                              <li><a href="rentlist.html">authorized</a></li>
+                              <li><a href="profile">Profile</a></li>                                            
+                              <li><a href="logout">Logout</a></li>                                          
+                          </ul>
+                      </li>    
+
+                      <!----Trader Navigationbar---->
+                      {% elif request.session.lgnt != null %}
+                      <li><a href="priceupload">Price</a></li> 
+                      <li><a href="tpricelistt">pricelist</a></li> 
+                      <li><a href="transaction{{0}}">History</a></li>                                     
+                      <li class="dropdown">
+                              <a class="dropdown-toggle" data-toggle="dropdown" href="#">profile</a>
+                              <ul class="dropdown-menu">
+                                      <li><a href="authorized.html">Authorized</a></li>
+                                      <li><a href="profile">Profile</a></li> 
+                                      <li><a href="logout">Logout</a></li>                                              
+                              </ul>
+                      </li>
+                      
+                      <!----Farmer Navigationbar---->
+                      {% elif request.session.lgnf != null %}
+                      <li class="dropdown">
+                          <a class="dropdown-toggle" data-toggle="dropdown" href="#">All list</a>
+                          <ul class="dropdown-menu">
+                              <li><a href="productlist">productlist</a></li>
+                              <li><a href="pricelist">Pricelist</a></li>
+                              <li><a href="equipmentlist">equipmentlist</a></li>
+                          </ul>
+                      </li>                                    
+                              <li><a href="transaction{{0}}">History</a></li>
+                                                                   
+                      <li class="dropdown">
+                              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Profile</a>
+                              <ul class="dropdown-menu">
+                                      <li><a href="profile">Profile</a></li>
+                                      <li><a href="logout">Logout</a></li>                                                
+                              </ul>
+                          </li>
+                     
+
+                      <!----Admin Navigationbar---->
+                      {% elif request.session.lgna != null %}
+                      <li><a href="authorized.html">Authorized</a></li>                                  
+                      <li><a href="profile">Profile</a></li>
+                      <li><a href="list{{0}}">List</a></li>
+                      <li><a href="districtupld.html">District</a></li>
+                      <li><a href="logout">Logout</a></li>
+                      {% endif %}
+                  </ul>            
+      
+        </div>
+      
+      </nav>
+
+       <!---- main block ---->
+       <div style="margin-top: 150px;">
+          {% block content %} {% endblock %}
+      </div>
+
+  </BODY>
+</html>

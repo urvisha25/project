@@ -59,11 +59,11 @@ urlpatterns=[
     path('rentbill',views.rentprolist, name='rent bill generate'),
     path('transaction<int:id>',views.transactionlist, name='rent bill list'), 
     path('GeneratePDF<int:id>',views.GeneratePDF, name='rent bill generate'),
-    path('rentbill<int:id>',views.rentbill, name='rent bill print(PDF)'),
+    path('rentfarmlist<int:id>',views.rentfarmlist, name='rent bill print(PDF)'),
 
     # Admin upload Districts, and Show all list
     path('list<int:id>',views.listall),
-    path('districtupld',views.updisttrict, name='Admin upload Districts'),
-    
-
+    path('districtupld.html',views.updisttrict, name='Admin upload Districts'),
+    path('deletedis<int:id>',views.deletedis),
+    path('basic',views.basic),
 ] #+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
