@@ -12,7 +12,7 @@
             {% csrf_token %}
             <div class="panel-group col-md-12">
                     <div class="panel panel-success">
-                            <div class="panel-heading">Upload District</div>  
+                            <div class="panel-heading"><h3><b>Upload District</b></h4></div>  
            
             <div class="card-body">
                 {% if messages %} {% for message in messages %}
@@ -20,11 +20,11 @@
                 {% endfor %} {% endif %}
             </div>  
             <div class="panel-body">
-                    <form class="form-horizontal inline" role="form">
+                    <form class="form-horizontal inline border" role="form">
                       <div class="form-group">
                         <label class="col-md-3 control-label">Add District:</label>
                         <div class="col-sm-7">
-                          <input type="text" class="form-control col-md-4" name="dist" />                                         
+                          <input type="text" class="form-control inline col-md-4" name="dist" />  <br>                                       
                         <button type="submit" class="btn btn-info inline"  id="submit">submit</button>  
                         </div>
                       </div>  

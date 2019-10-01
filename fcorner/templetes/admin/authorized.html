@@ -23,10 +23,14 @@
             <th>City</th>
             <th>Email</th>
             <th>Quantity</th>
+            <th>Price</th>
             <th>Buy</th>
             <th>Cancel</th>
         </tr>
         {% for i in fupld %}
+   
+        {% for j in prc %}
+        {% if i.P_id == j.P_id %}
         <tr class="danger">
             <td><img src="{{ i.Image.url }}" class="img-responsive" style="width: 70%; height:150px;margin-left: 20px; " /></td>
             <td>{{i.F_name}}</td>
@@ -34,11 +38,16 @@
             <td>{{i.Mobileno}}</td>
             <td>{{i.City}}</td>
             <td>{{i.email}}</td>           
-            <td>{{i.Quantity}}</td>          
+            <td>{{i.Quantity}}</td>  
+            <td>{{j.Price}}</td>        
             <td><a href="buy{{i.S_id}}"><button type="submit" value="{{i.S_id}}" id="submit" class="btn btn-success" >BUY</button></a></td>          
             <td><a href="authorized{{i.S_id}}"><button type="reset" value="{{i.S_id}}" id="cancel" class="btn btn-danger" >Cancel</button></a></td>
             
         </tr>
+       
+        {% endif %}
+        {% endfor %}
+      
          {% endfor %}
     </table>
     <br>

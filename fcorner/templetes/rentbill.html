@@ -21,9 +21,8 @@
             <th>Email</th>
             <th>Pincode</th>
             <th>Startdate</th>
-            <th>Enddate</th>
-            <th>Approve</th>
-            <th>Reject</th>
+            <th>Enddate</th>           
+            <th>Bill</th>
         </tr>
         {% for i in c %} 
         <tr class="danger">
@@ -34,20 +33,19 @@
             <td>{{i.Email}}</td>
             <td>{{i.Pincode}}</td>
             <td>{{i.startdate}}</td>
-            <td>{{i.enddate}}</td>
-            <td>{{i.Quantity}}</td>  
-            {% if i.status != 1 %} 
+            <td>{{i.enddate}}</td>             
+            {% if i.status == 1 %} 
                     
             <td>
 
                     <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}      
-                        <input type="number" name="rid" value="{{i.R_id}}" />          
+                        <input type="number" name="rid" hidden value="{{i.R_id}}" />          
                                 {{form}}                             
                                 <button type="submit" class="btn btn-success" id="submit">Bill</button>                        
                     </form>            
             </td>            
-            {% else %}
+            {% elif i.status == 2 %}
             <td>Bill Sent</td>
             {% endif %}
         </tr>

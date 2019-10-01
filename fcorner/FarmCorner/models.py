@@ -132,8 +132,9 @@ def create_profile(sender, **kwargs):
 post_save.connect(create_profile, sender=authorize)
 
 class uproduct(models.Model):
-   S_id= models.AutoField(primary_key=True)
-   F_id= models.IntegerField(default=0) 
+   S_id= models.AutoField(primary_key=True)   
+   F_id= models.IntegerField(default=0)    
+   P_id= models.IntegerField(default=0) 
    F_name= models.CharField(max_length=20, default="")
    P_name= models.CharField(max_length=20, default="")
    Mobileno= models.CharField(max_length=13, default="")

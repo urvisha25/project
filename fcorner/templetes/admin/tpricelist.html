@@ -46,6 +46,12 @@
         <center>
             <h3 style="color: green">Trader Upload Price List</h3>
         </center>
+        <div class="message">
+          {% if messages %} {% for message in messages %}
+          <div class="alert alert-{{message.tags}}">
+              {{message}}
+          </div>
+          {% endfor %} {% endif %}</div>
       <thead>
         <tr>
             <th>Holder Name</th>

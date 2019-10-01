@@ -40,10 +40,10 @@
                                         <input type="text" class="form-control" id="shopname" name="shopname" placeholder="Enter shop name" required>
                                     </div>
                                     <div class="form-group">
-                                        <textarea class="form-control" id="adrs" name="haddress" rows="3"></textarea>
+                                        <textarea class="form-control" id="adrs" name="haddress" rows="3" required required pattern="^\d+\s[A-z]+\s[A-z]+"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <input type="tel" class="form-control" id="mn1" name="hmobileno" placeholder="Mobile number" maxlength="10" required>
+                                        <input type="tel" class="form-control" id="mn1" name="hmobileno" placeholder="Mobile number" maxlength="10" required required pattern="^[6-9]\d{9}$">
                                     </div>
                                     <div class="form-group">
                                         <select class="form-control" id="district" name="hdist" placeholder="District" required>
@@ -64,16 +64,18 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="pnc" name="hpincode" placeholder="pincode" maxlength="6" required>
+                                        <input type="number" class="form-control" id="pnc" name="hpincode" placeholder="pincode" maxlength="6" required>
                                     </div>
 
                                     <hr>
                                     <div class="form-group">
-                                        <input type="password" id="password" class="form-control" name="password" placeholder="Password"  required>
+                                        <input type="password" id="password" class="form-control" name="password" placeholder="Password"  required aria-describedby="pass"  required pattern="(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
+                                        <small id="pass" class="form-text text-muted">Password must have UpperCase, LowerCase, Number/SpecialChar and min 6 Chars</small>
+
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="password"  id="confirm_password" class="form-control" name="password1" placeholder="Confirm Password" required>
+                                        <input type="password"  id="confirm_password" class="form-control" name="password1" placeholder="Confirm Password" required aria-describedby="pass"  required pattern="(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
                                         <span id='message'></span>
                                     </div>
                                     <button class="btn btn-primary  text-uppercase" type="submit">Submit</button>

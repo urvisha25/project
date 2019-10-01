@@ -458,7 +458,8 @@ def productupload(request,id):
                 mail= mb.email
                 city= mb.City
                 productupload= form.save(commit=False)
-                productupload.F_id= request.session["idf"]            
+                productupload.F_id= request.session["idf"]                   
+                productupload.P_id=id   
                 productupload.F_name= request.session["fname"]
                 productupload.Mobileno= mob
                 productupload.email = mail
@@ -484,11 +485,12 @@ def priceupload(request):
                 priceupload.T_id= request.session["tid"]             
                 priceupload.T_name= request.session["tname"]               
                 priceupload.save()                 
-                messages.success(request,'successfully Price Upload')
-                return render(request,'upload/priceupload.html')                 
+                messages.success(request,'successfully Price Upload!!')
+                return render(request,'upload/priceupload.html')     
+            else:
+                 messages.warning(request,'Not Upload Price!')              
        else: 
-            form = upldprice() 
-            messages.warning(request,'Not Upload Price!') 
+            form = upldprice()              
        return render(request, 'upload/priceupload.html', {'form' : form}) 
 
 # Trader upload price List show farmer
@@ -547,6 +549,7 @@ def authorized(request):
       istekler = Farmerreg.objects.all()
       holderacp = eholder.objects.all()
       trader=traderreg.objects.all() 
+      prc=uploadprice.objects.filter(T_id=request.session["tid"])
       fupld=uproduct.objects.all()      
       return render(request, 'admin/authorized.html', locals())
           
@@ -617,7 +620,7 @@ def tpricelistt(request):
                   upid= request.POST.get('pid','') 
                   if updt != "" and upid != "":
                         uploadprice.objects.filter(P_id=upid).update(Price=updt)
-                        messages.success(request,'booking successfully!')
+                        messages.success(request,'upload price successfully')
             return render(request, 'admin/tpricelist.html', locals())
 
       else:   
@@ -628,7 +631,7 @@ def tpricelistt(request):
                   upid= request.POST.get('pid','') 
                   if updt != "" and upid != "":
                         uploadprice.objects.filter(P_id=upid).update(Price=updt)
-                        messages.success(request,'booking successfully!')
+                        messages.success(request,'upload price successfully')
             return render(request, 'admin/tpricelist.html', locals())
 
 # All equipments list in home page
@@ -790,6 +793,7 @@ def buyprod(request,id):
       pnm = mb.P_name
       request.session["fnm"]=mb.F_name
       pb=uploadprice.objects.filter(T_id=request.session["tid"])
+      prc=0
       for i in pb:
             if i.P_name == pnm:
                   prc=i.Price   
@@ -848,7 +852,7 @@ def rentprolist(request):
                   rentprolist.Name=f.E_name   
                   rentprolist.Total= total                                    
                   rentprolist.save() 
-                  rentequipment.objects.filter(R_id= pid).update(status=1)
+                  rentequipment.objects.filter(R_id= pid).update(status=2)
                   messages.success(request,'Bill sent')
                   return render(request, "rentbill.html")
             else: 
