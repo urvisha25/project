@@ -434,10 +434,11 @@ def equipmentupload(request):
                 equipmentupload.City = city
                 equipmentupload.save()                 
                 messages.success(request,'successfully Upload Equipments')
-                return render(request,'upload/uploadequipment.html')                 
+                return render(request,'upload/uploadequipment.html')   
+            else:
+                  messages.warning(request,'Not Upload Equipments!') 
       else: 
-            form = equipments()
-            messages.warning(request,'Not Upload Equipments!') 
+            form = equipments()            
       return render(request, 'upload/uploadequipment.html', {'form' : form}) 
 
 # upload Farmer Products

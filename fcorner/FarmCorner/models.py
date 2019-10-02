@@ -19,7 +19,7 @@ class districts(models.Model):
 # Farmer Registration form
 class Farmerreg(models.Model):
    F_id= models.AutoField(primary_key=True)
-   F_name= models.CharField(max_length=20)
+   F_name= models.CharField(max_length=40)
    Address= models.CharField(max_length=70, default="")
    Mobileno= models.CharField(max_length=13, default="")
    District= models.CharField(max_length=15, default="")
@@ -38,8 +38,8 @@ class Farmerreg(models.Model):
 # Equipmentholder Registration
 class eholder(models.Model):
        H_id= models.AutoField(primary_key=True)
-       H_name= models.CharField(max_length=20, default="")
-       shop_name= models.CharField(max_length=30, default="")
+       H_name= models.CharField(max_length=40, default="")
+       shop_name= models.CharField(max_length=40, default="")
        Address= models.CharField(max_length=70, default="")
        Mobileno= models.CharField(max_length=13, default="")
        District= models.CharField(max_length=15, default="")
@@ -70,7 +70,7 @@ class uploadequip(models.Model):
        E_id= models.AutoField(primary_key=True)    
        H_id= models.IntegerField(default=0)  
        H_name= models.CharField(max_length=40, default="")
-       E_name= models.CharField(max_length=20, default="")      
+       E_name= models.CharField(max_length=40, default="")      
        City= models.CharField(max_length=15, default="")   
        Mobileno= models.CharField(max_length=13, default="")  
        Category=models.CharField(max_length=50, choices=cat,default="")  
@@ -89,7 +89,7 @@ class uploadequip(models.Model):
 # Trader Registration form
 class traderreg(models.Model):
        T_id= models.AutoField(primary_key=True)
-       T_name= models.CharField(max_length=20, default="")       
+       T_name= models.CharField(max_length=40, default="")       
        Address= models.CharField(max_length=70, default="")
        Mobileno= models.CharField(max_length=13, default="")
        District= models.CharField(max_length=15, default="")
@@ -108,8 +108,8 @@ class traderreg(models.Model):
 class uploadprice(models.Model):
    P_id= models.AutoField(primary_key=True)    
    T_id= models.IntegerField(default=0) 
-   T_name=models.CharField(max_length=20, default="")  
-   P_name= models.CharField(max_length=20, default="")       
+   T_name=models.CharField(max_length=40, default="")  
+   P_name= models.CharField(max_length=40, default="")       
    Price= models.IntegerField(default=0)  
    mydate = models.DateTimeField(default=datetime.now())
  
@@ -119,7 +119,7 @@ class uploadprice(models.Model):
 # Admin Registration form
 class authorize(models.Model):
    A_id= models.AutoField(primary_key=True)   
-   A_name= models.CharField(max_length=20, default="")
+   A_name= models.CharField(max_length=40, default="")
    Email= models.EmailField(max_length=50, default="")  
    Password= models.CharField(max_length=30)    
 
@@ -135,8 +135,8 @@ class uproduct(models.Model):
    S_id= models.AutoField(primary_key=True)   
    F_id= models.IntegerField(default=0)    
    P_id= models.IntegerField(default=0) 
-   F_name= models.CharField(max_length=20, default="")
-   P_name= models.CharField(max_length=20, default="")
+   F_name= models.CharField(max_length=40, default="")
+   P_name= models.CharField(max_length=40, default="")
    Mobileno= models.CharField(max_length=13, default="")
    City= models.CharField(max_length=15, default="")
    Image= models.ImageField(upload_to='Image', default="")
@@ -153,7 +153,7 @@ class rentequipment(models.Model):
    F_id= models.IntegerField(default=0)    
    H_id= models.IntegerField(default=0)
    E_id= models.IntegerField(default=0) 
-   Name = models.CharField(max_length=15, default="")
+   Name = models.CharField(max_length=40, default="")
    Mobileno=models.CharField(max_length=13, default="")
    Email=models.CharField(max_length=50, default="")
    Address= models.CharField(max_length=70, default="")
@@ -171,9 +171,9 @@ class buyproduct(models.Model):
    B_id=models.AutoField(primary_key=True)
    T_id=models.IntegerField(default=0) 
    F_id=models.IntegerField(default=0) 
-   F_name= models.CharField(max_length=20, default="")
-   T_name= models.CharField(max_length=20, default="")
-   P_name= models.CharField(max_length=20, default="")
+   F_name= models.CharField(max_length=40, default="")
+   T_name= models.CharField(max_length=40, default="")
+   P_name= models.CharField(max_length=40, default="")
    Quantity= models.IntegerField(default=0) 
    email=models.EmailField(max_length=50, default="")   
    Price= models.IntegerField(default=0) 
@@ -190,10 +190,10 @@ class transaction(models.Model):
    R_id=models.IntegerField(default=0)  
    P_id=models.IntegerField(default=0) 
    E_id=models.IntegerField(default=0) 
-   F_name= models.CharField(max_length=20, default="")
-   T_name= models.CharField(max_length=20, default="")   
-   Name= models.CharField(max_length=20, default="")
-   H_name= models.CharField(max_length=20, default="")
+   F_name= models.CharField(max_length=40, default="")
+   T_name= models.CharField(max_length=40, default="")   
+   Name= models.CharField(max_length=40, default="")
+   H_name= models.CharField(max_length=40, default="")
    Total=models.IntegerField(default=0) 
    status=models.IntegerField(default=0)
    mydate = models.DateTimeField(default=datetime.now())

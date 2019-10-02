@@ -11,6 +11,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{% static 'styles/signup.css' %}">
+    <link rel="stylesheet"href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script  src="/path/to/bootstrap-show-password.js"></script>
+
 </head>
 
 
@@ -32,50 +36,50 @@
                                 {% endfor %} {% endif %}
                                 <h1 class="card-title text-center">Trader Registration</h1>
                                 <form class="form-signin">
-                                    <div class="form-label-group">
-                                        <input type="text" id="inputUserame" class="form-control" placeholder="Username" name="name" required autofocus>
+                                    <div class="form-group">
+                                        <input type="text" id="name" class="form-control" placeholder="User Name" name="name" required autofocus>
                                     </div>
-                                    <div class="form-label-group">
+                                    <div class="form-group">
                                         <textarea class="form-control" id="adrs" name="address" rows="3" required required pattern="^\d+\s[A-z]+\s[A-z]+"></textarea>
                                     </div>
-                                    <div class="form-label-group">
+                                    <div class="form-group">
                                         <input type="tel" class="form-control" id="mn1" name="mobileno" placeholder="Mobile number" maxlength="10" required required pattern="^[6-9]\d{9}$">
                                     </div>
-                                    <div class="form-label-group">
+                                    <div class="form-group">
                                         <select class="form-control" id="district" name="dist" placeholder="District" required>
                                             {% for i in a %}
                                             <option>{{i.District}}</option>  
                                             {% endfor %}                                             
                                           </select> </div>
-                                    <div class="form-label-group">
+                                    <div class="form-group">
                                         <input type="text" class="form-control" id="taluka" name="taluka" placeholder="Taluka name" pattern='[A-Za-z\\s]*' required>
 
                                     </div>
-                                    <div class="form-label-group">
+                                    <div class="form-group">
                                         <input type="text" class="form-control" id="city" name="city" placeholder="City/Village name" pattern='[A-Za-z\\s]*' required>
                                     </div>
-                                    <div class="form-label-group">
+                                    <div class="form-group">
                                         <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email" required>
 
                                     </div>
-                                    <div class="form-label-group">
-                                        <input type="number" class="form-control" id="pnc" name="pincode" placeholder="pincode" maxlength="6" required>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="pnc" name="pincode" placeholder="pincode" maxlength="6" required>
                                     </div>
 
-                                    <hr>
-                                    <div class="form-label-group">
+                                    <div class="form-group">
                                         <input type="password" id="password" class="form-control" name="password" placeholder="Password" required aria-describedby="pass"  required pattern="(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
                                         <small id="pass" class="form-text text-muted">Password must have UpperCase, LowerCase, Number/SpecialChar and min 6 Chars</small>
 
                                     </div>
 
-                                    <div class="form-label-group">
+                                    <div class="form-group">
                                         <input type="password"  id="confirm_password" class="form-control" name="password1" placeholder="Confirm Password" required aria-describedby="pass"  required pattern="(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
                                         <span id='message'></span>
                                     </div>
 
-                                    <button class="btn btn-lg btn-primary text-uppercase" type="submit">Submit</button>
-                                    <button class="btn btn-lg btn-primary text-uppercase" type="reset">Cancel</button>
+                                    <button class="btn btn-primary text-uppercase" type="submit">Submit</button>
+                                    <button class="btn btn-primary text-uppercase" type="reset">Cancel</button>
+                                    <hr>
                                     <a class="d-block text-center mt-2 small" href="hlogin">Sign In</a>
                                 </form>
                             </div>
@@ -86,7 +90,7 @@
 </body>
 
 </html>
-
+<!-- Conform Password Is matching -->
 <script>
     $('#password, #confirm_password').on('keyup', function () {
       if ($('#password').val() == $('#confirm_password').val()) {
@@ -95,4 +99,50 @@
         $('#message').html('Not Matching Password').css('color', 'red');
     });
     </script>
+
+<!----- First latter is UpperCase ------>
+<script>
+        jQuery(document).ready(function() {
+
+             // 3 Capitalize string every 1st chacter of word to uppercase
+             jQuery('#name').keyup(function() 
+             {
+                 var str = jQuery('#name').val();    
+                 var spart = str.split(" ");
+                 for ( var i = 0; i < spart.length; i++ )
+                 {
+                     var j = spart[i].charAt(0).toUpperCase();
+                     spart[i] = j + spart[i].substr(1);
+                 }
+             jQuery('#name').val(spart.join(" "));
+             
+             });
+
+              // Capitalize string every 1st chacter of word to uppercase
+              jQuery('#taluka').keyup(function() 
+             {
+                 var str = jQuery('#taluka').val();
+                 var spart = str.split(" ");
+                 for ( var i = 0; i < spart.length; i++ )
+                 {
+                     var j = spart[i].charAt(0).toUpperCase();
+                     spart[i] = j + spart[i].substr(1);
+                 }
+             jQuery('#taluka').val(spart.join(" "));             
+             });
+
+             // Capitalize string every 1st chacter of word to uppercase
+             jQuery('#city').keyup(function() 
+             {
+                 var str = jQuery('#city').val();
+                 var spart = str.split(" ");
+                 for ( var i = 0; i < spart.length; i++ )
+                 {
+                     var j = spart[i].charAt(0).toUpperCase();
+                     spart[i] = j + spart[i].substr(1);
+                 }
+             jQuery('#city').val(spart.join(" "));             
+             });
+         });       
+       </script>
 {% endblock %}

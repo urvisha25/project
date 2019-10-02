@@ -16,28 +16,28 @@
             <h3 style="color: green">Farmer Upload Products List</h3>
         </center>
        <thead>
-        <tr>
+        <tr align="center">
             <th>Farmer Name</th>
             <th>Product Name</th>
             <th>Mobile no.</th>
             <th>City</th>
             <th>Email</th>
-            <th>Quantity</th>
-            <th>Image</th>
+            <th>Quantity in Mann</th>
+            <th>Image of Products</th>
             
         </tr>
     </thead>
       
         {% for i in upld %} 
         <tbody>       
-        <tr class="danger">
+        <tr class="danger" align="center">
             <td>{{i.F_name}}</td>
             <td>{{i.P_name}}</td>
             <td>{{i.Mobileno}}</td>
             <td>{{i.City}}</td>
             <td>{{i.email}}</td>
             <td>{{i.Quantity}}</td>
-            <td><img src="{{ i.Image.url }}" class="img-responsive" style="width: 50%; height:150px; " /></td>           
+            <td><img src="{{ i.Image.url }}" class="img-responsive" style="width: 70%; height:150px; " /></td>           
         </tr>  
     </tbody>            
         {% endfor %}    

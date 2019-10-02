@@ -34,16 +34,16 @@
                                 <h1 class="card-title text-center">Equipmentholder Registration</h1>
                                 <form class="form-signin">
                                     <div class="form-group">
-                                        <input type="text" id="inputUserame" class="form-control" placeholder="Username" name="hname" required autofocus>
+                                        <input type="text" id="name" class="form-control" placeholder="User Name" name="hname" required autofocus>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="shopname" name="shopname" placeholder="Enter shop name" required>
+                                        <input type="text" class="form-control" id="shopname" name="shopname" placeholder="Enter Shop Name" required>
                                     </div>
                                     <div class="form-group">
                                         <textarea class="form-control" id="adrs" name="haddress" rows="3" required required pattern="^\d+\s[A-z]+\s[A-z]+"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <input type="tel" class="form-control" id="mn1" name="hmobileno" placeholder="Mobile number" maxlength="10" required required pattern="^[6-9]\d{9}$">
+                                        <input type="tel" class="form-control" id="mn1" name="hmobileno" placeholder="Mobile Number" maxlength="10" required required pattern="^[6-9]\d{9}$">
                                     </div>
                                     <div class="form-group">
                                         <select class="form-control" id="district" name="hdist" placeholder="District" required>
@@ -53,21 +53,19 @@
                                           </select>
                                          </div>
                                           <div class="form-group">
-                                        <input type="text" class="form-control" id="taluka" name="htaluka" placeholder="Taluka name" pattern='[A-Za-z\\s]*' required>
+                                        <input type="text" class="form-control" id="htaluka" name="htaluka" placeholder="Taluka Name" pattern='[A-Za-z\\s]*' required>
 
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="city" name="hcity" placeholder="City/Village name" pattern='[A-Za-z\\s]*' required>
+                                        <input type="text" class="form-control" id="hcity" name="hcity" placeholder="City/Village Name" pattern='[A-Za-z\\s]*' required>
                                     </div>
                                     <div class="form-group">
-                                        <input type="email" class="form-control" id="exampleInputEmail1" name="hemail" aria-describedby="emailHelp" placeholder="Enter email" required>
+                                        <input type="email" class="form-control" id="exampleInputEmail1" name="hemail" aria-describedby="emailHelp" placeholder="Enter Email" required>
 
                                     </div>
                                     <div class="form-group">
-                                        <input type="number" class="form-control" id="pnc" name="hpincode" placeholder="pincode" maxlength="6" required>
-                                    </div>
-
-                                    <hr>
+                                        <input type="text" class="form-control" id="pnc" name="hpincode" placeholder="pincode" maxlength="6" required>
+                                    </div>                                   
                                     <div class="form-group">
                                         <input type="password" id="password" class="form-control" name="password" placeholder="Password"  required aria-describedby="pass"  required pattern="(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
                                         <small id="pass" class="form-text text-muted">Password must have UpperCase, LowerCase, Number/SpecialChar and min 6 Chars</small>
@@ -80,6 +78,7 @@
                                     </div>
                                     <button class="btn btn-primary  text-uppercase" type="submit">Submit</button>
                                     <button class="btn btn-primary text-uppercase" type="reset">Cancel</button>
+                                    <hr>
                                     <a class="d-block text-center mt-2 small" href="hlogin">Sign In</a>
                                 </form>
                             </div>
@@ -91,6 +90,7 @@
 
 </html>
 
+<!-- Conform Password Is matching -->
 <script>
     $('#password, #confirm_password').on('keyup', function () {
       if ($('#password').val() == $('#confirm_password').val()) {
@@ -99,5 +99,63 @@
         $('#message').html('Not Matching Password').css('color', 'red');
     });
     </script>
+
+<!------ First latter is UpperCase ------->
+<script>
+        jQuery(document).ready(function() {
+
+             // 3 Capitalize string every 1st chacter of word to uppercase
+             jQuery('#name').keyup(function() 
+             {
+                 var str = jQuery('#name').val();
+                 var spart = str.split(" ");
+                 for ( var i = 0; i < spart.length; i++ )
+                 {
+                     var j = spart[i].charAt(0).toUpperCase();
+                     spart[i] = j + spart[i].substr(1);
+                 }
+             jQuery('#name').val(spart.join(" "));             
+             });
+
+              // Capitalize string every 1st chacter of word to uppercase
+              jQuery('#htaluka').keyup(function() 
+             {
+                 var str = jQuery('#htaluka').val();
+                 var spart = str.split(" ");
+                 for ( var i = 0; i < spart.length; i++ )
+                 {
+                     var j = spart[i].charAt(0).toUpperCase();
+                     spart[i] = j + spart[i].substr(1);
+                 }
+             jQuery('#htaluka').val(spart.join(" "));             
+             });
+
+             // Capitalize string every 1st chacter of word to uppercase
+             jQuery('#hcity').keyup(function() 
+             {
+                 var str = jQuery('#hcity').val();
+                 var spart = str.split(" ");
+                 for ( var i = 0; i < spart.length; i++ )
+                 {
+                     var j = spart[i].charAt(0).toUpperCase();
+                     spart[i] = j + spart[i].substr(1);
+                 }
+             jQuery('#hcity').val(spart.join(" "));             
+             });
+
+              // Capitalize string every 1st chacter of word to uppercase
+              jQuery('#shopname').keyup(function() 
+             {
+                 var str = jQuery('#shopname').val();
+                 var spart = str.split(" ");
+                 for ( var i = 0; i < spart.length; i++ )
+                 {
+                     var j = spart[i].charAt(0).toUpperCase();
+                     spart[i] = j + spart[i].substr(1);
+                 }
+             jQuery('#shopname').val(spart.join(" "));             
+             });
+         });       
+       </script>
 
 {% endblock %}

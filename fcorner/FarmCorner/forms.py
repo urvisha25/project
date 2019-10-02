@@ -6,9 +6,9 @@ class equipments(forms.ModelForm):
     class Meta: 
         model = uploadequip 
         fields = ['E_name','Category','Image','Rent_price']   
-        labels={
-               
-                'E_name': 'Equipment Name',    
+        labels={               
+                'E_name': 'Equipment Name',  
+                'Rent_price': 'Rent Price'  
             }
 
 # upload product images
@@ -38,32 +38,49 @@ class editprofileh(forms.ModelForm):
     class Meta:
         model=eholder
         fields=[
-            'H_name','shop_name','Address','Mobileno','District','Taluka','City','Pincode','password'
-        ]
+            'H_name','shop_name','Address','Mobileno','District','Taluka','City','Pincode','password']
+
+        labels={ 
+                'H_name':'Equipmentholder Name',               
+                'shop_name':'Shop Name',
+                'password':'Password'
+            } 
 
 # edit profile  Trader
 class editprofilet(forms.ModelForm):
     class Meta:
         model=traderreg
         fields=[
-            'T_name','Address','Mobileno','District','Taluka','City','email','Pincode','password'
-        ]
+            'T_name','Address','Mobileno','District','Taluka','City','email','Pincode','password']
+
+        labels={ 
+                'T_name':'Trader Name',               
+                'email':'Email',
+                'password':'Password'
+            } 
 
 # edit profile Farmer
 class editprofilef(forms.ModelForm):
     class Meta:
         model=Farmerreg
         fields=[
-            'F_name','Address','Mobileno','District','Taluka','City','email','Pincode','Area','password'
-        ]
+            'F_name','Address','Mobileno','District','Taluka','City','email','Pincode','Area','password' ]
+
+        labels={ 
+                'F_name':'Farmer Name',               
+                'email':'Email',
+                'password':'Password'
+            } 
 
 # edit profile admin
 class editprofilea(forms.ModelForm):
     class Meta:
         model=authorize
         fields=[
-            'A_name','Email','Password'
-        ]
+            'A_name','Email','Password']
+
+        labels={ 
+                'A_name':'Admin Name' } 
 
 # rent
 

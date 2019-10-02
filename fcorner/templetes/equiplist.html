@@ -12,17 +12,17 @@
                 </center>
                 <hr>
                 <thead>
-                <tr>
+                <tr align="center">
                     <th>Holder Name</th>
                     <th>Equipment Name</th>
                     <th>Category</th>
-                    <th>Prices</th>
-                    <th>Image</th>
+                    <th>Price Per Day</th>
+                    <th>Image of Equipments</th>
                 </tr>
             </thead>
             <tbody>
                 {% for i in uplde %}              
-                <tr class="danger">
+                <tr class="danger" align="center">
                     <td>{{i.H_name}}</td>
                     <td>{{i.E_name}}</td>
                     <td>{{i.Category}}</td>
@@ -38,12 +38,12 @@
             <center> <h3 style="color: green">Equipmentholder Upload Equipments List</h3></center>            
             <hr>
             <thead>
-            <tr>
-                <th>Image</th>
+            <tr align="center">
+                <th>Image of Equipments</th>
                 <th>Holder Name</th>
                 <th>Equipment Name</th>
                 <th>Category</th>
-                <th>mobile no.</th>
+                <th>Mobile no.</th>
                 <th>City</th>
                 <th>Email</th>
                 <th>Price per day</th>  
@@ -51,7 +51,7 @@
         </thead>
         <tbody>
             {% for i in uplde %}            
-            <tr class="danger">
+            <tr class="danger" align="center">
                 <td><img src="{{ i.Image.url }}" class="img-responsive" style="width: 90%; height:160px; margin-left:30px; float:inline-start;" /></td>        
                 <td>{{i.H_name}}</td>
                 <td>{{i.E_name}}</td>
@@ -74,22 +74,22 @@
         </center>
         <hr>
         <thead>
-        <tr>
-            <th>Image</th> 
+        <tr align="center">
+            <th>Image of Equipments</th> 
             <th>Holder Name</th>
             <th>Equipment Name</th>
             <th>Category</th>
-            <th>mobile no.</th>
+            <th>Mobile no.</th>
             <th>City</th>
             <th>Email</th>
-            <th>Prices</th>                    
+            <th>Price Per Day</th>                    
             <th>Accept</th>           
         </tr>
     </thead>
     <tbody>
         {% for i in uplde %}
         
-        <tr class="danger">
+        <tr class="danger" align="center">
             <td><img src="{{ i.Image.url }}" class="img-responsive" style="width: 80%; height:160px; margin-left:30px; float:inline-start;" /></td>        
             <td>{{i.H_name}}</td>
             <td>{{i.E_name}}</td>
