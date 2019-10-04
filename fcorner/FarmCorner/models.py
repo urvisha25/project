@@ -62,7 +62,8 @@ cat = (
     ('Sowing and Planting Equipments','Sowing and Planting Equipments'),
     ('Pesticide applicators','Pesticide applicators'),   
     ('landscaping Equipments','landscaping Equipments'),
-    ('postharvest equipments','postharvest equipments')
+    ('postharvest equipments','postharvest equipments'),
+    ('Others','Others')
      )
 
 # Equipmentholder upload equipments

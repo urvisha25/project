@@ -3,10 +3,6 @@
     --input-padding-y: .75rem;
 }
 
-body {
-    background: lightcyan;
-    background: linear-gradient(to right, lightcyan, #33AEFF);
-}
 
 .card-signin {
     border: 0;
@@ -22,18 +18,14 @@ body {
     color: rebeccapurple;
 }
 
-.card-signin .card-img-left {
-    width: 45%;
-    /* Link to your background image using in the property below! */
-    background-size: cover;
-}
+
 
 .card-signin .card-body {
     padding: 2rem;
 }
 
 .form-signin {
-    width: 100%;
+    width: 80%;
 }
 
 .form-signin .btn {
@@ -65,7 +57,7 @@ body {
     top: 0;
     left: 0;
     display: block;
-    width: 100%;
+    width: 80%;
     margin-bottom: 0;
     /* Override default `<label>` margin */
     line-height: 1.5;
