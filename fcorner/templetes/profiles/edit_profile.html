@@ -1,23 +1,38 @@
-{% extends 'main.html' %} {% load crispy_forms_tags %}{% block content %}
-
-<form method="POST">
-    <div class="container" style="width: 50%; height:auto;">
-        
-            {% csrf_token %}
-            <center>  <h1>Edit Your Profile</h1></center>
-        <hr>
-            <div class="card-body">
-                    {% if messages %} {% for message in messages %}
-                    <div class="alert alert-{{message.tags}}">{{ message }}</div>
-                </div>
-                
-                <fieldset class="form-group">   
-                {% endfor %} {% endif %} {{ form|crispy }}
-                </fieldset>
-            
-            <button type="submit" class="btn btn-success">Submit</button>
-            <button type="submit" class="btn btn-primary">Cancel</button>                     
-    </div> 
- </form>   
-
+{% extends 'basic.html' %} {% load crispy_forms_tags %}{% block content %}  
+<html>
+    <head>
+        <style>
+                    label{
+                    font-weight: bold;
+                    }
+        </style>
+    </head>
+    <body>
+            <body>
+                    <center>
+                        <div class="card border-info" style="width: 40%; margin-top: 0px;" align="center">
+                                <div class="card-header bg-info">
+                                        <h1><b>Edit Your Profile</b></h1>
+                                </div>
+                                <div class="card-body">
+                                        {% if messages %} {% for message in messages %}
+                                        <div class="alert alert-{{message.tags}}">{{ message }}</div>
+                                        {% endfor %} {% endif %}
+                                    </div>  
+                                    <form class="form-horizontal inline"  role="form" method="POST" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                <div class="card-block">                                                                                                 
+                                       <fieldset class="form-group col-md-10" >    
+                                            {{form|crispy}}
+                                            <br>
+                                            <button type="submit" class="btn btn-success" id="submit">submit</button>&nbsp;&nbsp;
+                                            <button type="reset" class="btn btn-primary" id="reset">Cancel</button>                      
+                                        </fieldset>  
+                                    </form>  
+                               </div>                           
+                        </div>
+                    </center>
+                    </body>   
+    </body>
+</html>
 {% endblock %}

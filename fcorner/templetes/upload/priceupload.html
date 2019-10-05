@@ -1,4 +1,4 @@
-{% extends 'main.html' %} {% block content %} {% load static %}{% load crispy_forms_tags %}
+{% extends 'basic.html' %} {% block content %} {% load static %}{% load crispy_forms_tags %}
 <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="container" style="width: 50%; height:auto;">   
@@ -19,4 +19,54 @@
     </div>
 
 </form>
+<html>
+    <head>    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">    
+            <style>
+                    input[type=text],label,input[type=number]{
+                          width: 80%;
+                          align-content: center;                                                    
+                    }                    
+                    label{
+                        font-weight: bold;
+                    }
+                </style>
+    </head>
+    <body>
+        <center>
+            <div class="card border-info" style="width: 50%; margin-top: 0px;" align="center">
+                    <div class="card-header bg-info">
+                            <h3><b>Upload Product Price</b></h3>
+                    </div>
+                    <div class="card-body">
+                            {% if messages %} {% for message in messages %}
+                            <div class="alert alert-{{message.tags}}">{{ message }}</div>
+                            {% endfor %} {% endif %}
+                        </div> 
+                        <form class="form-horizontal inline"  role="form" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                    <div class="card-block">                                                                                     
+                           <fieldset class="form-group col-md-10" >                      
+                               
+                                {{form|crispy}}
+                                <br>
+                                <button type="submit" class="btn btn-success" id="submit">submit</button>&nbsp;&nbsp;
+                                <button type="reset" class="btn btn-primary" id="reset">Cancel</button>                      
+                            </fieldset>  
+                        </form>  
+                   </div>
+              
+            </div>
+        </center>
+        </body>    
+    </html>     
+    <script>
+    var userName = document.querySelector('#id_Price');
+
+userName.addEventListener('input', restrictNumber);
+function restrictNumber (e) {  
+  var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
+  this.value = newValue;
+}
+    </script>
 {% endblock %}

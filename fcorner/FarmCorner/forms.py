@@ -18,7 +18,7 @@ class uploadproduct(forms.ModelForm):
             model = uproduct 
             fields = ['Image','Quantity']   
             labels={               
-             
+                'Image': 'Choose the Image',
                 'Quantity':'Quantity in Mann(1Mann=20kg)'
             }
 

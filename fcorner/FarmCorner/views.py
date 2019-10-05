@@ -1055,5 +1055,4 @@ def deletedis(request,id):
             messages.success(request,'District Delete')
             return redirect('districtupld.html')       
 
-def basic(request):
-      return render(request,'basic.html')
+

@@ -1,6 +1,6 @@
-{% extends 'main.html' %} {% load render_table from django_tables2 %} {% render_table table %} {% block content %} {% load static %}
+{% extends 'basic.html' %} {% load render_table from django_tables2 %} {% render_table table %} {% block content %} {% load static %}
 
-<div class="message" style="margin-top: 160px">
+<div class="message" style="margin-top: 10px">
     {% if messages %} {% for message in messages %}
     <div class="alert alert-{{message.tags}}">
         {{message}}
@@ -14,6 +14,7 @@
     <table class="table table-hover" id="example">
         <center>
             <h3 style="color: green">Farmer Upload Products List</h3>
+            <hr>
         </center>
        <thead>
         <tr align="center">

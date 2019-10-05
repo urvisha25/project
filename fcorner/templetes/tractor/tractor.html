@@ -1,4 +1,4 @@
-{% extends 'main.html' %} {% load static %} {% block content %}
+{% extends 'basic.html' %} {% load static %} {% block content %}
 <style>
     .col-sm-3 img {
         display: block;
@@ -38,7 +38,7 @@
 }
 </style>
 
-<div class="conatiner" style="margin: 160px 50px 50px 50px; background-color:gainsboro;">
+<div class="conatiner" style="margin: 5px 50px 50px 50px; background-color:gainsboro;">
     <div class="row text-center">
 
         {% for i in d|slice:"0:" %}

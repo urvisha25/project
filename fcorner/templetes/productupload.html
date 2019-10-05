@@ -1,46 +1,65 @@
-{% extends 'main.html' %}{% load crispy_forms_tags %} {% block content %}
+{% extends 'basic.html' %}{% load crispy_forms_tags %} {% block content %}
 <html>
-    <head>            
+    <head>    
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">    
+            <style>
+                    input[type=text],label{
+                          width: 80%;
+                          align-content: center;
+                          
+                    }
+                    input[type=file]{
+                        width: 100%
+                    }
+                    label{
+                        font-weight: bold;
+                    }
+                </style>
     </head>
     <body>
-
- 
-    <div class="container" align="center" style="width: 50%; margin-top: 200px;">
-           
-            <div class="panel-group col-md-12">
-                    <div class="panel panel-success">
-                            <div class="panel-heading"><h3><b>Upload Farm Product</b></h3></div>   
-                            <div class="card-body">
-                                {% if messages %} {% for message in messages %}
-                                <div class="alert alert-{{message.tags}}">{{ message }}</div>
-                                {% endfor %} {% endif %}
-                            </div> 
-        {% if request.session.rmv == 0 %}
-        <div class="panel-body">
-                <form class="form-horizontal inline" role="form" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                   
-                        <div class="form-group">
-                                <label class="control-label"> <b>Farmer Name:</b>  &nbsp;</label>{{request.session.fname}}                                                                     
-                                <br>
-                               <label class="control-label"> <b>Trader Name:</b>  &nbsp;</label>{{request.session.tame}} <br>                                                                    
-                               <label class="control-label"> <b>Product Name:</b>  &nbsp;</label>{{request.session.pname}}                                                                     
-                               
+        <center>
+            <div class="card border-info" style="width: 50%; margin-top: 0px;" align="center">
+                    <div class="card-header bg-info">
+                            <h3><b>Upload Farm Product</b></h3>
+                    </div>
+                    <div class="card-body">
+                            {% if messages %} {% for message in messages %}
+                            <div class="alert alert-{{message.tags}}">{{ message }}</div>
+                            {% endfor %} {% endif %}
                         </div> 
-                  <fieldset class="form-group col-md-10" style="margin-left: 50px;">                       
+                        {% if request.session.rmv == 0 %}
+                        
+                        <form class="form-horizontal inline"  role="form" method="POST" enctype="multipart/form-data">
+                            
+                            {% csrf_token %}
+                    <div class="card-block">
+                            <label class="control-label"> Farmer Name:  &nbsp;</label><input type="text" class="form-control" value="{{request.session.fname}}" disabled />                                                                     
+                           
+                           <SPAN><label class="control-label inline" > Trader Name:  &nbsp;</label><input type="text" class="form-control" value="{{request.session.tame}}" disabled /> </SPAN> 
+                           
+                           <label class="control-label"> Product Name:  &nbsp;</label><input type="text" class="form-control" value="{{request.session.pname}}" disabled />                                                                                                                
+                                                                                       
+                           <fieldset class="form-group col-md-10" >                       
                                
-                                  {{form|crispy}}
-                                  <br>
-                                  <button type="submit" class="btn btn-success" id="submit">submit</button>&nbsp;&nbsp;
-                                  <button type="reset" class="btn btn-primary" id="reset">reset</button>                      
-                  </fieldset>  
-                     </form>          
-                 </div>
-             {% endif %}
-         </div>
-    </div>
-</div>       
+                                {{form|crispy}}
+                                <br>
+                                <button type="submit" class="btn btn-success" id="submit">submit</button>&nbsp;&nbsp;
+                                <button type="reset" class="btn btn-primary" id="reset">Cancel</button>                      
+                            </fieldset>  
+                        </form>  
+                   </div>
+                {% endif %}
+            </div>
+        </center>
+        </body>    
+    </html>     
+    <script>
+    var userName = document.querySelector('#id_Quantity');
 
-    </body>
-</html>        
+userName.addEventListener('input', restrictNumber);
+function restrictNumber (e) {  
+  var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
+  this.value = newValue;
+}
+    </script>   
 {% endblock %}

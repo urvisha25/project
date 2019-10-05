@@ -1,4 +1,4 @@
-{% extends 'main.html' %} {% block content %} {% load static %}
+{% extends 'basic.html' %} {% block content %} {% load static %}
 <!DOCTYPE html>
 <html>
 
@@ -14,17 +14,20 @@
             color: white !important;
             text-align: center;
             font-size: 30px;
-        }
-       
-        
+        }    
         .modal-footer {
             background-color: #f9f9f9;
         }
+        #msg {
+                display:none;
+                color:red;
+                }
     </style>
+    
 </head>
 
 <body>
-    <form method="POST">
+    <form method="POST" id="abc">
         {% csrf_token %}
         <div class="container">
             <!-- Modal content-->
@@ -37,8 +40,10 @@
                         {% if messages %} {% for message in messages %}
                         <div class="alert alert-{{message.tags}}">{{ message }}</div>
                         {% endfor %} {% endif %}
+                        
                         <form role="form">                           
                             <div class="form-group">
+                                    <p id="msg">WARNING! Caps lock is ON.</p>
                                 <label for="email"><i class="fa fa-envelope" aria-hidden="true"></i>
                                     Email</label>
                                 <input type="text" class="form-control" name="email" id="usrname" placeholder="Enter email">
@@ -64,4 +69,23 @@
 </body>
 
 </html>
+<!-----------Capslock On or Off -------------->
+<script>
+// Get the input field
+var input = document.getElementById("abc");
+
+// Get the warning text
+var text = document.getElementById("msg");
+
+// When the user presses any key on the keyboard, run the function
+input.addEventListener("keyup", function(event) {
+
+  // If "caps lock" is pressed, display the warning text
+  if (event.getModifierState("CapsLock")) {
+    text.style.display = "block";
+  } else {
+    text.style.display = "none"
+  }
+}); 
+</script>
 {% endblock %}

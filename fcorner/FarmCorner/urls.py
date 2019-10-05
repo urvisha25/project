@@ -65,5 +65,5 @@ urlpatterns=[
     path('list<int:id>',views.listall),
     path('districtupld.html',views.updisttrict, name='Admin upload Districts'),
     path('deletedis<int:id>',views.deletedis),
-    path('basic',views.basic),
+   
 ] #+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

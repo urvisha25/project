@@ -1,9 +1,9 @@
-{% extends 'main.html' %} {% load render_table from django_tables2 %} {% render_table table %} {% block content %} {% load static %}
+{% extends 'basic.html' %} {% load render_table from django_tables2 %} {% render_table table %} {% block content %} {% load static %}
  
      
         <!--Equipmentholder Upload Equipments-->
 
-<div class="table-responsive" style="font-size: 15px; margin-top: 180px;">
+<div class="table-responsive" style="font-size: 15px; margin-top: 10px;">
     
             {% if request.session.lgna != null %}
             <table class="table table-striped table-bordered" id="example" cellspacing="20px">
