@@ -9,6 +9,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+ 
   </head>
 <style>
 
@@ -49,11 +50,11 @@
         <ul class="navbar-nav mr-auto">   
             {% if request.session.lgnh == null and request.session.lgnf == null and request.session.lgnt == null and request.session.lgna == null %}
             <li class="nav-item">
-              <a class="nav-link " href="hlogin"> <button class="btn btn-outline-info">Sign IN</button></a>
+              <a class="nav-link " href="hlogin"> <button class="btn btn-outline-light">Sign IN</button></a>
             </li>                      
           <li class="nav-item dropdown">
             <a class="nav-link " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <button class="btn btn-outline-info dropdown-toggle">Sign UP</button>
+              <button class="btn btn-outline-light dropdown-toggle">Sign UP</button>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="fregis">Farmer</a>
@@ -64,7 +65,7 @@
           
           {% else %}
           <li class="nav-item" style="margin-left: 98%;">
-            <a class="nav-link " href="logout"> <button class="btn btn-outline-info">Logout</button></a>
+            <a class="nav-link " href="logout"> <button class="btn btn-outline-light">Logout</button></a>
           </li>
           {% endif %}
         </ul>        

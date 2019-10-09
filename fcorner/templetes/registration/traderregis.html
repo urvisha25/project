@@ -32,7 +32,7 @@
                                 <div class="alert alert-{{message.tags}}">{{ message }}</div>
                                 {% endfor %} {% endif %}
                                 <h1 class="card-title text-center">Trader Registration</h1>
-                                <form class="form-signin">
+                                <form class="form-signin outline-info">
                                     <div class="form-group">
                                         <input type="text" id="name" class="form-control" placeholder="User Name" name="name" required autofocus>
                                     </div>
@@ -40,7 +40,7 @@
                                         <textarea class="form-control" id="adrs" name="address" rows="3" required required pattern="^\d+\s[A-z]+\s[A-z]+"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <input type="tel" class="form-control" id="mn1" name="mobileno" placeholder="Mobile number" maxlength="10" required required pattern="^[6-9]\d{9}$">
+                                        <input type="tel" class="form-control" id="mob" name="mobileno" placeholder="Mobile number" maxlength="10" required required pattern="^[6-9]\d{9}$">
                                     </div>
                                     <div class="form-group">
                                         <select class="form-control" id="district" name="dist" placeholder="District" required>
@@ -60,7 +60,7 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="pnc" name="pincode" placeholder="pincode" maxlength="6" required>
+                                        <input type="text" class="form-control" id="pin" name="pincode" placeholder="pincode" maxlength="6" required>
                                     </div>
 
                                     <div class="form-group">
@@ -87,7 +87,7 @@
 </body>
 
 </html>
-<!-- Conform Password Is matching -->
+<!----------- Conform Password Is matching ----------->
 <script>
     $('#password, #confirm_password').on('keyup', function () {
       if ($('#password').val() == $('#confirm_password').val()) {
@@ -95,9 +95,9 @@
       } else 
         $('#message').html('Not Matching Password').css('color', 'red');
     });
-    </script>
+</script>
 
-<!----- First latter is UpperCase ------>
+<!----------- First latter is UpperCase ------------>
 <script>
         jQuery(document).ready(function() {
 
@@ -141,5 +141,20 @@
              jQuery('#city').val(spart.join(" "));             
              });
          });       
-       </script>
+</script>
+<!--------------only Enter Number ----------------->   
+<script>
+        var userName = document.querySelector('#pin');            
+        userName.addEventListener('input', restrictNumber);
+        function restrictNumber (e) {  
+        var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
+        this.value = newValue;
+        }
+        var mob = document.querySelector('#mob');            
+        mob.addEventListener('input', restrictNumber);
+        function restrictNumber (e) {  
+        var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
+        this.value = newValue;
+        }
+</script>
 {% endblock %}

@@ -499,7 +499,6 @@ def pricelist(request):
       prolist= uploadprice.objects.all()
       return render(request,'upload/pricelist.html',locals())
 
-
 # All Entity Edit Profile
 
 def edit_profile(request):  
@@ -665,11 +664,14 @@ def tractors(request,id):
 def rent(request,id):
       sd=rentequipment.objects.filter(E_id=id)
       storage=messages.get_messages(request)
-      storage.used=True   
+      storage.used=True 
+      arr=[]
+      for i in sd:
+            arr.append(i.startdate)  
       a=uploadequip.objects.get(E_id=id)   
       if request.method == 'POST':    
         sdate = request.POST.get('sdate','')
-        edate = request.POST.get('edate','')    
+        edate = request.POST.get('edate','')        
         form = rentequipments(request.POST, request.FILES) 
         if form.is_valid(): 
                 mb= Farmerreg.objects.get(F_id=request.session["idf"])

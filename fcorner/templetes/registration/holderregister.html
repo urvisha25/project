@@ -28,7 +28,7 @@
                                 {% endfor %} {% endif %}
 
                                 <h1 class="card-title text-center">Equipmentholder Registration</h1>
-                                <form class="form-signin">
+                                <form class="form-signin outline-info">
                                     <div class="form-group">
                                         <input type="text" id="name" class="form-control" placeholder="User Name" name="hname" required autofocus>
                                     </div>
@@ -39,7 +39,7 @@
                                         <textarea class="form-control" id="adrs" name="haddress" rows="3" required required pattern="^\d+\s[A-z]+\s[A-z]+"></textarea>
                                     </div>
                                     <div class="form-group">
-                                        <input type="tel" class="form-control" id="mn1" name="hmobileno" placeholder="Mobile Number" maxlength="10" required required pattern="^[6-9]\d{9}$">
+                                        <input type="tel" class="form-control" id="mob" name="hmobileno" placeholder="Mobile Number" maxlength="10" required required pattern="^[6-9]\d{9}$">
                                     </div>
                                     <div class="form-group">
                                         <select class="form-control" id="district" name="hdist" placeholder="District" required>
@@ -60,7 +60,7 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" id="pnc" name="hpincode" placeholder="pincode" maxlength="6" required>
+                                        <input type="text" class="form-control" id="pin" name="hpincode" placeholder="pincode" maxlength="6" required>
                                     </div>                                   
                                     <div class="form-group">
                                         <input type="password" id="password" class="form-control" name="password" placeholder="Password"  required aria-describedby="pass"  required pattern="(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
@@ -153,5 +153,19 @@
              });
          });       
        </script>
-
+<!--------------only Enter Number ----------------->   
+<script>
+            var userName = document.querySelector('#pin');            
+            userName.addEventListener('input', restrictNumber);
+            function restrictNumber (e) {  
+            var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
+            this.value = newValue;
+            }
+            var mob = document.querySelector('#mob');            
+            mob.addEventListener('input', restrictNumber);
+            function restrictNumber (e) {  
+            var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
+            this.value = newValue;
+            }
+</script>
 {% endblock %}
