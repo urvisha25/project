@@ -51,11 +51,10 @@ class editprofilet(forms.ModelForm):
     class Meta:
         model=traderreg
         fields=[
-            'T_name','Address','Mobileno','District','Taluka','City','email','Pincode','password']
+            'T_name','Address','Mobileno','District','Taluka','City','Pincode','password']
 
         labels={ 
-                'T_name':'Trader Name',               
-                'email':'Email',
+                'T_name':'Trader Name',  
                 'password':'Password'
             } 
 
@@ -64,11 +63,10 @@ class editprofilef(forms.ModelForm):
     class Meta:
         model=Farmerreg
         fields=[
-            'F_name','Address','Mobileno','District','Taluka','City','email','Pincode','Area','password' ]
+            'F_name','Address','Mobileno','District','Taluka','City','Pincode','Area','password' ]
 
         labels={ 
-                'F_name':'Farmer Name',               
-                'email':'Email',
+                'F_name':'Farmer Name',  
                 'password':'Password'
             } 
 

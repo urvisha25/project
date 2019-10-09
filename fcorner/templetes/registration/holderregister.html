@@ -1,19 +1,7 @@
 {% extends 'basic.html' %} {% block content %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/signup.css' %}">
-</head>
-
-<body style="background-image: url(images/bkhh.jpg)">
+<body style="background-color:whitesmoke;">
     <form method="POST">
         {% csrf_token %}
         <center>
@@ -27,7 +15,7 @@
                                 <div class="alert alert-{{message.tags}}">{{ message }}</div>
                                 {% endfor %} {% endif %}
 
-                                <h1 class="card-title text-center">Equipmentholder Registration</h1>
+                                <h1 class="card-title text-center">Equipmentholder Registration</h1><br>
                                 <form class="form-signin outline-info">
                                     <div class="form-group">
                                         <input type="text" id="name" class="form-control" placeholder="User Name" name="hname" required autofocus>

@@ -45,7 +45,7 @@ urlpatterns=[
     path('equiplist<int:id>',views.equipmentlisth, name='equipmentlist particular Holder'),    
     path('equiplist.html<int:id>',views.equipmentlisth, name='equipmentlist particular Holder'), 
     path('tpricelist',views.tpricelist, name='Tpricelist'),     
-    path('tpricelistt',views.tpricelistt, name='Tpricelist particular Trader'), 
+    path('tpricelistt.html',views.tpricelistt, name='Tpricelist particular Trader'), 
 
     # list of all categorywise products and rent
     path('tractors<int:id>',views.tractors, name='tractors'), 
@@ -65,5 +65,5 @@ urlpatterns=[
     path('list<int:id>',views.listall),
     path('districtupld.html',views.updisttrict, name='Admin upload Districts'),
     path('deletedis<int:id>',views.deletedis),
-   
+    path('delprc<int:id>',views.delprc),
 ] #+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

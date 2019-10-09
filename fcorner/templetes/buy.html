@@ -1,27 +1,67 @@
 {% extends 'basic.html' %} {% load render_table from django_tables2 %}{% load crispy_forms_tags %} {% render_table table %} {% block content %} {% load static %}
-<form method="POST">
- 
-        <div class="container" style="width: 50%; height:auto;">
-            {% csrf_token %}
-         <center>   <h1>Buy Product</h1> </center>
-            <hr>
-            <div class="card-body">
-                {% if messages %} {% for message in messages %}
-                <div class="alert alert-{{message.tags}}">{{ message }}</div>
-                {% endfor %} {% endif %}
-            </div>    
-            <label><b> Farmer Name:</b> {{request.session.fnm}}</label>  <br> 
-            <label><b> Trader Name:</b> {{request.session.tname}}</label> <br>    
-            {{request.session.price}}   
-            <b>Quantity:</b>
-            <input type="text" name="qty">                                                                           
-                             {{form|crispy}}        
-               
-                <br><br>
-                <button type="submit" class="btn btn-success" id="submit">submit</button>&nbsp;&nbsp;
-                <button type="reset" class="btn btn-primary" id="reset">reset</button>
-            </fieldset>
-        </div>    
-    </form>
-
+    <html>
+            <head>    
+                    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">    
+                    <style>
+                            input[type=text],label{
+                                  width: 70%;
+                                  align-content: center;
+                                  
+                            }
+                            input[type=number]{
+                                width: 70%
+                            }
+                            label{
+                                font-weight: bold;
+                            }
+                        </style>
+            </head>
+            <body>
+                <center>
+                    <div class="card border-info" style="width: 50%; margin-top: 0px;" align="center">
+                            <div class="card-header bg-info">
+                                    <h3><b>Buy Product</b></h3>
+                            </div>
+                            <div class="card-body">
+                                    {% if messages %} {% for message in messages %}
+                                    <div class="alert alert-{{message.tags}}">{{ message }}</div>
+                                    {% endfor %} {% endif %}
+                                </div> 
+                         
+                                
+                                <form class="form-horizontal inline"  role="form" method="POST" enctype="multipart/form-data">
+                                    
+                                    {% csrf_token %}
+                            <div class="card-block">
+                                    <label class="control-label"> Farmer Name:  &nbsp;</label><input type="text" class="form-control" value="{{request.session.fnm}}" disabled />                                                                     
+                                   
+                                   <SPAN><label class="control-label inline" > Trader Name:  &nbsp;</label><input type="text" class="form-control" value="{{request.session.tname}}" disabled /> </SPAN> 
+                                   <label class="control-label"> Quantity:  &nbsp;</label><input type="number" min="1" class="form-control" id="id_qty" name="Quantity" />                                                                     
+                                   
+                                                                                               
+                                   <fieldset class="form-group col-md-10" >                       
+                                       
+                                        {{form|crispy}}
+                                        <br>
+                                        <button type="submit" class="btn btn-success" id="submit">submit</button>&nbsp;&nbsp;
+                                        <button type="reset" class="btn btn-primary" id="reset">Cancel</button>                      
+                                    </fieldset>  
+                                </form>  
+                           </div>
+                    
+                    </div>
+                </center>
+                </body>    
+            </html>   
+     
+        <!-----------only enter number-------------------->
+        <script>
+                var userName = document.querySelector('#id_qty');
+            
+                userName.addEventListener('input', restrictNumber);
+                function restrictNumber (e) {  
+                var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
+                this.value = newValue;
+                }
+            </script>
 {% endblock %}

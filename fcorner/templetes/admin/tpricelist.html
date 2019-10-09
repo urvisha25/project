@@ -51,6 +51,7 @@
             <th>Price Per Rs</th>
             <th>Update</th>
             <th>Date</th>
+            <th>Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -69,6 +70,8 @@
               </form>
             </td>
             <td>{{i.mydate}}</td>
+            <td><a href="delprc{{i.P_id}}"><button type="submit" class="btn btn-danger"><i class="fas fa-times"></i></button></a></td>
+                
         </tr>
         {% endfor %}
       </tbody>

@@ -52,14 +52,25 @@
             </div>
         </center>
         </body>    
-    </html>     
-    <script>
-    var userName = document.querySelector('#id_Quantity');
-
-userName.addEventListener('input', restrictNumber);
-function restrictNumber (e) {  
-  var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
-  this.value = newValue;
-}
-    </script>   
+    </html>   
+<!---------Price in not add zero value ------------->  
+<script>
+            $("input[name='Quantity']").change(function() {
+             number = $("input[name='Quantity']").val()
+              if( number <= 0  ) {
+                  $("input[name='Quantity']").val("");
+                  alert("value should be more than 0");
+                }
+              });           
+</script>  
+<!-----------only enter number-------------------->
+<script>
+        var userName = document.querySelector('#id_Rent_price');
+    
+        userName.addEventListener('input', restrictNumber);
+        function restrictNumber (e) {  
+        var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
+        this.value = newValue;
+        }
+    </script>
 {% endblock %}

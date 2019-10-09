@@ -81,24 +81,24 @@ def farmerregis(request):
 
           # mobile number check
         elif Farmerreg.objects.filter(Mobileno=mobileno).exists():
-              messages.error(request,'mobile number already exists as a Farmer!')
+              messages.warning(request,'mobile number already exists as a Farmer!')
               return render(request,'registration/fregis.html') 
         elif traderreg.objects.filter(Mobileno=mobileno).exists():
-              messages.error(request,'mobile number already exists as a Trader!')
+              messages.warning(request,'mobile number already exists as a Trader!')
               return render(request,'registration/fregis.html') 
         elif eholder.objects.filter(Mobileno=mobileno).exists():
-              messages.error(request,'mobile number already exists as a Equipmentholder!')
+              messages.warning(request,'mobile number already exists as a Equipmentholder!')
               return render(request,'registration/fregis.html')                  
 
         # email number check
         elif Farmerreg.objects.filter(email=email1).exists():
-              messages.error(request,'Your email already exists as a Farmer! please enter another email!')
+              messages.warning(request,'Your email already exists as a Farmer! please enter another email!')
               return render(request,'registration/fregis.html')
         elif Farmerreg.objects.filter(email=email1).exists():
-              messages.error(request,'Your email already exists as a Farmer! please enter another email!')
+              messages.warning(request,'Your email already exists as a Farmer! please enter another email!')
               return render(request,'registration/fregis.html')
         elif Farmerreg.objects.filter(email=email1).exists():
-              messages.error(request,'Your email already exists as a Farmer! please enter another email!')
+              messages.warning(request,'Your email already exists as a Farmer! please enter another email!')
               return render(request,'registration/fregis.html')           
          
         else:
@@ -112,7 +112,7 @@ def farmerregis(request):
               messages.success(request,'Successfully Register!')
               return render(request,'registration/fregis.html')
       else:  
-          messages.error(request,'email already exists!')   
+          messages.warning(request,'email already exists!')   
           return render(request,'registration/fregis.html',locals())
     else:       
         return render(request,'registration/fregis.html',locals())
@@ -164,24 +164,24 @@ def traderegis(request):
 
           # mobile number check
         elif Farmerreg.objects.filter(Mobileno=mobileno).exists():
-              messages.error(request,'mobile number already exists as a Farmer!')
+              messages.warning(request,'mobile number already exists as a Farmer!')
               return render(request,'registration/traderregis.html') 
         elif traderreg.objects.filter(Mobileno=mobileno).exists():
-              messages.error(request,'mobile number already exists as a Trader!')
+              messages.warning(request,'mobile number already exists as a Trader!')
               return render(request,'registration/traderregis.html') 
         elif eholder.objects.filter(Mobileno=mobileno).exists():
-              messages.error(request,'mobile number already exists as a Equipmentholder!')
+              messages.warning(request,'mobile number already exists as a Equipmentholder!')
               return render(request,'registration/traderregis.html')                  
 
         # email number check
         elif Farmerreg.objects.filter(email=email1).exists():
-              messages.error(request,'Your email already exists as a Farmer! please enter another email!')
+              messages.warning(request,'Your email already exists as a Farmer! please enter another email!')
               return render(request,'registration/traderregis.html')
         elif Farmerreg.objects.filter(email=email1).exists():
-              messages.error(request,'Your email already exists as a Farmer! please enter another email!')
+              messages.warning(request,'Your email already exists as a Farmer! please enter another email!')
               return render(request,'registration/traderregis.html')
         elif Farmerreg.objects.filter(email=email1).exists():
-              messages.error(request,'Your email already exists as a Farmer! please enter another email!')
+              messages.warning(request,'Your email already exists as a Farmer! please enter another email!')
               return render(request,'registration/traderregis.html')           
  
         else:
@@ -195,7 +195,7 @@ def traderegis(request):
             messages.success(request,'Successfully Register!')
             return render(request,'registration/traderregis.html') 
       else: 
-          messages.error(request,'Password not matching!')
+          messages.warning(request,'Password not matching!')
           return render(request,'registration/traderregis.htmt',locals())  
     else:       
         return render(request,'registration/traderregis.html',locals())
@@ -248,24 +248,24 @@ def holderregis(request):
 
           # mobile number check
         elif Farmerreg.objects.filter(Mobileno=mobileno).exists():
-              messages.error(request,'mobile number already exists as a Farmer!')
+              messages.warning(request,'mobile number already exists as a Farmer!')
               return render(request,'registration/holderregister.html') 
         elif traderreg.objects.filter(Mobileno=mobileno).exists():
-              messages.error(request,'mobile number already exists as a Trader!')
+              messages.warning(request,'mobile number already exists as a Trader!')
               return render(request,'registration/holderregister.html') 
         elif eholder.objects.filter(Mobileno=mobileno).exists():
-              messages.error(request,'mobile number already exists as a Equipmentholder!')
+              messages.warning(request,'mobile number already exists as a Equipmentholder!')
               return render(request,'registration/holderregister.html')                  
 
         # email number check
         elif Farmerreg.objects.filter(email=email1).exists():
-              messages.error(request,'Your email already exists as a Farmer! please enter another email!')
+              messages.warning(request,'Your email already exists as a Farmer! please enter another email!')
               return render(request,'registration/holderregister.html')
         elif Farmerreg.objects.filter(email=email1).exists():
-              messages.error(request,'Your email already exists as a Farmer! please enter another email!')
+              messages.warning(request,'Your email already exists as a Farmer! please enter another email!')
               return render(request,'registration/holderregister.html')
         elif Farmerreg.objects.filter(email=email1).exists():
-              messages.error(request,'Your email already exists as a Farmer! please enter another email!')
+              messages.warning(request,'Your email already exists as a Farmer! please enter another email!')
               return render(request,'registration/holderregister.html')           
         else:  
             reg= eholder(H_name=name,shop_name=shopname, Address=address,Mobileno=mobileno,District=dist,Taluka=taluka,City=city,email=email1,Pincode=pincode,password=password)
@@ -334,7 +334,7 @@ def hlogin(request):
             request.session['prff']=hold.Email                        
             return redirect('home.html')
         else:
-          messages.error(request,'Invalid username and Password!') 
+          messages.warning(request,'Invalid username and Password!') 
           return render(request,'login/hlogin.html')
    return render(request,'login/hlogin.html')
 
@@ -1052,9 +1052,15 @@ def updisttrict(request):
 
 # Admin Delete Districts
 
-def deletedis(request,id):   
-            districts.objects.get(D_id=id).delete()
+def deletedis(request,id): 
+            districts.objects.get(D_id=id).delete()            
             messages.success(request,'District Delete')
-            return redirect('districtupld.html')       
-
+            return redirect('districtupld.html')  
+     
+# Trader Delete Price 
+             
+def delprc(request,id):
+      uploadprice.objects.get(P_id=id).delete()
+      messages.success(request,'Upload Price Delete')
+      return redirect('tpricelistt.html')   
 

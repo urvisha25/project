@@ -77,7 +77,7 @@ class uploadequip(models.Model):
        Category=models.CharField(max_length=50, choices=cat,default="")  
        email= models.EmailField(max_length=50, default="")    
        Image= models.ImageField(upload_to="Image", default="",validators=[validate_file_size])
-       Rent_price= models.IntegerField(default=0) 
+       Rent_price= models.IntegerField(default="") 
        mydate = models.DateTimeField(default=datetime.now())
        startdate=models.DateField(default=datetime.now())
        enddate = models.DateField(default=datetime.now())
@@ -111,7 +111,7 @@ class uploadprice(models.Model):
    T_id= models.IntegerField(default=0) 
    T_name=models.CharField(max_length=40, default="")  
    P_name= models.CharField(max_length=40, default="")       
-   Price= models.IntegerField(default=0)  
+   Price= models.IntegerField(default="")  
    mydate = models.DateTimeField(default=datetime.now())
  
    def __str__(self):
@@ -177,7 +177,7 @@ class buyproduct(models.Model):
    P_name= models.CharField(max_length=40, default="")
    Quantity= models.IntegerField(default=0) 
    email=models.EmailField(max_length=50, default="")   
-   Price= models.IntegerField(default=0) 
+   Price= models.IntegerField(default="") 
    mydate = models.DateTimeField(default=datetime.now())
    def __str__(self):
           return self.F_name 

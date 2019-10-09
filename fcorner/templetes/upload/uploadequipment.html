@@ -42,13 +42,25 @@
         </center>
         </body>    
     </html>     
-    <script>
+<!-----------only enter number-------------------->
+<script>
     var userName = document.querySelector('#id_Rent_price');
 
-userName.addEventListener('input', restrictNumber);
-function restrictNumber (e) {  
-  var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
-  this.value = newValue;
-}
-    </script>
+    userName.addEventListener('input', restrictNumber);
+    function restrictNumber (e) {  
+    var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
+    this.value = newValue;
+    }
+</script>
+<!---------Price in not add zero value ------------->  
+<script>
+        $("input[name='number']").change(function() {
+         number = $("input[name='number']").val()
+          if( number <= 0  ) {
+              $("input[name='number']").val("");
+              alert("value should be more than 0");
+            }
+          });
+       
+</script>  
 {% endblock %}

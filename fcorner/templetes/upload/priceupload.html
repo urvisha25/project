@@ -5,10 +5,13 @@
             <style>
                     input[type=text],label,input[type=number]{
                           width: 80%;
-                          align-content: center;                                                    
+                          align-content: center;                                                                              
                     }                    
                     label{
                         font-weight: bold;
+                    }
+                    input[type=number]{
+                        min:0;
                     }
                 </style>
     </head>
@@ -23,7 +26,7 @@
                             <div class="alert alert-{{message.tags}}">{{ message }}</div>
                             {% endfor %} {% endif %}
                         </div> 
-                        <form class="form-horizontal inline"  role="form" method="POST" enctype="multipart/form-data">
+                        <form class="form-horizontal inline" id="form" role="form" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
                     <div class="card-block">                                                                                     
                            <fieldset class="form-group col-md-10" >                      
@@ -42,12 +45,22 @@
     </html>  
 <!--------------only Enter Number ----------------->   
     <script>
-    var userName = document.querySelector('#id_Price');
+            var userName = document.querySelector('#id_Price');
 
-userName.addEventListener('input', restrictNumber);
-function restrictNumber (e) {  
-  var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
-  this.value = newValue;
-}
+        userName.addEventListener('input', restrictNumber);
+        function restrictNumber (e) {  
+        var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
+        this.value = newValue;
+        }
     </script>
+<!---------Price in not add zero value ------------->  
+<script>
+     $("input[name='Price']").change(function() {
+      number = $("input[name='Price']").val()
+       if( number <= 0  ) {
+           $("input[name='Price']").val("");
+           alert("value should be more than 0");
+         }
+       });    
+</script>
 {% endblock %}
