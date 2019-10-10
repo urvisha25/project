@@ -4,7 +4,7 @@
         display: block;
         max-width: 100%;
         width: 350;
-        height: 250;
+        height: 270;
     }
     
     .body {
@@ -28,23 +28,23 @@
     }
 
     /* Bottom right text */
-.text-block {
-  position: absolute;
-  bottom: 20px;
-  right: 20px; 
-  color: red;
-  padding-left: 20px;
-  padding-right: 40px;
+    .text-block {
+        position: absolute;
+        bottom: 130px;
+        right: 70px;
+        color: red;        
 }
 </style>
 
 <div class="conatiner" style="margin: 5px 50px 50px 50px; background-color:gainsboro;">
     <div class="row text-center">
-
+          
         {% for i in d|slice:"0:" %}
+        {% for j in a %}
+        {% if i.H_id == j.H_id %}
         <div class="col-sm-4">
             <div class="thumbnail" style="width:350px; height:auto;">
-                <div><img src="/media/{{i.Image}}" alt="{{i.P_name}}" width="350" height="250">
+                <div><img src="/media/{{i.Image}}" alt="{{i.P_name}}" width="350" height="270">
                     <div class="text-block">
                         <i class="fas fa-star" aria-hidden="true"></i>
                       </div>
@@ -53,15 +53,17 @@
                     <div align=left class="body"><strong>{{i.E_name}}</strong></div>
                     <div align=left class="bodyl"><i class="fas fa-map-marker-alt"></i> <b>{{i.City}}</b></div>
                 </div>
-                <div style="height:40px;background-color:whitesmoke">
+                <div style="height:55px; background-color:whitesmoke">
+                <div align="left"><b>{{j.shop_name}}</b></div>
                     {% if request.session.lgnf %}
                   <div class="footer"><a href="rentlist" style="color: red">Rent Now</a></div>
                   {% endif %}
-                    <div class="footerl">{{i.Rent_price}}</div>
+                    <div class="footerl">{{i.Rent_price}} Rs Per Day</div>
                 </div>
                     </div>
         </div>
-
+        {% endif %}
+        {% endfor %} 
         {% endfor %}
     </div>
 </div>

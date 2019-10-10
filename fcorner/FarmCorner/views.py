@@ -564,9 +564,8 @@ def reject(request, F_id):
       elif traderreg.objects.filter(T_id=F_id).exists():
             traderreg.objects.get(T_id=F_id).delete()   
       elif uploadequip.objects.filter(E_id=F_id).exists():
-            uploadequip.objects.get(E_id=F_id).delete()  
-            return redirect('equiplist.html0')
-      
+            uploadequip.objects.get(E_id=F_id).delete()        
+            return redirect('equiplist.html0')      
       else:  
             uproduct.objects.get(S_id=F_id).delete()          
       messages.warning(request,'Rejected Successfully')
@@ -639,28 +638,33 @@ def tpricelistt(request):
 # All equipments list in home page
 
 def tractors(request,id):
+      a= eholder.objects.all()
       if id==1:
-            nam="tractor"
+            nam="Tractor"
             d=uploadequip.objects.filter(Category=nam)
       elif id==2:
             nam="Harvesters"
             d=uploadequip.objects.filter(Category=nam)
       elif id==3:
-            nam="tiller"
+            nam="Tiller"
             d=uploadequip.objects.filter(Category=nam)
       elif id==4:
             nam="Sowing and Planting Equipments"
             d=uploadequip.objects.filter(Category=nam)
       elif id==5:
-            nam="Pesticide applicators"
+            nam="Pesticide Applicators"
             d=uploadequip.objects.filter(Category=nam)
       elif id==6:
-            nam="landscaping Equipments"
+            nam="Landscaping Equipments"
             d=uploadequip.objects.filter(Category=nam)
       elif id==7:
-            nam="postharvest equipments"
+            nam="postharvest Equipments"
             d=uploadequip.objects.filter(Category=nam)
-      return render(request,'tractor/tractor.html',locals())
+      context={
+            'a':a,
+            'd':d
+      }
+      return render(request,'tractor/tractor.html',context)
 
 # Farmer rent in equipments
 def rent(request,id):
@@ -669,7 +673,7 @@ def rent(request,id):
       storage.used=True 
       arr=[]
       for i in sd:
-            arr.append(i.startdate)  
+            arr.append(i.startdate)
       a=uploadequip.objects.get(E_id=id)   
       if request.method == 'POST':    
         sdate = request.POST.get('sdate','')

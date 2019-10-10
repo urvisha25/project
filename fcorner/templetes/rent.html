@@ -12,49 +12,32 @@
         <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/themes/redmond/jquery-ui.css" rel="stylesheet" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
-        
+     <style>
+      .markholidays{
+          color: red;
+      }
+     </style>   
 
     {% for i in sd %}
-        <script type="text/javascript">    
-        $(function () {
-            var array = []       
-              
-              array.push( "{{i.startdate}}" ); 
-         
-            $("#txtFrom").datepicker({
-                minDate: 0,
-                numberOfMonths: 2,
-                beforeShowDay: function(date){
-         var string = jQuery.datepicker.formatDate('yy-mm-dd', date);
-         return [ array.indexOf(string) == -1 ]
-     },
-                onSelect: function (selected) {
-                    var dt = new Date(selected);
-                    dt.setDate(dt.getDate() + 1);
-                    $("#txtTo").datepicker("option", "minDate", dt);
+       
+<script>
+    $(document).ready(function(){
+        var holidays = ["2019-10-16"]  
+        $("#txtFrom").datepicker({
+            numberOfMonths:3,
+            beforeShowDay: function(date){
+                var day = date.getDay();
+                if (day==0)
+                {
+                    return [true,"markholidays"];
                 }
-            });
-            $("#txtTo").datepicker({
-                minDate: 0,
-                numberOfMonths: 2,
-                onSelect: function (selected) {
-                    var dt = new Date(selected);
-                    dt.setDate(dt.getDate() - 1);
-                    $("#txtFrom").datepicker("option", "maxDate", dt);
+                else
+                {    
+                    return [true,"markholidays"];
                 }
-            });              
+            }
         });
-        </script>
-    
-    <script type="text/javascript">
-       var exclude = ["16-11-2019", "17-11-2019"]
-
-$('#txtFrom').datepicker({
-  beforeShowDay: function(date) {
-    var day = jQuery.datepicker.formatDate('dd-mm-yy', date);
-    return [!~$.inArray(day, exclude) && (date.getDay() != 0)];
-  }
-});
+    });
     </script>
         {% endfor %}
 
@@ -76,7 +59,7 @@ $('#txtFrom').datepicker({
                                 {% endfor %} {% endif %}
                                 <h1 class="card-title text-center">Rent on Equipments</h1>
                                 
-                                
+                     {{arr}}           
 <table border="0" cellpadding="0" cellspacing="0">
         <tr>
             <td>

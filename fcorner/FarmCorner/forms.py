@@ -8,7 +8,7 @@ class equipments(forms.ModelForm):
         fields = ['E_name','Category','Image','Rent_price']   
         labels={               
                 'E_name': 'Equipment Name',  
-                'Rent_price': 'Rent Price'  
+                'Rent_price': 'Rent Price in Per Day'  
             }
 
 # upload product images
