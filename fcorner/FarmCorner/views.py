@@ -23,6 +23,8 @@ from xhtml2pdf import pisa
 from .utils import *
 from datetime import *
 from dateutil import parser
+from django.core.exceptions import ValidationError
+from django.contrib import messages
 # Create your views here..
 
 # Home page 
@@ -445,7 +447,7 @@ def equipmentupload(request):
 
 def productupload(request,id):  
       storage= messages.get_messages(request)
-      storage.used= True  
+      storage.used= True     
       a= uploadprice.objects.get(P_id=id) 
       b= a.P_name
       request.session["rmv"]=0
@@ -453,7 +455,7 @@ def productupload(request,id):
       request.session['pname']=a.P_name   
       if request.method == 'POST': 
             form = uploadproduct(request.POST, request.FILES)   
-            if form.is_valid(): 
+            if form.is_valid():             
                 mb= Farmerreg.objects.get(F_id=request.session["idf"])
                 mob= mb.Mobileno
                 mail= mb.email
@@ -816,7 +818,8 @@ def buyprod(request,id):
                 productupload.P_name = pnm     
                 productupload.Quantity = quty 
                 productupload.Price = int(quty) *  int(prc)             
-                productupload.save()  
+                productupload.save() 
+                request.session["rmv"]=1 
                 fqty= int(qtty)- int(quty)
                 if fqty == 0:
                       uproduct.objects.get(S_id = id).delete()
@@ -1064,3 +1067,10 @@ def delprc(request,id):
       messages.success(request,'Upload Price Delete')
       return redirect('tpricelistt.html')   
 
+def validate_file_size(value):
+    filesize= value.size
+    
+    if filesize > 700000:
+        messages.warning("The maximum file size that can be uploaded is 700kb")
+    else:
+        return value

@@ -20,7 +20,7 @@ class uploadproduct(forms.ModelForm):
             labels={               
                 'Image': 'Choose the Image',
                 'Quantity':'Quantity in Mann(1Mann=20kg)'
-            }
+            }             
 
  # upload product price
 

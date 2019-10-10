@@ -9,3 +9,4 @@ def validate_file_size(value):
         messages.warning("The maximum file size that can be uploaded is 700kb")
     else:
         return value
+        

@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from datetime import datetime
 from .render import validate_file_size
 from django.core.exceptions import ValidationError
+
 # Create your models here.
 # discribe district
 
@@ -76,7 +77,7 @@ class uploadequip(models.Model):
        Mobileno= models.CharField(max_length=13, default="")  
        Category=models.CharField(max_length=50, choices=cat,default="")  
        email= models.EmailField(max_length=50, default="")    
-       Image= models.ImageField(upload_to="Image", default="",validators=[validate_file_size])
+       Image= models.ImageField(upload_to="Image", default="",validators=[validate_file_size])       
        Rent_price= models.IntegerField(default="") 
        mydate = models.DateTimeField(default=datetime.now())
        startdate=models.DateField(default=datetime.now())
@@ -140,7 +141,7 @@ class uproduct(models.Model):
    P_name= models.CharField(max_length=40, default="")
    Mobileno= models.CharField(max_length=13, default="")
    City= models.CharField(max_length=15, default="")
-   Image= models.ImageField(upload_to='Image', default="")
+   Image= models.ImageField(upload_to='Image', default="",validators=[validate_file_size])
    email=models.EmailField(max_length=50, default="")   
    Quantity= models.IntegerField(default="") 
    status=models.IntegerField(default=0)
