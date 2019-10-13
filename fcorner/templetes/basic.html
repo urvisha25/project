@@ -105,7 +105,7 @@
                 ALL LIST
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="equiplist{{0}}">LIST</a>
+              <a class="dropdown-item" href="equiplist{{0}}">EQUIPMENTS LIST</a>
               <a class="dropdown-item" href="rentbill">BILL</a>   
               </div>           
           </li>
@@ -114,7 +114,7 @@
                   PROFILE
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="authorized.html">AUTHORIZED</a>
+                <a class="dropdown-item" href="rentlist.html">AUTHORIZED</a>
                 <a class="dropdown-item" href="profile">PROFILE</a>            
               </div>
             </li>
@@ -122,20 +122,23 @@
           <!-----------------------Trader Navigationbar-------------------------->
           {% elif request.session.lgnt != null %}
           <li class="nav-item">
-            <a class="nav-link" href="priceupload">PRICE</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="tpricelistt.html">PRICELIST</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="transaction{{0}}">HISTORY</a>
-              </li>
+            <a class="nav-link" href="priceupload">UPLOAD PRICE</a>
+          </li>        
+              <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      HISTORY
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="tpricelistt.html">PRICELIST</a>
+                    <a class="dropdown-item" href="transaction{{0}}">BUYLIST</a>                  
+                  </div>
+                </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     PROFILE
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="authorized.html">AUTHORIZRD</a>
+                  <a class="dropdown-item" href="authorized.html">BUY PRODUCT</a>
                   <a class="dropdown-item" href="profile">PROFILE</a>                  
                 </div>
               </li> 
@@ -162,16 +165,16 @@
                 <!-------------------------Admin Navigationbar------------------------>
                 {% elif request.session.lgna != null %}
                 <li class="nav-item">
-                    <a class="nav-link" href="authorized.html">AUTHORIZRD</a>
+                    <a class="nav-link" href="authorized.html">AUTHORIZED</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="profile">PROFILE</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="list{{0}}">LIST</a>
+                    <a class="nav-link" href="list{{0}}">LIST DATA</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="districtupld.html">DISTRICT</a>
+                    <a class="nav-link" href="districtupld.html">UPLOAD DISTRICT</a>
                 </li>               
                 {% endif %}
         </ul>       

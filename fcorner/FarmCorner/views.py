@@ -670,14 +670,13 @@ def tractors(request,id):
 def rent(request,id):
       sd=rentequipment.objects.filter(E_id=id)
       storage=messages.get_messages(request)
-      storage.used=True 
-      arr=[]
-      for i in sd:
-            arr.append(i.startdate)
+      storage.used=True       
       a=uploadequip.objects.get(E_id=id)   
       if request.method == 'POST':    
         sdate = request.POST.get('sdate','')
-        edate = request.POST.get('edate','')        
+        edate = request.POST.get('edate','')  
+        request.session["sdate"]=s
+        request.session["edate"]=e      
         form = rentequipments(request.POST, request.FILES) 
         if form.is_valid(): 
                 mb= Farmerreg.objects.get(F_id=request.session["idf"])
@@ -1078,3 +1077,31 @@ def validate_file_size(value):
         messages.warning("The maximum file size that can be uploaded is 700kb")
     else:
         return value
+
+def list(request):
+    if request.method == 'POST':
+        s= request.POST.get('sdate','')
+        e= request.POST.get('edate','')
+        request.session["diff"]=float(request.POST.get('leave',''))
+        request.session["sdate"]=s
+        request.session["edate"]=e
+        if book.objects.filter(enddate__gt=s):
+            c=book.objects.filter(enddate__gt=s)
+            for i in c:
+              vnm=i.v_num
+              x=vehicle.objects.filter(v_num=vnm).update(bstatus=1)
+             
+        else:
+           c=book.objects.filter(enddate__lt=s)
+           for i in c:
+              vnm=i.v_num
+              x=vehicle.objects.filter(v_num=vnm).update(bstatus=0)          
+            
+        g=vehicle.objects.all()
+        for i in g:
+            if vehicle.objects.filter(bstatus=1):
+                messages.warning(request,'no vehicle available')
+            if vehicle.objects.filter(bstatus=0):
+                d=vehicle.objects.filter(bstatus=0)
+            return render(request,'shop/list.html',locals())   
+    return render(request,'shop/list.html',locals())   

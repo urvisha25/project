@@ -15,13 +15,8 @@
     .bodyl {
         margin: 5px 5px 15px 5px;
         font-size: 10pt;
-    }
-    
-    .footer {
-        float: left;
-        margin: 5px 5px 0px 10px;
-    }
-    
+    }    
+   
     .footerl {
         float: right;
         margin: 5px 5px 0px 10px;
@@ -54,10 +49,7 @@
                     <div align=left class="bodyl"><i class="fas fa-map-marker-alt"></i> <b>{{i.City}}</b></div>
                 </div>
                 <div style="height:55px; background-color:whitesmoke">
-                <div align="left"><b>{{j.shop_name}}</b></div>
-                    {% if request.session.lgnf %}
-                  <div class="footer"><a href="rentlist" style="color: red">Rent Now</a></div>
-                  {% endif %}
+                <div align="left"><b>{{j.shop_name}}</b></div>                   
                     <div class="footerl">{{i.Rent_price}} Rs Per Day</div>
                 </div>
                     </div>
