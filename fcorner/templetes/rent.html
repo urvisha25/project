@@ -1,126 +1,91 @@
 {% extends 'basic.html' %}  {% block content %} {% load static %}
- 
-<!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Datepicker - Select a Date Range</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
-        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet"type="text/css"/>
+
+  $( function() {
+    var cars = [];
+    var text = "";
     
-        
-        <script>
-            $(function () {
-                var bDates = [{ start: new Date(2019, 09, 20), end: new Date(2019, 10, 17) },
-                                    ];
-                var dateFormat = 'yyyy mm dd',
-                    from = $( "#txtFrom" ).datepicker({
-                            defaultDate: "+1w",
-                            changeMonth: true,
-                            numberOfMonths: 2,
-                            minDate:0,
-                            beforeShowDay: function(date) {
-                                for (var i = 0; i < bDates.length; i++) {
-                                    if (date >= bDates[i].start && date <= bDates[i].end) return [false, ''];
-                                }
-                                return [true, ''];
-                            }
-                        })
-                        .on( "change", function() {
-                            to.datepicker( "option", "minDate", getDate( this ) );
-                        }),
-                    to = $( "#txtTo" ).datepicker({
-                            defaultDate: "+1w",
-                            changeMonth: true,
-                            numberOfMonths: 2
-                        })
-                        .on( "change", function() {
-                            from.datepicker( "option", "maxDate", getDate( this ) );
-                        });
-        
-        
-            } );
-        </script>
- 
-
-<body >
-    <form method="POST">
-        {% csrf_token %}
-        <center>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-10 col-xl-9 mx-auto">
-                        <div class="card card-signin flex-row my-5">
-                            <div class="card-img-left d-none d-md-flex">
-
-                                <!-- Background image for card set in CSS! -->
-                            </div>
-                            <div class="card-body">
-                                {% if messages %} {% for message in messages %}
-                                <div class="alert alert-{{message.tags}}">{{ message }}</div>
-                                {% endfor %} {% endif %}
-                                <h1 class="card-title text-center">Rent on Equipments</h1>                                
-                               
-<table border="0" cellpadding="0" cellspacing="0">
-        <tr>
-            <td>
-                From:
-            </td>
-            <td>
-                <input  id="txtFrom" class="form-control" readonly name="sdate" />
-            </td>
-            <td>
-                &nbsp;
-            </td>
-            <td>
-                To:
-            </td>
-            <td>
-                <input  id="txtTo" class="form-control" readonly name="edate" />
-            </td>
-        </tr>
-        </table>
-          <button class="btn btn-primary text-uppercase" style="margin-top: 20px" onclick="DateCheck()" type="submit">Submit</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-</body>
-
-</html>
-<script>
-
-        /** Days to be disabled as an array */
-        var disableddates = ["20-10-2019", "12-11-2019"];
-
-        function DisableSpecificDates(date) {
-
-            var m = date.getMonth();
-            var d = date.getDate();
-            var y = date.getFullYear();
-
-            // First convert the date in to the mm-dd-yyyy format 
-            // Take note that we will increment the month count by 1 
-            var currentdate = (m + 1) + '-' + d + '-' + y;
-
-            // We will now check if the date belongs to disableddates array 
-            for (var i = 0; i < disableddates.length; i++) {
-
-                // Now check if the current date is in disabled dates array. 
-                if ($.inArray(currentdate, disableddates) != -1) {
-                    return [false];
-                }
-            }
+    '{% for i in sd %}'
+    var array = [];
+    text += '"{{i.startdate|date:"m/d/Y"}}",' + ' "{{i.enddate|date:"m/d/Y"}}",';
+    array += array.push(text)
+    
+    document.getElementById("demo").innerHTML = array;
+    var array = ["10/22/2019","10/23/2019"];
+    var dateFormat = "mm/dd/yy",
+      from = $( "#from" )
+        .datepicker({
+          minDate: 0,
+          defaultDate: "+1w",
+          changeMonth: true,
+          numberOfMonths: 1,
+          beforeShowDay: function(date){
+            var string = jQuery.datepicker.formatDate('mm/dd/yy', date);
+            return [ array.indexOf(string) == -1 ]
+          }
+        })
+        .on( "change", function() {
+          to.datepicker( "option", "minDate", getDate( this ) );
+        }),
+      to = $( "#to" ).datepicker({
+        minDate: 0,
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1,
+        beforeShowDay: function(date){
+            var string = jQuery.datepicker.formatDate('mm/dd/yy', date);
+            return [ array.indexOf(string) == -1 ]
         }
+      })
+      .on( "change", function() {
+        from.datepicker( "option", "maxDate", getDate( this ) );
+      });
+ 
+    function getDate( element ) {
+      var date;
+      try {
+        date = $.datepicker.parseDate( dateFormat, element.value );
+      } catch( error ) {
+        date = null;
+      }
+ 
+      return date;
+    }
+    '{% endfor %}'
+  } );
 
-        $(function () {
-            $("#txtFrom").datepicker({
-                beforeShowDay: DisableSpecificDates
-            });
-        });
-    </script>
+  </script>
+</head>
+<body style="border-width: 1px solid black;">
+{% for i in prices %}
+    {{i.startdate|date:'m/d/Y'}}
+    {{i.enddate|date:'m/d/Y'}}
+{% endfor %}
 
+<p id="demo"></p>
+<div class="card-body">
+        {% if messages %} {% for message in messages %}
+        <div class="alert alert-{{message.tags}}">{{ message }}</div>
+        {% endfor %} {% endif %}
+</div>
+<form method="POST" class="col-md-4">
+        {% csrf_token %}
+<label for="from">From</label>
+<input type="text" class="form-control" readonly width="100px" id="from" name="A">
+<label for="to">to</label>
+<input type="text" class="form-control" readonly width="100px" id="to" name="B">
+<input type="submit" value="Submit" class="btn btn-outline-success">
+</form>
+</body>
+</html>
 {% endblock %}
-
-  

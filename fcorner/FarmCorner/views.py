@@ -668,15 +668,17 @@ def tractors(request,id):
 
 # Farmer rent in equipments
 def rent(request,id):
-      sd=rentequipment.objects.filter(E_id=id)
+      sd=rentequipment.objects.filter(E_id=id)     
       storage=messages.get_messages(request)
-      storage.used=True       
+      storage.used=True     
+      prices = []
+      for i in sd:
+            price = i.startdate
+            prices.append(price)  
       a=uploadequip.objects.get(E_id=id)   
       if request.method == 'POST':    
-        sdate = request.POST.get('sdate','')
-        edate = request.POST.get('edate','')  
-        request.session["sdate"]=s
-        request.session["edate"]=e      
+        sdate = request.POST.get('A','')
+        edate = request.POST.get('B','')              
         form = rentequipments(request.POST, request.FILES) 
         if form.is_valid(): 
                 mb= Farmerreg.objects.get(F_id=request.session["idf"])
@@ -1014,8 +1016,9 @@ def rentfarmlist(request,id):
       if  transaction.objects.filter(Rb_id=id).exists(): 
             a ="billlist"
             b = transaction.objects.get(Rb_id=id)  
+            eid = b.E_id
             y = Farmerreg.objects.get(F_id=b.F_id) 
-            z = uploadequip.objects.all()
+            z = uploadequip.objects.get(E_id = eid)
 
       elif buyproduct.objects.filter(B_id=id).exists() :
             a ="tradbill"

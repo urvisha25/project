@@ -1,0 +1,141 @@
+{% extends 'basic.html' %}  {% block content %} {% load static %}
+ 
+<!DOCTYPE html>
+<html lang="en">
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+        <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet"type="text/css"/>
+    
+        
+        <script>
+            $(function () {
+                var bDates = [];
+                var dateFormat = 'yyyy mm dd',
+                    from = $( "#txtFrom" ).datepicker({
+                            defaultDate: "-1w",
+                            changeMonth: true,
+                            numberOfMonths: 3,
+                            minDate:0,
+                            beforeShowDay: function(date) {
+                                for (var i = 0; i < bDates.length; i++) {
+                                    if (date >= bDates[i].start && date <= bDates[i].end) return [false, ''];
+                                }
+                                return [true, ''];
+                            }
+                        })
+                        .on( "change", function() {
+                            to.datepicker( "option", "minDate", getDate( this ) );
+                        }),
+                    to = $( "#txtTo" ).datepicker({
+                            defaultDate: "-1w",
+                            changeMonth: true,
+                            numberOfMonths: 3
+                        })
+                        .on( "change", function() {
+                            from.datepicker( "option", "maxDate", getDate( this ) );
+                        });
+        
+          
+            } );
+        </script>
+ <script>
+    var startDate = "2019-10-15", // some start date
+    endDate  = "2019-10-21",  // some end date
+        dateRange = [];           // array to hold the range
+
+    // populate the array
+    for (var d = new Date(startDate); d <= new Date(endDate); d.setDate(d.getDate() + 1)) {
+        dateRange.push($.datepicker.formatDate('yy-mm-dd', d));
+    }
+
+    // use this array 
+    beforeShowDay: function (date) {
+        var dateString = jQuery.datepicker.formatDate('yy-mm-dd', date);
+        return [dateRange.indexOf(dateString) == -1];
+    }
+   
+ </script>
+
+<body >
+    <form method="POST">
+        {% csrf_token %}
+        <center>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 col-xl-9 mx-auto">
+                        <div class="card card-signin flex-row my-5">
+                            <div class="card-img-left d-none d-md-flex">
+
+                                <!-- Background image for card set in CSS! -->
+                            </div>
+                            <div class="card-body">
+                                {% if messages %} {% for message in messages %}
+                                <div class="alert alert-{{message.tags}}">{{ message }}</div>
+                                {% endfor %} {% endif %}
+                                <h1 class="card-title text-center">Rent on Equipments</h1>                                
+                               
+<table border="0" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                From:
+            </td>
+            <td>
+                <input  id="txtFrom" class="form-control" readonly name="sdate" />
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                To:
+            </td>
+            <td>
+                <input  id="txtTo" class="form-control" readonly name="edate" />
+            </td>
+        </tr>
+        </table>
+          <button class="btn btn-primary text-uppercase" style="margin-top: 20px" onclick="DateCheck()" type="submit">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</body>
+
+</html>
+<script>
+
+        /** Days to be disabled as an array */
+        var disableddates = ["20-10-2019", "12-11-2019"];
+
+        function DisableSpecificDates(date) {
+
+            var m = date.getMonth();
+            var d = date.getDate();
+            var y = date.getFullYear();
+
+            // First convert the date in to the mm-dd-yyyy format 
+            // Take note that we will increment the month count by 1 
+            var currentdate = (m + 1) + '-' + d + '-' + y;
+
+            // We will now check if the date belongs to disableddates array 
+            for (var i = 0; i < disableddates.length; i++) {
+
+                // Now check if the current date is in disabled dates array. 
+                if ($.inArray(currentdate, disableddates) != -1) {
+                    return [false];
+                }
+            }
+        }
+
+        $(function () {
+            $("#txtFrom").datepicker({
+                beforeShowDay: DisableSpecificDates
+            });
+        });
+    </script>
+
+{% endblock %}
+
+  
