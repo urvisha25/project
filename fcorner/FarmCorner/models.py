@@ -165,6 +165,7 @@ class rentequipment(models.Model):
    enddate = models.DateField(datetime)
    status=models.IntegerField(default=0)
    mydate = models.DateTimeField(default=datetime.now())
+   Rating = models.FloatField(max_length=5, default="")
 
    def __str__(self):
           return self.Name

@@ -109,3 +109,4 @@ class rentbill(forms.ModelForm):
         model = transaction
         fields=[]
 
+

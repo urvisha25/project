@@ -338,6 +338,7 @@ def hlogin(request):
         else:
           messages.warning(request,'Invalid username and Password!') 
           return render(request,'login/hlogin.html')
+        
    return render(request,'login/hlogin.html')
 
 # about
