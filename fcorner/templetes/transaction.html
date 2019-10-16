@@ -87,10 +87,11 @@
                                     </tr>
                                 </tbody>
         <!---------------------- The Rating Modal ---------------------->
+                                <form class="rating" method="POST" enctype="multipart/form-data">
+                                  {% csrf_token %}
                                     <div class="modal fade" id="myModal">
                                         <div class="modal-dialog modal-sm">
-                                          <div class="modal-content">
-                                          
+                                          <div class="modal-content">                                          
                                             <!-- Modal Header -->
                                             <div class="modal-header bg-light" align="center">
                                               <h4 class="modal-title" style="color: cadetblue; margin-left:90px;" >Rating</h4>
@@ -106,13 +107,14 @@
                                             </div>                                            
                                             <!-- Modal footer -->
                                             <div class="modal-footer bg-light">
-                                              <button type="button" class="btn btn-info" data-dismiss="modal" style="margin-right:100px;">Close</button>
+                                              <button type="submit" class="btn btn-info" id="submit"  style="margin-right:100px;">Submit</button>
                                             </div>                                            
                                           </div>
                                         </div>
                                       </div>
+                                    </form>
                                     {% endfor %}
--
+
         <!----------------------Trader Buy Products---------------------->
 
                                 {% elif request.session.alistt == "prolist" %}
@@ -144,10 +146,10 @@
                                     {% endif %}
                         </table> 
                     </div>
-                    </div>
-                    </div>
-                    </div>
-                    </body>
+                </div>
+              </div>
+          </div>
+      </body>
 
         <!--------------------Trader Product Buy List-------------------->
           {% elif request.session.lgnt %}

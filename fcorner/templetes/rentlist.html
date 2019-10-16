@@ -14,31 +14,25 @@
             <h3 style="color: green">Farmer Rent Form Table</h3>
         </center>
         <tr align="center">
-            <th>Farmer Name</th>   
-            <th>Address</th>        
-            <th>Mobile no.</th>
-            <th>City</th>
-            <th>Email</th>
-            <th>Pincode</th>
+            <th>Farmer Name</th>
+            <th>Equipment Category</th>   
+            <th>Equipment Name</th>
             <th>Startdate</th>
-            <th>Enddate</th>
-            <th>Approve</th>
-            <th>Reject</th>
+            <th>Enddate</th>  
+            <th>Price in Rs</th>          
+            <th>Cancel</th>
         </tr>
-        {% for i in c %} {% if i.status == 0 %}
+        {% for i in c %}{% for j in d %} {% if i.E_id == j.E_id %}
         <tr class="danger" align="center">
             <td>{{i.Name}}</td> 
-            <td>{{i.Address}}</td>          
-            <td>{{i.Mobileno}}</td>
-            <td>{{i.City}}</td>
-            <td>{{i.Email}}</td>
-            <td>{{i.Pincode}}</td>
+            <td>{{j.Category}}</td>
+           <td>{{j.E_name}}</td>
             <td>{{i.startdate}}</td>
-            <td>{{i.enddate}}</td>           
-            <td><a href="acpt{{i.R_id}}"><button type="submit" value="{{i.R_id}}" id="submit" class="btn btn-success" ><i class="fas fa-check"></i></button></a></td>
+            <td>{{i.enddate}}</td> 
+            <td>{{j.Rent_price}}</td>          
             <td><a href="rjct{{i.R_id}}"><button type="submit" value="{{i.R_id}}" id="cancel" class="btn btn-danger" ><i class="fas fa-times"></i></button></a></td>
         </tr>
-        {% endif %} {% endfor %}
+        {% endif %} {% endfor %}{% endfor %}
     </table>
     <br>
     <br>   

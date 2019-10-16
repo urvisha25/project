@@ -337,8 +337,7 @@ def hlogin(request):
             return redirect('home.html')
         else:
           messages.warning(request,'Invalid username and Password!') 
-          return render(request,'login/hlogin.html')
-        
+          return render(request,'login/hlogin.html')        
    return render(request,'login/hlogin.html')
 
 # about
@@ -701,7 +700,7 @@ def rent(request,id):
                 productupload.City = city
                 productupload.Address = add
                 productupload.Pincode = pin
-                productupload.save()
+                productupload.save()                
                 uploadequip.objects.filter(E_id=id).update(status=1)
                 messages.success(request,'booking successfully!')
                 return render(request, 'rent.html') 
@@ -711,12 +710,13 @@ def rent(request,id):
 
 # Equipment holder show rent farmer list
 def rentlist(request):    
-      c= rentequipment.objects.filter(H_id= request.session["hid"])
+      c= rentequipment.objects.filter(F_id= request.session["idf"])
+      d = uploadequip.objects.all()
       return render(request,'rentlist.html',locals())
 
 # Equipment holder Accept rent farmer list
 
-def acptrent(request,id):
+'''def acptrent(request,id):
       rentequipment.objects.filter(R_id=id).update(status=1)
 
       d=rentequipment.objects.get(R_id=id)          
@@ -725,7 +725,7 @@ def acptrent(request,id):
       to = d.Email     
       email_from = settings.EMAIL_HOST_USER    
       send_mail( subject, message, email_from, [to] )
-      return redirect('rentlist.html')
+      return redirect('rentlist.html')'''
 
 # Equipment holder Reject rent farmer list
 
@@ -763,7 +763,7 @@ def listall(request,id):
                   fareqip= uploadequip.objects.all()
             elif id == 8:
                   request.session["alist"] = "buylist"                 
-                  buylst= buyproduct.objects.all()
+                  buylst= buyproduct.objects.all()            
             return render(request,'admin/list.html',locals())
       else:
             if id== 1:
@@ -841,7 +841,8 @@ def buyprod(request,id):
 # List Rent product by farmer
 
 def rentprolist(request):
-      c= rentequipment.objects.filter(H_id= request.session["hid"])   
+      c= rentequipment.objects.filter(H_id= request.session["hid"])  
+      g= uploadequip.objects.all() 
       if request.method =='POST': 
             pid= request.POST.get('rid','')
             d=rentequipment.objects.get(R_id=pid)            
@@ -874,6 +875,7 @@ def rentprolist(request):
             return render(request, 'rentbill.html', locals(), {'form':form})    
       return render(request,'rentbill.html',locals())   
 
+# Rent Bill Product
 def transactions(request):
       if request.method =='POST': 
             details = rentbill(request.POST, request.FILES)
@@ -887,8 +889,7 @@ def transactions(request):
             form = rentbill(None)    
             return render(request, 'rentbill.html', {'form':form}) 
 
-
-# Transaction List show in Farmer
+# Transaction List show in Farmer with Rating
 
 def transactionlist(request,id):
       sdate= request.POST.get('sdate','')
@@ -922,6 +923,11 @@ def transactionlist(request,id):
             return render(request,'transaction.html',locals())
       return render(request,'transaction.html',locals())
 
+# delete rent in Equipments
+def delrentequip(request,id):
+      transaction.objects.get(Rb_id=id).delete()            
+      messages.success(request,'Rent in Equipments is  Delete')
+      return render(request,'transaction.html')
 # Generate PDF 
 
 def GeneratePDF(request,id,*args, **kwargs):                
@@ -991,7 +997,8 @@ def GeneratePDF(request,id,*args, **kwargs):
                 'a':a,
                 'b':b,
                 'date':datetime.now()
-            }         
+            }  
+            
         template = get_template('pdf.html')      
         html = template.render(context)
         pdf = render_to_pdf('pdf.html', context)

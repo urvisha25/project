@@ -11,30 +11,41 @@
     <!--Farmer Rent Products --> 
     <table class="table table-hover">
         <center>
-            <h3 style="color: green">Farmer Rent Form Table</h3>
+            <h3 style="color: green">Farmer Rent In Equipment's List</h3>
         </center>        
         <tr align="center">
             <th>Farmer Name</th>   
             <th>Address</th>        
             <th>Mobile no.</th>
-            <th>City</th>
-            <th>Email</th>
+            <th>Category</th>
+            <th>Equipment Name</th>
+            <th>City</th>           
             <th>Pincode</th>
             <th>Startdate</th>
             <th>Enddate</th>           
-            <th>Bill</th>
+            
         </tr>
-        {% for i in c %} 
+        {% for i in c %} {% for j in g %} {% if i.E_id == j.E_id %}
         <tr class="danger" align="center">
             <td>{{i.Name}}</td> 
             <td>{{i.Address}}</td>          
             <td>{{i.Mobileno}}</td>
-            <td>{{i.City}}</td>
-            <td>{{i.Email}}</td>
+            <td>{{j.Category}}</td>
+            <td>{{j.E_name}}</td>
+            <td>{{i.City}}</td>           
             <td>{{i.Pincode}}</td>
             <td>{{i.startdate}}</td>
-            <td>{{i.enddate}}</td>             
-            {% if i.status == 1 %} 
+            <td>{{i.enddate}}</td>    
+        </tr>
+        {% endif %} {% endfor %}  {% endfor %}
+    </table>
+    <div align="center">
+        <a href="GeneratePDF{{7}}" target="_blank"><button id="button" name="submit" class="btn btn-info">Print</button></a>
+    </div>
+</div>
+
+{% endblock %}
+           <!-- {% if i.status == 1 %} 
                     
             <td>
 
@@ -47,12 +58,6 @@
             </td>            
             {% elif i.status == 2 %}
             <td>Bill Sent</td>
-            {% endif %}
-        </tr>
-        {% endfor %}
-    </table>
-    <br>
-    <br>   
-</div>
-
-{% endblock %}
+            {% endif %}-->
+               
+      

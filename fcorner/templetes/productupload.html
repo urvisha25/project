@@ -28,7 +28,7 @@
                         </div> 
                         {% if request.session.rmv == 0 %}
                         
-                        <form class="form-horizontal inline"  role="form" method="POST" enctype="multipart/form-data">
+                        <form class="form-horizontal inline" id="upeqip"  role="form" method="POST" enctype="multipart/form-data">
                             
                             {% csrf_token %}
                     <div class="card-block">
@@ -64,12 +64,27 @@
 </script>  
 <!-----------only enter number-------------------->
 <script>
-        var userName = document.querySelector('#id_Rent_price');
+        var userName = document.querySelector('#id_Quantity');
     
         userName.addEventListener('input', restrictNumber);
         function restrictNumber (e) {  
         var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
         this.value = newValue;
         }
+</script>
+<!----------------------check for Image jpg and jpeg formate----------------------->
+<script>
+    window.onload = function () {
+      var form = document.getElementById('upeqip'),
+          imageInput = document.getElementById('id_Image');
+    
+      form.onsubmit = function () {
+        var isValid = /\.jpe?g$/i.test(imageInput.value);
+        if (!isValid) {
+          alert('Only jpg/jpeg files allowed!');
+        }
+        return isValid;
+      };
+    };
     </script>
 {% endblock %}

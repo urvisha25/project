@@ -10,16 +10,29 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
   $( function() {
+    
     var cars = [];
-    var text = "";
-    
+    var text = ""; 
+    var ddd="";
+    var k="";
     '{% for i in sd %}'
-    var array = [];
+    var startDate = new Date("{{i.startdate|date:'m/d/Y'}}"); //YYYY-MM-DD
+    var endDate = new Date("{{i.enddate|date:'m/d/Y'}}"); //YYYY-MM-DD    
+    dateRange = [];    
+    var array=[];
+           // array to hold the range
+
+// populate the array
+    for (var d = new Date(startDate); d <= new Date(endDate); d.setDate(d.getDate() + 1)) {
+        dateRange.push($.datepicker.formatDate('"mm/dd/yy"', d));
+        k+=$.datepicker.formatDate('"mm/dd/yy"', d);
+    }
+   
     text += '"{{i.startdate|date:"m/d/Y"}}",' + ' "{{i.enddate|date:"m/d/Y"}}",';
-    array += array.push(text)
+    array += array.push(k);
     
-    document.getElementById("demo").innerHTML = array;
-    var array = ["10/22/2019","10/23/2019"];
+    //alert("ss "+ dateRange);
+       
     var dateFormat = "mm/dd/yy",
       from = $( "#from" )
         .datepicker({
@@ -61,16 +74,49 @@
     }
     '{% endfor %}'
   } );
+  $( function() {  
+  
+    var dateFormat = "mm/dd/yy",
+      from = $( "#from" )
+        .datepicker({
+          minDate: 0,
+          defaultDate: "+1w",
+          changeMonth: true,
+          numberOfMonths: 1,
+          
+        })
+        .on( "change", function() {
+          to.datepicker( "option", "minDate", getDate( this ) );
+        }),
+      to = $( "#to" ).datepicker({
+        minDate: 0,
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1,
+        
+      })
+      .on( "change", function() {
+        from.datepicker( "option", "maxDate", getDate( this ) );
+      });
+ 
+    function getDate( element ) {
+      var date;
+      try {
+        date = $.datepicker.parseDate( dateFormat, element.value );
+      } catch( error ) {
+        date = null;
+      }
+ 
+      return date;
+    }
+    
+  } );
 
   </script>
+
 </head>
 <body style="border-width: 1px solid black;">
-{% for i in prices %}
-    {{i.startdate|date:'m/d/Y'}}
-    {{i.enddate|date:'m/d/Y'}}
-{% endfor %}
 
-<p id="demo"></p>
 <div class="card-body">
         {% if messages %} {% for message in messages %}
         <div class="alert alert-{{message.tags}}">{{ message }}</div>
@@ -82,7 +128,10 @@
 <input type="text" class="form-control" readonly width="100px" id="from" name="A">
 <label for="to">to</label>
 <input type="text" class="form-control" readonly width="100px" id="to" name="B">
+<br>
+<input type="checkbox" required> If you will cancel the rental equipment then you will  500 Rs fine<br> <br>
 <input type="submit" value="Submit" class="btn btn-outline-success">
+
 </form>
 </body>
 </html>
