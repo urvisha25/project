@@ -674,6 +674,9 @@ def tractors(request,id):
       elif id==7:
             nam="postharvest Equipments"
             d=uploadequip.objects.filter(Category=nam)
+      elif id==8:
+            nam="Others"
+            d=uploadequip.objects.filter(Category=nam)
       context={
             'a':a,
             'd':d

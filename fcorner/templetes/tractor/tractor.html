@@ -11,6 +11,10 @@
         margin: 0px 5px 0px 5px;
         font-size: 15pt;
     }
+    .footer {
+        float: left;
+        margin: 0px 5px 0px 10px;
+    }
     
     .bodyl {
         margin: 5px 5px 15px 5px;
@@ -19,7 +23,7 @@
    
     .footerl {
         float: right;
-        margin: 5px 5px 0px 10px;
+        margin: 0px 5px 0px 10px;
     }
 
     /* Bottom right text */
@@ -35,8 +39,8 @@
     <div class="row text-center">
           
         {% for i in d|slice:"0:" %}
-        {% for j in a %}
-        {% if i.H_id == j.H_id %}
+      {% for j in a %}
+      {% if i.H_id == j.H_id %}
         <div class="col-sm-4">
             <div class="thumbnail" style="width:350px; height:auto;">
                 <div><img src="/media/{{i.Image}}" alt="{{i.P_name}}" width="350" height="270">
@@ -44,18 +48,26 @@
                         <i class="fas fa-star" aria-hidden="true"></i>
                       </div>
                 </div>
-                <div style="background-color:seashell; height:70px;">
+                 <div style="background-color:seashell; height:70px;">
                     <div align=left class="body"><strong>{{i.E_name}}</strong></div>
                     <div align=left class="bodyl"><i class="fas fa-map-marker-alt"></i> <b>{{i.City}}</b></div>
                 </div>
                 <div style="height:55px; background-color:whitesmoke">
-                <div align="left"><b>{{j.shop_name}}</b></div>                   
-                    <div class="footerl">{{i.Rent_price}} Rs Per Day</div>
+                <div align="left"><b>{{j.shop_name}}</b></div>   
                 </div>
-                    </div>
+                <div style="height:40px;background-color:whitesmoke">
+                    
+                    {% if request.session.lgnf == null %}
+                  <div class="footer"><a href="hlogin" style="color: red">Rent Now</a></div>
+                  {% else %}
+                  <div class="footer"><a href="equipmentlist" style="color: red">Rent Now</a></div>
+                  {% endif %}
+                    <div class="footerl">{{i.Rent_price}} Rs Per Day</div>
+                </div>                
+            </div>
         </div>
         {% endif %}
-        {% endfor %} 
+        {% endfor %}
         {% endfor %}
     </div>
 </div>

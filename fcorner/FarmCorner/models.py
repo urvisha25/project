@@ -57,13 +57,13 @@ class eholder(models.Model):
    
 
 cat = (
-    ('tractor','Tractor'),
-    ('tiller', 'Tiller'),
+    ('Tractor','Tractor'),
+    ('Tiller', 'Tiller'),
     ('Harvesters','Harvesters'),
     ('Sowing and Planting Equipments','Sowing and Planting Equipments'),
-    ('Pesticide applicators','Pesticide Applicators'),   
-    ('landscaping Equipments','Landscaping Equipments'),
-    ('postharvest equipments','postharvest Equipments'),
+    ('Pesticide Applicators','Pesticide Applicators'),   
+    ('Landscaping Equipments','Landscaping Equipments'),
+    ('postharvest Equipments','postharvest Equipments'),
     ('Others','Others')
      )
 

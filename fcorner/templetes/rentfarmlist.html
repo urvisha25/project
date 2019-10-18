@@ -61,20 +61,20 @@
                            <th>Holder Name</th>
                            <th>Equipment Category</th>
                            <th>Equipment Name</th>               
-                           <th>Total Price</th>                              
+                           <th>Total Price In Rs</th>                              
                        </tr>         
                    </thead>   
                    <hr>
                    <tbody>  
-                         {% for z in z %}                
+                                        
                            <tr class="danger" style="padding: 5px;">                               
                                <td align="center">{{b.mydate|date:'d-m-Y H:i'}}</td> 
                                <td align="center">{{b.H_name}}</td>
                                <td align="center">{{z.Category}}</td>
                                <td align="center">{{b.Name}}</td>                  
-                               <td align="center">{{b.Total}} Rs</td>                                                                                
+                               <td align="center">{{b.Total}}</td>                                                                                
                        </tr>  
-                       {% endfor %}          
+                               
                        </tbody>         
             
                        {% elif a == "tradbill" %}
@@ -92,7 +92,7 @@
                                  <th>Date</th> 
                                  <th>Product Name</th>                     
                                  <th>Quantity/Mann</th>
-                                 <th>Price/Rs</th>                        
+                                 <th>Price In Rs</th>                        
                        </tr>
                            </thead>             
                             <tbody>
@@ -100,7 +100,7 @@
                                 <td align="center">{{b.mydate|date:'d-m-Y H:i'}}</td>  
                                 <td align="center">{{b.P_name}}</td> 
                                 <td align="center">{{b.Quantity}} Mann</td>
-                                <td align="center">{{b.Price}} Rs</td>                                        
+                                <td align="center">{{b.Price}}</td>                                        
                             </tr> 
                             </tbody>
                         {% endif %}

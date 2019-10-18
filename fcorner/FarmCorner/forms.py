@@ -38,7 +38,7 @@ class editprofileh(forms.ModelForm):
     class Meta:
         model=eholder
         fields=[
-            'H_name','shop_name','Address','Mobileno','District','Taluka','City','Pincode','password']
+            'H_name','shop_name','Address','District','Taluka','City','Pincode','password']
 
         labels={ 
                 'H_name':'Equipmentholder Name',               
@@ -51,7 +51,7 @@ class editprofilet(forms.ModelForm):
     class Meta:
         model=traderreg
         fields=[
-            'T_name','Address','Mobileno','District','Taluka','City','Pincode','password']
+            'T_name','Address','District','Taluka','City','Pincode','password']
 
         labels={ 
                 'T_name':'Trader Name',  
@@ -63,7 +63,7 @@ class editprofilef(forms.ModelForm):
     class Meta:
         model=Farmerreg
         fields=[
-            'F_name','Address','Mobileno','District','Taluka','City','Pincode','Area','password' ]
+            'F_name','Address','District','Taluka','City','Pincode','Area','password' ]
 
         labels={ 
                 'F_name':'Farmer Name',  
