@@ -4,7 +4,11 @@
         <!--Equipmentholder Upload Equipments-->
 
 <div class="table-responsive" style="font-size: 15px; margin-top: 10px;">
-    
+        <div class="card-body">
+                {% if messages %} {% for message in messages %}
+                <div class="alert alert-{{message.tags}}">{{ message }}</div>
+                {% endfor %} {% endif %}
+            </div> 
             {% if request.session.lgna != null %}
             <table class="table table-striped table-bordered" id="example" cellspacing="20px">
                 <center>
@@ -18,7 +22,7 @@
                     <th>Category</th>
                     <th>Price Per Day</th>
                     <th>Image of Equipments</th>
-                    
+                    <th>Rating</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,6 +33,7 @@
                     <td>{{i.Category}}</td>
                     <td>{{i.Rent_price}}</td>
                     <td><img src="{{ i.Image.url }}" class="img-responsive" style="width: 80%; height:150px; margin-left:30px; float:inline-start;" /></td>
+                    <td>{{i.Rating|floatformat:1}}<i class="fas fa-star" aria-hidden="true" style="color: red;"></i></td>
                 </tr>            
                 {% endfor %}
             </tbody>
@@ -40,27 +45,25 @@
             <hr>
             <thead>
             <tr align="center">
-                <th>Image of Equipments</th>
-                <th>Holder Name</th>
+                <th>Image of Equipments</th>                
                 <th>Equipment Name</th>
-                <th>Category</th>
-                <th>Mobile no.</th>
-                <th>City</th>
-                <th>Email</th>
-                <th>Price per day</th>  
+                <th>Category</th>                
+                <th>Rating</th>
+                <th>Price per day</th> 
+                <th>Edit</th> 
+                <th>Delete</th>
+                
             </tr>
         </thead>
         <tbody>
             {% for i in uplde %}            
             <tr class="danger" align="center">
-                <td><img src="{{ i.Image.url }}" class="img-responsive" style="width: 90%; height:160px; margin-left:30px; float:inline-start;" /></td>        
-                <td>{{i.H_name}}</td>
+                <td><img src="{{ i.Image.url }}" class="img-responsive" style="width: 70%; height:160px; margin-left:30px; float:inline-start;" /></td>        
                 <td>{{i.E_name}}</td>
-                <td>{{i.Category}}</td>
-                <td>{{i.Mobileno}}</td>
-                <td>{{i.City}}</td>
-                <td>{{i.email}}</td>
+                <td>{{i.Category}}</td>                
+                <td>{{i.Rating|floatformat:1}}<i class="fas fa-star" aria-hidden="true" style="color: red;"></i></td>
                 <td>{{i.Rent_price}} Rs per day</td>
+                <td><a href="editequipment{{i.E_id}}"><button type="submit" id="edit" class="btn btn-danger" >Edit</button></a></td>
                 <td><a href="authorized{{i.E_id}}"><button type="submit" value="{{i.E_id}}" id="cancel" class="btn btn-danger" ><i class="fas fa-times"></i></button></a></td>
              </tr>       
             {% endfor %}
@@ -83,6 +86,7 @@
             <th>Mobile no.</th>
             <th>City</th>
             <th>Email</th>
+            <th>Rating</th>
             <th>Price Per Day</th>                    
             <th>Accept</th>           
         </tr>
@@ -98,6 +102,7 @@
             <td>{{i.Mobileno}}</td>
             <td>{{i.City}}</td>
             <td>{{i.email}}</td>
+            <td>{{i.Rating|floatformat:1}}<i class="fas fa-star" aria-hidden="true" style="color: red;"></i></td>
             <td>{{i.Rent_price}}</td>
                        
             <td><a href="rent{{i.E_id}}"><button type="submit" value="{{i.E_id}}" id="submit" class="btn btn-success" >RENT</button></a></td>          

@@ -30,7 +30,7 @@
             <td>{{i.startdate}}</td>
             <td>{{i.enddate}}</td> 
             <td>{{j.Rent_price}}</td>          
-            <td><a href="rjct{{i.R_id}}"><button type="submit" value="{{i.R_id}}" id="cancel" class="btn btn-danger" ><i class="fas fa-times"></i></button></a></td>
+            <td><a href="rjct{{i.R_id}}"><button type="submit"  value="{{i.R_id}}" id="cancel" class="btn btn-danger" ><i class="fas fa-times"></i></button></a></td>
         </tr>
         {% endif %} {% endfor %}{% endfor %}
     </table>
@@ -38,4 +38,18 @@
     <br>   
 </div>
 
+<!-----------------Alert Box----------------------->
+<script>
+    
+    function myFunction() {
+    var txt;
+    if (confirm("Are you sure delete these Types of equipment?","gfgf")) {
+        txt = "You pressed OK!";
+    } else {
+        txt = "You pressed Cancel!";
+    }
+    document.getElementById("demo").innerHTML = txt;
+    }
+
+</script>
 {% endblock %}

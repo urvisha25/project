@@ -38,7 +38,7 @@
             </div>
             <hr>
       
-            <!---------- Farmer Details Table ------------>           
+            <!---------- Farmer Details Table 1 ------------>           
 
    <table class="table-responsive" style="font-size:11pt;">   
         {% if a == "flist" %}
@@ -75,7 +75,7 @@
         {% endfor %}       
         </tbody>
 
-        <!----------Trader Details table------------>
+        <!----------Trader Details table 2------------>
 
      {% elif a == "tlist" %}
      <thead>
@@ -107,7 +107,7 @@
         {% endfor %}
         </tbody>
 
-           <!----------equipmentholder Details table ------------>
+           <!----------equipmentholder Details table 3------------>
 
         {% elif a == "ehlist" %}
      <thead>
@@ -141,7 +141,7 @@
         {% endfor %}
         </tbody>
 
-        <!----------Farmer Upload Product table ------------>
+        <!----------Farmer Upload Product table 4------------>
 
         {% elif a == "fplist" %}
      <thead>
@@ -171,7 +171,7 @@
         {% endfor %}
         </tbody>
 
-        <!----------Trader Upload Product Price  table ------------>
+        <!----------Trader Upload Product Price  table 5 ------------>
 
         {% elif a == "tplist" %}
      <thead>
@@ -195,7 +195,7 @@
         {% endfor %}
         </tbody>
 
-        <!----------EquipmentHolder Upload Equipment table ------------>
+        <!----------EquipmentHolder Upload Equipment table 6 ------------>
 
         {% elif a == "helist" %}
      <thead>
@@ -228,7 +228,7 @@
         {% endfor %}
         </tbody>
 
-         <!----------Farmer Rent in Equipments table ------------>
+         <!----------Farmer Rent in Equipments table 7 ------------>
 
         {% elif a == "frlist" %}
      <thead>
@@ -266,7 +266,7 @@
         {% endfor %}
         </tbody>
 
-        <!----------Trader Buy Farmer Product table ------------>
+        <!----------Trader Buy Farmer Product table 8------------>
         {% elif a == "buylist" %}
      <thead>
         <tr style="border-bottom: 1px solid black; color: orange;">
@@ -295,7 +295,43 @@
         {% endfor %}
         </tbody>              
            
-              
+         <!----------Farmer Rent in Equipments table 9 ------------>
+
+        {% elif a == "rentlist" %}
+        <thead>
+           <tr style="border-bottom: 1px solid black; color: orange;" align="center">
+               <th>Farmer Name</th>   
+               <th colspan="2">Address</th>        
+               <th>Mobile no.</th>
+               <th>Category</th>
+               <th>Equipment Name</th>
+               <th>City</th>           
+               <th>Pincode</th>
+               <th>Startdate</th>
+               <th>Enddate</th>                                                         
+           </tr>
+       </thead>
+      <center> <label style="color: orange;" align="center"><h1>Farmer Rent in Equipments List</h1></label></center>
+       <hr>
+       <tbody>
+           {% for i in b %} 
+           {% for j in j %}
+           {% if i.E_id == j.E_id %}
+           <tr class="danger" style="padding: 4px; font-size: 7pt;">                        
+               <td>{{i.Name}}</td> 
+               <td colspan="2">{{i.Address}}</td>          
+               <td>{{i.Mobileno}}</td>
+               <td>{{j.Category}}</td>
+               <td>{{j.E_name}}</td>
+               <td>{{i.City}}</td>           
+               <td>{{i.Pincode}}</td>
+               <td>{{i.startdate}}</td>
+               <td>{{i.enddate}}</td>
+           </tr>
+           {% endif %}
+           {% endfor %}
+           {% endfor %}
+           </tbody>     
                
      {% endif %}
 

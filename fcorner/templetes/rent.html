@@ -16,6 +16,7 @@
     var ddd="";
     var k="";
     '{% for i in sd %}'
+    '{% if i.status == 1 %}'
     var startDate = new Date("{{i.startdate|date:'m/d/Y'}}"); //YYYY-MM-DD
     var endDate = new Date("{{i.enddate|date:'m/d/Y'}}"); //YYYY-MM-DD    
     dateRange = [];    
@@ -72,6 +73,7 @@
  
       return date;
     }
+    '{% endif %}'
     '{% endfor %}'
   } );
   $( function() {  
@@ -117,22 +119,27 @@
 </head>
 <body style="border-width: 1px solid black;">
 
-<div class="card-body">
-        {% if messages %} {% for message in messages %}
-        <div class="alert alert-{{message.tags}}">{{ message }}</div>
-        {% endfor %} {% endif %}
-</div>
-<form method="POST" class="col-md-4">
-        {% csrf_token %}
-<label for="from">From</label>
-<input type="text" class="form-control" readonly width="100px" id="from" name="A">
-<label for="to">to</label>
-<input type="text" class="form-control" readonly width="100px" id="to" name="B">
-<br>
-<input type="checkbox" required> If you will cancel the rental equipment then you will  500 Rs fine<br> <br>
-<input type="submit" value="Submit" class="btn btn-outline-success">
-
-</form>
+      <div class="card-body">
+              {% if messages %} {% for message in messages %}
+              <div class="alert alert-{{message.tags}}">{{ message }}</div>
+              {% endfor %} {% endif %}
+      </div>
+  <center>  
+    <form method="POST" class="col-md-4" style="border: 1px black solid;">
+      <label><h2 style="color: cornflowerblue;">Farmer Rent In Equipments</h2>
+      </label>
+      <hr>
+            {% csrf_token %}
+          <label for="from">Start Date</label>
+          <input type="text" class="form-control" readonly width="100px" id="from" name="A">
+          <label for="to">End Date</label>
+          <input type="text" class="form-control" readonly width="100px" id="to" name="B">
+          <br>
+          <input type="checkbox" required> If you will cancel the rental equipment then you will  500 Rs fine<br> <br>
+          <hr>
+          <input type="submit" value="Submit" class="btn btn-success" style="margin-bottom: 5px;">
+          <input type="reset" value="Cancel" class="btn btn-primary" style="margin-bottom: 5px;">
+    </form></center>
 </body>
 </html>
 {% endblock %}

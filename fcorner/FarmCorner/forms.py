@@ -30,7 +30,7 @@ class upldprice(forms.ModelForm):
             fields = ['P_name','Price']   
             labels={ 
                 'P_name':'Product Name',               
-                'Price':'Price (Rs/20kg)'
+                'Price':'Price (Rs In 20kg)'
             }       
 
 # edit profile Equipmentholder
@@ -79,6 +79,18 @@ class editprofilea(forms.ModelForm):
 
         labels={ 
                 'A_name':'Admin Name' } 
+
+# edit Upload Equipments by Holder
+
+class editequipments(forms.ModelForm):
+    class Meta:
+        model=uploadequip
+        fields=['Category','E_name','Image','Rent_price']
+
+        labels={ 
+                'E_name':'Equipment Name',
+                'Rent_price':'Rent Price In Rs'
+                 } 
 
 # rent
 

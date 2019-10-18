@@ -19,13 +19,13 @@
                                         <div class="alert alert-{{message.tags}}">{{ message }}</div>
                                         {% endfor %} {% endif %}
                                     </div>  
-                                    <form class="form-horizontal inline"  role="form" method="POST" enctype="multipart/form-data">
+                                    <form class="form-horizontal inline"  name="form" method="POST" enctype="multipart/form-data">
                                         {% csrf_token %}
                                 <div class="card-block">                                                                                                 
                                        <fieldset class="form-group col-md-10" >    
                                             {{form|crispy}}
                                             <br>
-                                            <button type="submit" class="btn btn-success" id="submit">Submit</button>&nbsp;&nbsp;
+                                            <button type="submit" class="btn btn-success" onclick="allLetter(document.form.F_name)" id="submit">Submit</button>&nbsp;&nbsp;
                                             <button type="reset" class="btn btn-primary" id="reset">Cancel</button>                      
                                         </fieldset>  
                                     </form>  
@@ -39,7 +39,7 @@
 <script>
     jQuery(document).ready(function() {
 
-         // 3 Capitalize string every 1st chacter of word to uppercase
+         // Capitalize string every 1st chacter of word to uppercase
          jQuery('#id_T_name').keyup(function() 
          {
              var str = jQuery('#id_T_name').val();
@@ -50,6 +50,32 @@
                  spart[i] = j + spart[i].substr(1);
              }
          jQuery('#id_T_name').val(spart.join(" "));             
+         });
+
+          // Capitalize string every 1st chacter of word to uppercase
+          jQuery('#id_F_name').keyup(function() 
+         {
+             var str = jQuery('#id_F_name').val();
+             var spart = str.split(" ");
+             for ( var i = 0; i < spart.length; i++ )
+             {
+                 var j = spart[i].charAt(0).toUpperCase();
+                 spart[i] = j + spart[i].substr(1);
+             }
+         jQuery('#id_F_name').val(spart.join(" "));             
+         });
+
+          // Capitalize string every 1st chacter of word to uppercase
+          jQuery('#id_H_name').keyup(function() 
+         {
+             var str = jQuery('#id_H_name').val();
+             var spart = str.split(" ");
+             for ( var i = 0; i < spart.length; i++ )
+             {
+                 var j = spart[i].charAt(0).toUpperCase();
+                 spart[i] = j + spart[i].substr(1);
+             }
+         jQuery('#id_H_name').val(spart.join(" "));             
          });
 
           // Capitalize string every 1st chacter of word to uppercase
@@ -99,12 +125,22 @@
         function restrictNumber (e) {  
         var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
         this.value = newValue;
-        }
-        var mob = document.querySelector('#id_Mobileno');            
-        mob.addEventListener('input', restrictNumber);
-        function restrictNumber (e) {  
-        var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
-        this.value = newValue;
-        }
+        }              
 </script>
+<!--------------Only Enter Character -------------->
+<script language="javascript">
+       function allLetter(inputtxt)
+      { 
+      var letters = /^[A-Za-z]+$/;
+      if(inputtxt.value.match(letters))
+      {      
+      return true;
+      }
+      else
+      {
+      alert('Please input alphabet characters only');
+      return false;
+      }
+      }
+     </script>
 {% endblock %}

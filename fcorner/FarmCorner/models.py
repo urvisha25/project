@@ -82,6 +82,7 @@ class uploadequip(models.Model):
        mydate = models.DateTimeField(default=datetime.now())
        startdate=models.DateField(default=datetime.now())
        enddate = models.DateField(default=datetime.now())
+       Rating = models.FloatField(default=0)
        status=models.IntegerField(default=0)
        
        def __str__(self):
@@ -164,8 +165,8 @@ class rentequipment(models.Model):
    startdate=models.DateField(datetime.now())
    enddate = models.DateField(datetime)
    status=models.IntegerField(default=0)
-   mydate = models.DateTimeField(default=datetime.now())
-   Rating = models.FloatField(default=0)
+   mydate = models.DateTimeField(default=datetime.now())   
+   unumber = models.IntegerField(default=0)
 
    def __str__(self):
           return self.Name

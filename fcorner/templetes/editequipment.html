@@ -1,0 +1,109 @@
+{% extends 'basic.html' %} {% load crispy_forms_tags %}{% block content %}  
+<html>
+    <head>
+        <style>
+                    label{
+                    font-weight: bold;
+                    }
+        </style>
+    </head>
+    <body>
+              <center>
+                    <div class="card border-info" style="width: 40%; margin-top: 0px;" align="center">
+                        <div class="card-header bg-info">
+                            <h1><b>Edit Equipments</b></h1>
+                        </div>
+                        <div class="card-body">
+                                {% if messages %} {% for message in messages %}
+                                        <div class="alert alert-{{message.tags}}">{{ message }}</div>
+                                {% endfor %} {% endif %}
+                        </div>  
+                            <form class="form-horizontal inline"  role="form" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="card-block">                                                                                                 
+                                    <fieldset class="form-group col-md-10" >    
+                                        {{form|crispy}}
+                                         <br>
+                                        <button type="submit" class="btn btn-success" id="submit">Submit</button>&nbsp;&nbsp;
+                                        <button type="reset" class="btn btn-primary" id="reset">Cancel</button>                      
+                                    </fieldset> 
+                               </div>   
+                            </form>                        
+                        </div>
+               </center>
+    </body>       
+</html>
+
+<!------ First latter is UpperCase ------->
+<script>
+    jQuery(document).ready(function() {
+
+         // 3 Capitalize string every 1st chacter of word to uppercase
+         jQuery('#id_T_name').keyup(function() 
+         {
+             var str = jQuery('#id_T_name').val();
+             var spart = str.split(" ");
+             for ( var i = 0; i < spart.length; i++ )
+             {
+                 var j = spart[i].charAt(0).toUpperCase();
+                 spart[i] = j + spart[i].substr(1);
+             }
+         jQuery('#id_T_name').val(spart.join(" "));             
+         });
+
+          // Capitalize string every 1st chacter of word to uppercase
+          jQuery('#id_Taluka').keyup(function() 
+         {
+             var str = jQuery('#id_Taluka').val();
+             var spart = str.split(" ");
+             for ( var i = 0; i < spart.length; i++ )
+             {
+                 var j = spart[i].charAt(0).toUpperCase();
+                 spart[i] = j + spart[i].substr(1);
+             }
+         jQuery('#id_Taluka').val(spart.join(" "));             
+         });
+
+         // Capitalize string every 1st chacter of word to uppercase
+         jQuery('#id_City').keyup(function() 
+         {
+             var str = jQuery('#id_City').val();
+             var spart = str.split(" ");
+             for ( var i = 0; i < spart.length; i++ )
+             {
+                 var j = spart[i].charAt(0).toUpperCase();
+                 spart[i] = j + spart[i].substr(1);
+             }
+         jQuery('#id_City').val(spart.join(" "));             
+         });
+
+          // Capitalize string every 1st chacter of word to uppercase
+          jQuery('#id_District').keyup(function() 
+         {
+             var str = jQuery('#id_District').val();
+             var spart = str.split(" ");
+             for ( var i = 0; i < spart.length; i++ )
+             {
+                 var j = spart[i].charAt(0).toUpperCase();
+                 spart[i] = j + spart[i].substr(1);
+             }
+         jQuery('#id_District').val(spart.join(" "));             
+         });
+     });       
+   </script>
+<!--------------only Enter Number ----------------->   
+<script>
+        var userName = document.querySelector('#id_Pincode');            
+        userName.addEventListener('input', restrictNumber);
+        function restrictNumber (e) {  
+        var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
+        this.value = newValue;
+        }
+        var mob = document.querySelector('#id_Mobileno');            
+        mob.addEventListener('input', restrictNumber);
+        function restrictNumber (e) {  
+        var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
+        this.value = newValue;
+        }
+</script>
+{% endblock %}

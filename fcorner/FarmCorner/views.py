@@ -28,6 +28,7 @@ from django.contrib import messages
 # Create your views here..
 
 # Home page 
+
 def home(request):
       plist= uploadequip.objects.all()
       context={
@@ -501,6 +502,21 @@ def pricelist(request):
       prolist= uploadprice.objects.all()
       return render(request,'upload/pricelist.html',locals())
 
+# Edit Upload Equipments by Holder
+def edit_profiles(request,id):  
+      user = uploadequip.objects.get(E_id=id)
+      form = editequipments(instance=user)
+      if request.method == "POST":
+        form = editequipments(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+          update = form.save(commit=False)               
+          update.user = user
+          update.save()  
+          messages.success(request,'Your profile update Successfully')    
+        else:
+            form = editequipments()       
+      return render(request, 'editequipment.html', {'form': form})
+
 # All Entity Edit Profile
 
 def edit_profile(request):  
@@ -597,13 +613,11 @@ def equipmentlist(request):
       uplde=uploadequip.objects.all()         
       el=rentequipment.objects.all()       
       return render(request, 'equiplist.html', locals())        
-     
-
+ 
 def equipmentlisth(request,id): 
       uplde=uploadequip.objects.filter(H_id = request.session["hid"])        
       return render(request, 'equiplist.html', locals())    
-     
-
+ 
 # Show Trader Price List
 
 def tpricelist(request):
@@ -668,7 +682,10 @@ def tractors(request,id):
 
 # Farmer rent in equipments
 def rent(request,id):
-      sd=rentequipment.objects.filter(E_id=id)     
+      sd=rentequipment.objects.filter(E_id=id)  
+      rt=rentequipment.objects.all()   
+      for f in rt:
+            request.session["unq"] = int(f.unumber) + 1
       storage=messages.get_messages(request)
       storage.used=True     
       prices = []
@@ -700,14 +717,51 @@ def rent(request,id):
                 productupload.City = city
                 productupload.Address = add
                 productupload.Pincode = pin
-                productupload.save()                
-                uploadequip.objects.filter(E_id=id).update(status=1)
-                messages.success(request,'booking successfully!')
-                return render(request, 'rent.html') 
+                productupload.unumber = request.session["unq"]
+                productupload.save()  
+                return redirect('rprice.html') 
       else: 
         form = rentequipments()       
       return render(request,'rent.html',locals(),{'form':form})
 
+# Equipment holder Give Bill
+
+def equipmentbill(request):
+      rn= rentequipment.objects.get(unumber=request.session["unq"])     
+      g= uploadequip.objects.all() 
+      a = rn.startdate
+      b = rn.enddate
+      delta = b - a
+      dd=delta.days
+      e=eholder.objects.get(H_id=rn.H_id)
+      f=uploadequip.objects.get(E_id=rn.E_id)
+      total=f.Rent_price * dd
+      request.session["tot"]=total
+      if request.method =='POST':              
+            form = rentbill(request.POST, request.FILES)
+            if form.is_valid():
+                  rentprolist = form.save(commit = False) 
+                  rentprolist.H_id=rn.H_id
+                  rentprolist.E_id=rn.E_id
+                  rentprolist.F_id=rn.F_id   
+                  rentprolist.R_id=rn.R_id
+                  rentprolist.F_name=rn.Name
+                  rentprolist.H_name=e.H_name      
+                  rentprolist.Name=f.E_name   
+                  rentprolist.Total= total                                    
+                  rentprolist.save() 
+                  del request.session["tot"]
+                  uploadequip.objects.filter(E_id=rn.E_id).update(status=1)
+                  rentequipment.objects.filter(R_id=rn.R_id).update(status=1)
+                  messages.success(request,'Equipment booking Successfully')
+                  return redirect("equipmentlist")
+            else: 
+                  return render(request, "rprice.html", {'form':details}) 
+      else: 
+            form = rentbill(None)    
+            return render(request, 'rprice.html', locals(), {'form':form})    
+      return render(request,'rprice.html',locals())  
+ 
 # Equipment holder show rent farmer list
 def rentlist(request):    
       c= rentequipment.objects.filter(F_id= request.session["idf"])
@@ -763,7 +817,11 @@ def listall(request,id):
                   fareqip= uploadequip.objects.all()
             elif id == 8:
                   request.session["alist"] = "buylist"                 
-                  buylst= buyproduct.objects.all()            
+                  buylst= buyproduct.objects.all()
+            elif id == 9:
+                  request.session["alist"] = "rentlist"                 
+                  farentlst= rentequipment.objects.all()
+                  fareqip= uploadequip.objects.all()            
             return render(request,'admin/list.html',locals())
       else:
             if id== 1:
@@ -812,7 +870,7 @@ def buyprod(request,id):
       namet=mbt.T_name
       mail= mbt.email
       if request.method == 'POST': 
-            quty= request.POST.get("qty",'')
+            quty= request.POST.get("Quantity",'')
             form = buyproducts(request.POST, request.FILES)   
             if form.is_valid(): 
                 productupload= form.save(commit=False)
@@ -894,7 +952,25 @@ def transactions(request):
 def transactionlist(request,id):
       sdate= request.POST.get('sdate','')
       ldate = request.POST.get('ldate','')
-      
+      #translst= rentequipment.objects.filter(mydate__range=(sdate,ldate))
+      if request.method == "POST":
+            rate= request.POST.get("rate","")
+            eid= request.POST.get("eid","")   
+            tid= request.POST.get("tid","")
+            dd = uploadequip.objects.get(E_id= eid) 
+            if dd.Rating == 0:
+                uploadequip.objects.filter(E_id=eid).update(Rating=rate)
+                transaction.objects.filter(Rb_id=tid).update(status=1)
+                messages.success(request,"Thanks For Rating!")
+                return render(request,'transaction.html')
+            else:
+                dr = float(dd.Rating) + float(rate)
+                rs = dr/2
+                uploadequip.objects.filter(E_id=eid).update(Rating=rs)
+                transaction.objects.filter(Rb_id=tid).update(status=1)
+                messages.success(request,"Thanks For Rating!")
+                return render(request,'transaction.html',locals())
+            return render(request,'transaction.html',locals())
       if sdate== '' and ldate=='' and request.session["tid"] == 0:
             if id== 9:
                   request.session["alistt"] = "translist"
@@ -916,7 +992,7 @@ def transactionlist(request,id):
       else:
             if id == 9:
                   request.session["alistt"] = "translist"                  
-                  translst= rentequipment.objects.filter(mydate__range=(sdate,ldate))   
+                  translst= rentequipment.objects.filter(mydate__range=(sdate,ldate))  
             elif id == 10:
                   request.session["alistt"] = "prolist"
                   tproductlst= buyproduct.objects.filter(mydate__range=(sdate,ldate))                
@@ -998,7 +1074,16 @@ def GeneratePDF(request,id,*args, **kwargs):
                 'b':b,
                 'date':datetime.now()
             }  
-            
+        elif id == 9:            
+            a ="rentlist"
+            b = rentequipment.objects.filter(H_id=request.session["hid"]) 
+            j = uploadequip.objects.all()
+            context = {
+                'a':a,
+                'b':b,
+                'j':j,
+                'date':datetime.now()
+            }    
         template = get_template('pdf.html')      
         html = template.render(context)
         pdf = render_to_pdf('pdf.html', context)

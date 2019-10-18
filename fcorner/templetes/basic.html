@@ -163,19 +163,22 @@
                 </li>    
                 
                 <!-------------------------Admin Navigationbar------------------------>
-                {% elif request.session.lgna != null %}
+                {% elif request.session.lgna != null %}                
                 <li class="nav-item">
-                    <a class="nav-link" href="authorized.html">AUTHORIZED</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="profile">PROFILE</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="list{{0}}">LIST DATA</a>
+                    <a class="nav-link" href="list{{1}}">LIST DATA</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="districtupld.html">UPLOAD DISTRICT</a>
-                </li>               
+                </li> 
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        PROFILE
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="nav-link" href="authorized.html">AUTHORIZED</a>
+                      <a class="nav-link" href="profile">PROFILE</a>                   
+                    </div>
+                  </li>               
                 {% endif %}
         </ul>       
       </div>

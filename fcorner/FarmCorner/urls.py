@@ -61,6 +61,8 @@ urlpatterns=[
     path('GeneratePDF<int:id>',views.GeneratePDF, name='rent bill generate'),
     path('rentfarmlist<int:id>',views.rentfarmlist, name='rent bill print(PDF)'),
     path('delrentequip<int:id>',views.delrentequip, name='rent Equipmetn delete'),
+    path('rprice.html', views.equipmentbill, name="Farmer rent in equipment then its give Bill"),
+    path('editequipment<int:id>',views.edit_profiles, name="edit upload equipments by Holder"),
 
     # Admin upload Districts, and Show all list
     path('list<int:id>',views.listall),

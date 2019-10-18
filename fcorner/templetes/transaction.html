@@ -67,7 +67,10 @@
                                         <th>Equipment Name</th>
                                         <th>Holder Name</th>
                                         <th>Total In Rs</th>
-                                        <th>Date</th>               
+                                        <th>Date</th>
+                                        <th>Payment</th>
+                                        <th>Bill</th>
+                                        <th>Rate</th>               
                                     </tr>
                                 </thead>
                                     {% for i in translst %}
@@ -76,19 +79,20 @@
                                         <td>{{i.Name}}</td>
                                         <td>{{i.H_name}}</td>
                                         <td>{{i.Total}}</td> 
-                                        <td>{{i.mydate}}</td>    
-                                        {% if i.status == 0 %}
-                                        <td><button type="submit" class="btn btn-success" id="submit">Pay</button> </td>
-                                        {% else %}
+                                        <td>{{i.mydate}}</td>                                        
                                         <td>Paid</td>
-                                        {% endif %}
+                                       
                                         <td><a href="rentfarmlist{{i.Rb_id}}" target="_blank"><button type="submit" class="btn btn-success" id="submit">Print</button></a> </td>           
-                                        <td><button data-toggle="modal" data-target="#myModal" type="submit" class="btn-info" id="submit">RATE</button></td>           
-                                    </tr>
+                                      {% if i.status == 0 %}
+                                        <td><button data-toggle="modal" data-target="#myModal" type="submit" class="btn btn-info" id="submit">RATE</button></td>           
+                                   {% else %}
+                                   <td>Thanks</td>
+                                   {% endif %}
+                                      </tr>
                                 </tbody>
         <!---------------------- The Rating Modal ---------------------->
-                                <form class="rating" method="POST" enctype="multipart/form-data">
-                                  {% csrf_token %}
+                                
+                                  
                                     <div class="modal fade" id="myModal">
                                         <div class="modal-dialog modal-sm">
                                           <div class="modal-content">                                          
@@ -96,23 +100,29 @@
                                             <div class="modal-header bg-light" align="center">
                                               <h4 class="modal-title" style="color: cadetblue; margin-left:90px;" >Rating</h4>
                                               <button type="button" class="close" data-dismiss="modal">×</button>
-                                            </div>                                            
+                                            </div>     
+                                                                                  
                                             <!-- Modal body -->
                                             <div class="modal-body bg-light">
-                                            <input type="radio" name="1" id="r1"> 1<br>
-                                              <input type="radio" name="1" id="r2"> 2<br>
-                                              <input type="radio" name="1" id="r3"> 3<br>
-                                                <input type="radio" name="1" id="r4"> 4<br>
-                                                <input type="radio" name="1" id="r5"> 5<br>
+                                                <form class="rating" method="POST" enctype="multipart/form-data">
+                                                  {% csrf_token %}
+                                            <input type="radio" name="rate" value="1"> 1<br>
+                                              <input type="radio" name="rate" value="2"> 2<br>
+                                              <input type="radio" name="rate" value="3"> 3<br>
+                                                <input type="radio" name="rate" value="4"> 4<br>
+                                                <input type="radio" name="rate" value="5"> 5<br>
+                                                <input type="number" hidden name="eid" value="{{i.E_id}}" >
+                                                <input type="number" hidden name="tid" value="{{i.Rb_id}}" >
+                                                <input type="submit" class="btn btn-info" id="submit"  style="margin-right:100px;" value="Submit">
+                                              </form>
                                             </div>                                            
                                             <!-- Modal footer -->
                                             <div class="modal-footer bg-light">
-                                              <button type="submit" class="btn btn-info" id="submit"  style="margin-right:100px;">Submit</button>
-                                            </div>                                            
+                                              </div>                                            
                                           </div>
                                         </div>
                                       </div>
-                                    </form>
+                                   
                                     {% endfor %}
 
         <!----------------------Trader Buy Products---------------------->

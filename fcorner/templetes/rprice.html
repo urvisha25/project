@@ -13,23 +13,26 @@
                             <div class="alert alert-{{message.tags}}">{{ message }}</div>
                             {% endfor %} {% endif %}
                         </div> 
-                        {% if request.session.rmv == 0 %}
+                        
                         
                         <form class="form-horizontal inline" id="upeqip"  role="form" method="POST" enctype="multipart/form-data">
-                            
+                        
                             {% csrf_token %}
+                            {{form}}
                     <div class="card-block">
-                            <label class="control-label"> Farmer Name:  &nbsp;</label><input type="text" class="form-control" value="{{request.session.fname}}" disabled />                                                                     
+                            <label class="control-label"> Farmer Name:  &nbsp;</label><input type="text" class="form-control" value="{{rn.Name}}" disabled />                                                                     
                            
-                           <SPAN><label class="control-label inline" > Trader Name:  &nbsp;</label><input type="text" class="form-control" value="{{request.session.tame}}" disabled /> </SPAN> 
+                           <SPAN><label class="control-label inline" > Trader Name:  &nbsp;</label><input type="text" class="form-control" value="{{e.H_name }}" disabled /> </SPAN> 
                            
-                           <label class="control-label"> Product Name:  &nbsp;</label><input type="text" class="form-control" value="{{request.session.pname}}" disabled />                                                                                                                
+                           <label class="control-label"> Product Name:  &nbsp;</label><input type="text" class="form-control" value="{{f.E_name}}" disabled />                                                                                                                
                                                                                        
-                           <label class="control-label"> Total Price:  &nbsp;</label><input type="text" class="form-control" value="{{request.session.pname}}" disabled />                                                                                                                
-                           
+                           <label class="control-label"> Total Price:  &nbsp;</label><input type="text" class="form-control" value="{{request.session.tot}}" disabled />                                                                                                                
+                          <br>
+                           <input type="submit" class="btn btn-outline-success" value="Submit" />
+                          
                         </form>  
                    </div>
-                {% endif %}
+               
             </div>
         </center>
         </body> 
