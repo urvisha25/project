@@ -6,6 +6,11 @@ from . import views
 from urllib import request
 from .models import *
 import requests 
+from django.shortcuts import render, redirect
+from django.conf import settings
+from django.contrib import messages
+from .models import *
+
 from .forms import *
 from django.core.mail import send_mail
 from django.conf import settings
@@ -25,6 +30,8 @@ from datetime import *
 from dateutil import parser
 from django.core.exceptions import ValidationError
 from django.contrib import messages
+from captcha.fields import *
+from captcha.widgets import *
 # Create your views here..
 
 # Home page 
@@ -288,7 +295,13 @@ def holderregis(request):
 
 # Equipmentholder,Trader,Farmer,Admin Login
 
-def hlogin(request):      
+def hlogin(request):  
+   recaptcha = ReCaptchaField(widget=ReCaptchaV2Invisible)    
+   #recaptcha = captcha.displayhtml(CAPTCHA_PUBLIC) 
+   context ={
+       #'captcha':captcha  ,
+       'recaptcha':recaptcha
+   } 
    request.session["idf"]=0
    request.session["tid"]=0
    if request.method == 'POST':
@@ -339,7 +352,7 @@ def hlogin(request):
         else:
           messages.warning(request,'Invalid username and Password!') 
           return render(request,'login/hlogin.html')        
-   return render(request,'login/hlogin.html')
+   return render(request,'login/hlogin.html',context)
 
 # about
 
@@ -489,7 +502,7 @@ def priceupload(request):
                 priceupload.T_id= request.session["tid"]             
                 priceupload.T_name= request.session["tname"]               
                 priceupload.save()                 
-                messages.success(request,'successfully Price Upload!!')
+                messages.success(request,'Successfully Price Upload!!')
                 return render(request,'upload/priceupload.html')     
             else:
                  messages.warning(request,'Not Upload Price!')              
@@ -512,7 +525,7 @@ def edit_profiles(request,id):
           update = form.save(commit=False)               
           update.user = user
           update.save()  
-          messages.success(request,'Your profile update Successfully')    
+          messages.success(request,'Your Equipments update Successfully')    
         else:
             form = editequipments()       
       return render(request, 'editequipment.html', {'form': form})
@@ -624,30 +637,33 @@ def tpricelist(request):
       pricel=uploadprice.objects.all()  
       return render(request, 'admin/tpricelist.html', locals())
 
+# history of trader upload price list of trader
+
 def tpricelistt(request):      
       sdate= request.POST.get('sdate','')
       ldate = request.POST.get('ldate','')
       if sdate != '' and ldate != '':
-            pricel= uploadprice.objects.filter(mydate__range=(sdate,ldate))
-            if request.method == 'POST':
-                  updt=request.POST.get('updt','')
-                  request.session["updt"] = updt
-                  upid= request.POST.get('pid','') 
-                  if updt != "" and upid != "":
-                        uploadprice.objects.filter(P_id=upid).update(Price=updt)
-                        messages.success(request,'upload price successfully')
+            pricel= uploadprice.objects.filter(mydate__range=(sdate,ldate))              
             return render(request, 'admin/tpricelist.html', locals())
-
       else:   
-            pricel=uploadprice.objects.filter(T_id = request.session["tid"])  
-            if request.method == 'POST':
-                  updt=request.POST.get('updt','')
-                  request.session["updt"] = updt
-                  upid= request.POST.get('pid','') 
-                  if updt != "" and upid != "":
-                        uploadprice.objects.filter(P_id=upid).update(Price=updt)
-                        messages.success(request,'upload price successfully')
-            return render(request, 'admin/tpricelist.html', locals())
+            pricel=uploadprice.objects.filter(T_id = request.session["tid"])             
+      return render(request, 'admin/tpricelist.html', locals())
+ 
+# Edit Product Price by Holder
+def editprice(request,id):  
+      user = uploadprice.objects.get(P_id=id)
+      form = editeprodprice(instance=user)
+      if request.method == "POST":
+        form = editeprodprice(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+          update = form.save(commit=False)               
+          update.user = user
+          update.save()  
+          messages.success(request,'Your Price update Successfully')    
+          return redirect('tpricelistt.html')
+        else:
+            form = editeprodprice()       
+      return render(request, 'editprice.html', {'form': form})
 
 # All equipments list in home page
 

@@ -63,6 +63,7 @@ urlpatterns=[
     path('delrentequip<int:id>',views.delrentequip, name='rent Equipmetn delete'),
     path('rprice.html', views.equipmentbill, name="Farmer rent in equipment then its give Bill"),
     path('editequipment<int:id>',views.edit_profiles, name="edit upload equipments by Holder"),
+    path('editprice<int:id>',views.editprice, name="edit product price by Trader"),
 
     # Admin upload Districts, and Show all list
     path('list<int:id>',views.listall),

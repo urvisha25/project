@@ -23,6 +23,7 @@
             <th>City</th>
             <th>Email</th>
             <th>Quantity In Mann</th>
+            <th>Grade</th>
             <th>Price in Rs</th>
             <th>Buy</th>
             <th>Cancel</th>
@@ -37,7 +38,8 @@
             <td>{{i.Mobileno}}</td>
             <td>{{i.City}}</td>
             <td>{{i.email}}</td>           
-            <td>{{i.Quantity}}</td>  
+            <td>{{i.Quantity}}</td> 
+            <td>{{i.Grade}}</td> 
             <td>{{j.Price}}</td>        
             <td><a href="buy{{i.S_id}}"><button type="submit" value="{{i.S_id}}" id="submit" class="btn btn-success" >BUY</button></a></td>          
             <td><a href="authorized{{i.S_id}}"><button type="reset" value="{{i.S_id}}" id="cancel" class="btn btn-danger" >Cancel</button></a></td>

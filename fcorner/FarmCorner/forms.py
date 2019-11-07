@@ -5,10 +5,12 @@ from .models import *
 class equipments(forms.ModelForm):   
     class Meta: 
         model = uploadequip 
-        fields = ['E_name','Category','Image','Rent_price']   
+        fields = ['E_name','Category','Image','year','hp','Rent_price']   
         labels={               
                 'E_name': 'Equipment Name',  
-                'Rent_price': 'Rent Price in Per Day'  
+                'Rent_price': 'Rent Price in Per Day',
+                'hp':'Horsepower in Watts',
+                'year':'Year of Equipment'  
             }
 
 # upload product images
@@ -27,10 +29,13 @@ class uploadproduct(forms.ModelForm):
 class upldprice(forms.ModelForm):   
     class Meta: 
             model = uploadprice 
-            fields = ['P_name','Price']   
+            fields = ['P_name','Price','Gradea','Gradeb','Gradec']   
             labels={ 
                 'P_name':'Product Name',               
-                'Price':'Price (Rs In 20kg)'
+                'Price':'Price (Rs In 20kg)',
+                'Gradea':'Price for Grade A (Rs In 20kg)',
+                'Gradeb':'Price for Grade B (Rs In 20kg)',
+                'Gradec':'Price for Grade C (Rs In 20kg)',
             }       
 
 # edit profile Equipmentholder
@@ -85,11 +90,26 @@ class editprofilea(forms.ModelForm):
 class editequipments(forms.ModelForm):
     class Meta:
         model=uploadequip
-        fields=['Category','E_name','Image','Rent_price']
+        fields=['Category','E_name','Image','year','hp','Rent_price']
 
         labels={ 
                 'E_name':'Equipment Name',
-                'Rent_price':'Rent Price In Rs'
+                'Rent_price':'Rent Price In Rs',
+                'hp':'Power',
+                'year':'Year of Equipment'
+                 } 
+
+#Edit Product Price by Holder
+
+class editeprodprice(forms.ModelForm):
+    class Meta:
+        model=uploadprice
+        fields=['Gradea','Gradeb','Gradec']
+
+        labels={ 
+                'Gradea':'Grade A Price in 20kg',
+                'Gradeb':'Grade B Price in 20kg',
+                'Gradec':'Grade C Price in 20kg'
                  } 
 
 # rent

@@ -17,16 +17,20 @@
         </center>
         <tr>
             <th>Trader Name</th>
-            <th>Product Name</th>           
-            <th>Price in 20kg</th>
+            <th>Product Name</th> 
+            <th>Grade A(Price in 20kg)</th>
+            <th>Grade B(Price in 20kg)</th>
+            <th>Grade C(Price in 20kg)</th>          
             <th>Upload Product</th>
 
         </tr>
         {% for i in prolist %}
         <tr class="danger">
             <td>{{i.T_name}}</td>
-            <td>{{i.P_name}}</td>           
-            <td>{{i.Price}}</td>
+            <td>{{i.P_name}}</td> 
+            <td>{{i.Gradea}}</td> 
+            <td>{{i.Gradeb}}</td> 
+            <td>{{i.Gradec}}</td> 
             <td><a href="productupload{{i.P_id}}"><button type="submit" id="submit"  class="btn btn-success" >Upload Product</button></a></td>
 
         </tr>

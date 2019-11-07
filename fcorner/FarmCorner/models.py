@@ -76,7 +76,9 @@ class uploadequip(models.Model):
        City= models.CharField(max_length=15, default="")   
        Mobileno= models.CharField(max_length=13, default="")  
        Category=models.CharField(max_length=50, choices=cat,default="")  
-       email= models.EmailField(max_length=50, default="")    
+       email= models.EmailField(max_length=50, default="") 
+       year= models.CharField(default="",max_length=12)   
+       hp = models.FloatField(default="")
        Image= models.ImageField(upload_to="Image", default="",validators=[validate_file_size])       
        Rent_price= models.IntegerField(default="") 
        mydate = models.DateTimeField(default=datetime.now())
@@ -112,7 +114,10 @@ class uploadprice(models.Model):
    P_id= models.AutoField(primary_key=True)    
    T_id= models.IntegerField(default=0) 
    T_name=models.CharField(max_length=40, default="")  
-   P_name= models.CharField(max_length=40, default="")       
+   P_name= models.CharField(max_length=40, default="")  
+   Gradea = models.IntegerField(default="")
+   Gradeb = models.IntegerField(default="")
+   Gradec = models.IntegerField(default="")     
    Price= models.IntegerField(default="")  
    mydate = models.DateTimeField(default=datetime.now())
  
@@ -135,6 +140,7 @@ def create_profile(sender, **kwargs):
 post_save.connect(create_profile, sender=authorize)
 
 class uproduct(models.Model):
+   gradechoice=(('A','A'),('B','B'),('C','C'))
    S_id= models.AutoField(primary_key=True)   
    F_id= models.IntegerField(default=0)    
    P_id= models.IntegerField(default=0) 
@@ -146,8 +152,8 @@ class uproduct(models.Model):
    email=models.EmailField(max_length=50, default="")   
    Quantity= models.IntegerField(default="") 
    status=models.IntegerField(default=0)
-   mydate = models.DateTimeField(default=datetime.now())
-
+   Grade = models.CharField(default="",max_length=1)
+   mydate = models.DateTimeField(default=datetime.now())   
    def __str__(self):
       return self.P_name
 

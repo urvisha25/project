@@ -45,22 +45,60 @@
 <!-----------only enter number-------------------->
 <script>
     var userName = document.querySelector('#id_Rent_price');
-
     userName.addEventListener('input', restrictNumber);
     function restrictNumber (e) {  
     var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
     this.value = newValue;
     }
 </script>
+<!-----------only enter number for FLOAT value ------------->
+<script>
+   $('.numberinput').keypress(function(eve) {
+  if ((eve.which != 46 || $(this).val().indexOf('.') != -1) && (eve.which < 48 || eve.which > 57) || (eve.which == 46 && $(this).caret().start == 0)) {
+    eve.preventDefault();
+  }
+
+  // this part is when left part of number is deleted and leaves a . in the leftmost position. For example, 33.25, then 33 is deleted
+  $('.numberinput').keyup(function(eve) {
+    if ($(this).val().indexOf('.') == 0) {
+      $(this).val($(this).val().substring(1));
+    }
+  });
+});    
+</script>
+<!-----------First letter is Capital ----------->
+<script>
+    jQuery(document).ready(function() {
+         // 3 Capitalize string every 1st chacter of word to uppercase
+         jQuery('#id_E_name').keyup(function() 
+         {
+             var str = jQuery('#id_E_name').val();
+             var spart = str.split(" ");
+             for ( var i = 0; i < spart.length; i++ )
+             {
+                 var j = spart[i].charAt(0).toUpperCase();
+                 spart[i] = j + spart[i].substr(1);
+             }
+         jQuery('#id_E_name').val(spart.join(" "));             
+         });
+        });  
+ </script>
 <!---------Price in not add zero value ------------->  
 <script>
-        $("input[name='number']").change(function() {
-         number = $("input[name='number']").val()
+        $("input[name='Rent_price']").change(function() {
+         number = $("input[name='Rent_price']").val()
           if( number <= 0  ) {
-              $("input[name='number']").val("");
+              $("input[name='Rent_price']").val("");
               alert("value should be more than 0");
             }
-          });
+          }); 
+          $("input[name='hp']").change(function() {
+         number = $("input[name='hp']").val()
+          if( number <= 0  ) {
+              $("input[name='hp']").val("");
+              alert("value should be more than 0");
+            }
+          });        
        
 </script> 
 <!----------------------check for Image jpg and jpeg formate----------------------->

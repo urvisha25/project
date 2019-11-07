@@ -1,0 +1,58 @@
+{% extends 'basic.html' %} {% load crispy_forms_tags %}{% block content %}  
+<html>
+    <head>
+        <style>
+                    label{
+                    font-weight: bold;
+                    }
+        </style>
+    </head>
+    <body>
+              <center>
+                    <div class="card border-info" style="width: 40%; margin-top: 0px;" align="center">
+                        <div class="card-header bg-info">
+                            <h1><b>Edit Product Price</b></h1>
+                        </div>
+                        <div class="card-body">
+                                {% if messages %} {% for message in messages %}
+                                        <div class="alert alert-{{message.tags}}">{{ message }}</div>
+                                {% endfor %} {% endif %}
+                        </div>  
+                            <form class="form-horizontal inline"  role="form" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="card-block">                                                                                                 
+                                    <fieldset class="form-group col-md-10" >    
+                                        {{form|crispy}}
+                                         <br>
+                                        <button type="submit" class="btn btn-success" id="submit">Submit</button>&nbsp;&nbsp;
+                                        <button type="reset" class="btn btn-primary" id="reset">Cancel</button>                      
+                                    </fieldset> 
+                               </div>   
+                            </form>                        
+                        </div>
+               </center>
+    </body>       
+</html>
+
+<!--------------only Enter Number ----------------->   
+<script>
+        var grda = document.querySelector('#id_Gradea');            
+        grda.addEventListener('input', restrictNumber);
+        function restrictNumber (e) {  
+        var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
+        this.value = newValue;
+        }
+        var grdb = document.querySelector('#id_Gradeb');            
+        grdb.addEventListener('input', restrictNumber);
+        function restrictNumber (e) {  
+        var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
+        this.value = newValue;
+        }
+        var grdc = document.querySelector('#id_Gradec');            
+        grdc.addEventListener('input', restrictNumber);
+        function restrictNumber (e) {  
+        var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
+        this.value = newValue;
+        }
+</script>
+{% endblock %}

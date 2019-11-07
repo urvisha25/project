@@ -25,8 +25,8 @@ SECRET_KEY = '&+^02(^yn#e_0&(55f*zu*w6m-di^so4*2*9f-*swjx21^$)yt'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 #10.112.77.213
+#ALLOWED_HOSTS = ["10.112.77.213"]
 ALLOWED_HOSTS = []
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'FarmCorner.apps.FarmcornerConfig',
     'django_tables2',
+    'captcha',
 ]
 
 MIDDLEWARE = [
@@ -145,3 +146,7 @@ EMAIL_HOST_PASSWORD = '9825325721'
 DATE_INPUT_FORMATES = ['%Y-%m-%d']
 
 GOOGLE_RECAPTCHA_SECRET_KEY = '6Ley1rwUAAAAAHHIJO6DJbA8huiulq05w58X5Y6h'
+CAPTCHA_PUBLIC = '6LfVSb4UAAAAANyqGx18JjjD_YZpKrdZ-M7wb4kK'
+CAPTCHA_PRIVATE = '6LfVSb4UAAAAAHB1f_H4LhhnEO3iVBoiwUNS1ATS'
+RECAPTCHA_PUBLIC_KEY = '6LfVSb4UAAAAANyqGx18JjjD_YZpKrdZ-M7wb4kK'
+RECAPTCHA_PRIVATE_KEY = '6LfVSb4UAAAAAHB1f_H4LhhnEO3iVBoiwUNS1ATS'

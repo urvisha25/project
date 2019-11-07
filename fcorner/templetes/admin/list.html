@@ -199,8 +199,10 @@
                            <center> <h2><small><b>TRADER UPLOAD PRICE LIST</b></small></h2>  </center>
                             <tr>
                                     <th>Holder Name</th>
-                                    <th>Equipment Name</th>                                   
-                                    <th>Price/Rs</th>
+                                    <th>Equipment Name</th> 
+                                    <th>Grade A per Rs</th> 
+                                    <th>Grade B per Rs</th>
+                                    <th>Grade C per Rs</th>
                                     <th>Date</th>
                                 </tr>
                         
@@ -208,7 +210,9 @@
                                 <tr class="danger">
                                     <td>{{i.T_name}}</td>
                                     <td>{{i.P_name}}</td>                                    
-                                    <td>{{i.Price}}/Rs</td>
+                                    <td>{{i.Gradea}}</td>
+                                    <td>{{i.Gradeb}}</td>
+                                    <td>{{i.Gradec}}</td>
                                     <td>{{i.mydate}}</td>
                                 </tr>
                             {% endfor %}

@@ -29,20 +29,20 @@
                         <form class="form-horizontal inline" id="form" role="form" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
                     <div class="card-block">                                                                                     
-                           <fieldset class="form-group col-md-10" >                      
-                               
-                                {{form|crispy}}
+                           <fieldset class="form-group col-md-10" >  
+                                {{form|crispy}}  
                                 <br>
+                                
                                 <button type="submit" class="btn btn-success" id="submit">submit</button>&nbsp;&nbsp;
                                 <button type="reset" class="btn btn-primary" id="reset">Cancel</button>                      
                             </fieldset>  
                         </form>  
-                   </div>
-              
+                   </div>             
             </div>
         </center>
         </body>    
     </html>  
+    
 <!--------------only Enter Number ----------------->   
     <script>
             var userName = document.querySelector('#id_Price');
@@ -52,7 +52,43 @@
         var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
         this.value = newValue;
         }
+        var grda = document.querySelector('#id_Gradea');            
+        grda.addEventListener('input', restrictNumber);
+        function restrictNumber (e) {  
+        var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
+        this.value = newValue;
+        }
+        var grdb = document.querySelector('#id_Gradeb');            
+        grdb.addEventListener('input', restrictNumber);
+        function restrictNumber (e) {  
+        var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
+        this.value = newValue;
+        }
+        var grdc = document.querySelector('#id_Gradec');            
+        grdc.addEventListener('input', restrictNumber);
+        function restrictNumber (e) {  
+        var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
+        this.value = newValue;
+        }
     </script>
+<!------ First latter is UpperCase ------->
+<script>
+    jQuery(document).ready(function() {
+
+         // 3 Capitalize string every 1st chacter of word to uppercase
+         jQuery('#id_P_name').keyup(function() 
+         {
+             var str = jQuery('#id_P_name').val();
+             var spart = str.split(" ");
+             for ( var i = 0; i < spart.length; i++ )
+             {
+                 var j = spart[i].charAt(0).toUpperCase();
+                 spart[i] = j + spart[i].substr(1);
+             }
+         jQuery('#id_P_name').val(spart.join(" "));             
+         });
+    });
+</script>
 <!---------Price in not add zero value ------------->  
 <script>
      $("input[name='Price']").change(function() {
