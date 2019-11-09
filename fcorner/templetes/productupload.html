@@ -40,24 +40,15 @@
                           
                            <fieldset class="form-group col-md-10" >                       
                                
-                                {{form|crispy}}
-                                
-                                <label><h3>Product Grade</h3></label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="grade" value=""> Grade A
-                                  </label>
-                                  <label class="radio-inline">
-                                    <input type="radio" name="grade" value=""> Grade B
-                                  </label>
-                                  <label class="radio-inline">
-                                    <input type="radio" name="grade" value=""> Grade C
-                                  </label>                                
+                                {{form|crispy}}                               
+                                                        
                                 <br>
                                 <button type="submit" class="btn btn-success" id="submit">submit</button>&nbsp;&nbsp;
                                 <button type="reset" class="btn btn-primary" id="reset">Cancel</button>                      
                             </fieldset>  
-                        </form>  
+                        
                    </div>
+                </form>  
                 {% endif %}
             </div>
         </center>

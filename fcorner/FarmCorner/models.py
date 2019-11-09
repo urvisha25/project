@@ -117,8 +117,7 @@ class uploadprice(models.Model):
    P_name= models.CharField(max_length=40, default="")  
    Gradea = models.IntegerField(default="")
    Gradeb = models.IntegerField(default="")
-   Gradec = models.IntegerField(default="")     
-   Price= models.IntegerField(default="")  
+   Gradec = models.IntegerField(default="")  
    mydate = models.DateTimeField(default=datetime.now())
  
    def __str__(self):
@@ -140,10 +139,10 @@ def create_profile(sender, **kwargs):
 post_save.connect(create_profile, sender=authorize)
 
 class uproduct(models.Model):
-   gradechoice=(('A','A'),('B','B'),('C','C'))
+   gradechoice=(('A','Grade A'),('B','Grade B'),('C','Grade C'))
    S_id= models.AutoField(primary_key=True)   
    F_id= models.IntegerField(default=0)    
-   P_id= models.IntegerField(default=0) 
+   P_id= models.IntegerField(default=0)  
    F_name= models.CharField(max_length=40, default="")
    P_name= models.CharField(max_length=40, default="")
    Mobileno= models.CharField(max_length=13, default="")
@@ -152,7 +151,7 @@ class uproduct(models.Model):
    email=models.EmailField(max_length=50, default="")   
    Quantity= models.IntegerField(default="") 
    status=models.IntegerField(default=0)
-   Grade = models.CharField(default="",max_length=1)
+   Grade = models.CharField(default="",choices=gradechoice,max_length=7)
    mydate = models.DateTimeField(default=datetime.now())   
    def __str__(self):
       return self.P_name

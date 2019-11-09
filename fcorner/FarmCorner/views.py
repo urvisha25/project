@@ -702,9 +702,13 @@ def tractors(request,id):
 # Farmer rent in equipments
 def rent(request,id):
       sd=rentequipment.objects.filter(E_id=id)  
-      rt=rentequipment.objects.all()   
-      for f in rt:
+      rt=rentequipment.objects.all()
+      #request.session["unq"] = 1 
+      #if rt != '':  
+      for f in rt:                
             request.session["unq"] = int(f.unumber) + 1
+      #else:            
+            #request.session["unq"] = 1
       storage=messages.get_messages(request)
       storage.used=True     
       prices = []
@@ -744,7 +748,6 @@ def rent(request,id):
       return render(request,'rent.html',locals(),{'form':form})
 
 # Equipment holder Give Bill
-
 def equipmentbill(request):
       rn= rentequipment.objects.get(unumber=request.session["unq"])     
       g= uploadequip.objects.all() 
@@ -755,7 +758,7 @@ def equipmentbill(request):
       e=eholder.objects.get(H_id=rn.H_id)
       f=uploadequip.objects.get(E_id=rn.E_id)
       total=f.Rent_price * dd
-      request.session["tot"]=total
+      request.session["tot"]=total + f.Rent_price
       if request.method =='POST':              
             form = rentbill(request.POST, request.FILES)
             if form.is_valid():
@@ -810,7 +813,9 @@ def rjctrent(request, id):
 
 def listall(request,id):
       sdate= request.POST.get('sdate','')
-      ldate = request.POST.get('ldate','')
+      ldate = request.POST.get('ldate','')     
+      request.session["sd"]=sdate
+      request.session["ld"]=ldate
       if sdate== '' and ldate=='':
             if id== 1:
                   request.session["alist"] = "flist"
@@ -881,10 +886,17 @@ def buyprod(request,id):
       pnm = mb.P_name
       request.session["fnm"]=mb.F_name
       pb=uploadprice.objects.filter(T_id=request.session["tid"])
+      gd=uproduct.objects.filter(S_id=id)
       prc=0
       for i in pb:
-            if i.P_name == pnm:
-                  prc=i.Price   
+            for j in gd:
+                  if i.P_id == j.P_id:
+                        if j.Grade == "A":
+                              prc=i.Gradea                        
+                        elif j.Grade == "B":
+                              prc=i.Gradeb                             
+                        elif j.Grade == "C":
+                              prc=i.Gradec                             
       mbt= traderreg.objects.get(T_id=request.session["tid"])
       namet=mbt.T_name
       mail= mbt.email
@@ -929,7 +941,7 @@ def rentprolist(request):
             dd=delta.days
             e=eholder.objects.get(H_id=request.session["hid"])
             f=uploadequip.objects.get(E_id=d.E_id)
-            total=f.Rent_price * dd
+            total=f.Rent_price * dd            
             form = rentbill(request.POST, request.FILES)
             if form.is_valid():
                   rentprolist = form.save(commit = False) 
@@ -940,7 +952,7 @@ def rentprolist(request):
                   rentprolist.F_name=d.Name
                   rentprolist.H_name=e.H_name      
                   rentprolist.Name=f.E_name   
-                  rentprolist.Total= total                                    
+                  rentprolist.Total= total                                 
                   rentprolist.save() 
                   rentequipment.objects.filter(R_id= pid).update(status=2)
                   messages.success(request,'Bill sent')
@@ -967,29 +979,31 @@ def transactions(request):
             return render(request, 'rentbill.html', {'form':form}) 
 
 # Transaction List show in Farmer with Rating
-
-def transactionlist(request,id):
-      sdate= request.POST.get('sdate','')
-      ldate = request.POST.get('ldate','')
-      #translst= rentequipment.objects.filter(mydate__range=(sdate,ldate))
-      if request.method == "POST":
-            rate= request.POST.get("rate","")
-            eid= request.POST.get("eid","")   
-            tid= request.POST.get("tid","")
-            dd = uploadequip.objects.get(E_id= eid) 
+def rat(request,id):
+      du = transaction.objects.get(Rb_id = id)
+      rate=request.POST.get('rate','')
+      if request.method == "POST":           
+            dd = uploadequip.objects.get(E_id = du.E_id) 
             if dd.Rating == 0:
-                uploadequip.objects.filter(E_id=eid).update(Rating=rate)
-                transaction.objects.filter(Rb_id=tid).update(status=1)
+                request.session["rat"] = rate
+                uploadequip.objects.filter(E_id = dd.E_id).update(Rating = rate)               
+                transaction.objects.filter(Rb_id=id).update(status=1)
                 messages.success(request,"Thanks For Rating!")
-                return render(request,'transaction.html')
+                return redirect('transaction9.html')
             else:
                 dr = float(dd.Rating) + float(rate)
                 rs = dr/2
-                uploadequip.objects.filter(E_id=eid).update(Rating=rs)
-                transaction.objects.filter(Rb_id=tid).update(status=1)
+                request.session["rat"] = rs
+                uploadequip.objects.filter(E_id = dd.E_id).update(Rating = rs)                
+                transaction.objects.filter(Rb_id=id).update(status=1)
                 messages.success(request,"Thanks For Rating!")
-                return render(request,'transaction.html',locals())
-            return render(request,'transaction.html',locals())
+                return redirect('transaction9.html')
+      return render(request,'rate.html')
+       
+
+def transactionlist(request,id):
+      sdate= request.POST.get('sdate','')
+      ldate = request.POST.get('ldate','')  
       if sdate== '' and ldate=='' and request.session["tid"] == 0:
             if id== 9:
                   request.session["alistt"] = "translist"
@@ -1006,8 +1020,7 @@ def transactionlist(request,id):
 
       elif buyproduct.objects.filter(T_id = request.session["tid"]).exists():
             tprotlst= buyproduct.objects.filter(mydate__range=(sdate,ldate)) 
-            return render(request,'transaction.html',locals())
-      
+            return render(request,'transaction.html',locals())      
       else:
             if id == 9:
                   request.session["alistt"] = "translist"                  
@@ -1026,83 +1039,221 @@ def delrentequip(request,id):
 # Generate PDF 
 
 def GeneratePDF(request,id,*args, **kwargs):                
-        if id == 1:           
-            a = "flist"            
-            b = Farmerreg.objects.all() 
-            
-            context = {
-                'a':a,
-                'b':b,
-                'date':datetime.now()
-            }
+        if id == 1:    
+            if request.session["sd"] == '' and request.session["ld"] == '':   
+                  c=request.session["sd"]  
+                  d=request.session["ld"]      
+                  a = "flist"            
+                  b = Farmerreg.objects.all()
+                  context = {
+                  'a':a,
+                  'b':b,
+                  'date':datetime.now()
+                  }
+            else:
+                  c=request.session["sd"]  
+                  d=request.session["ld"]      
+                  a = "flist1"            
+                  e = Farmerreg.objects.filter(mydate__range=(c,d)) 
+                  context = {
+                  'a':a,
+                  'e':e,
+                  'c':c,
+                  'd':d,
+                  'date':datetime.now()
+                  }
         elif id == 2:
-            a ="tlist"            
-            b = traderreg.objects.all() 
-            context = {
-                'a':a,
-                'b':b,
-                'date':datetime.now()
-            }  
-        elif id == 3:           
-            a =  "ehlist"
-            b = eholder.objects.all() 
-            context = {
-                'a':a,
-                'b':b,
-                'date':datetime.now()
-            } 
-        elif id == 4:            
-            a = "fplist"
-            b = uproduct.objects.all() 
-            context = {
-                'a':a,
-                'b':b,
-                'date':datetime.now()
-            } 
-        elif id == 5:           
-            a = "tplist"
-            b = uploadprice.objects.all() 
-            context = {
-                'a':a,
-                'b':b,
-                'date':datetime.now()
-            } 
-        elif id == 6:            
-            a = "helist"
-            b = uploadequip.objects.all() 
-            context = {
-                'a':a,
-                'b':b,
-                'date':datetime.now()
-            } 
-        elif id == 7:            
-            a = "frlist"
-            b = rentequipment.objects.all() 
-            j = uploadequip.objects.all()
-            context = {
-                'a':a,
-                'b':b,
-                'j':j,
-                'date':datetime.now()
-            } 
-        elif id == 8:            
-            a ="buylist"
-            b = buyproduct.objects.all() 
-            context = {
-                'a':a,
-                'b':b,
-                'date':datetime.now()
-            }  
-        elif id == 9:            
-            a ="rentlist"
-            b = rentequipment.objects.filter(H_id=request.session["hid"]) 
-            j = uploadequip.objects.all()
-            context = {
-                'a':a,
-                'b':b,
-                'j':j,
-                'date':datetime.now()
-            }    
+            if request.session["sd"] == '' and request.session["ld"] == '':   
+                  c=request.session["sd"]  
+                  d=request.session["ld"]    
+                  a ="tlist"            
+                  b = traderreg.objects.all() 
+                  context = {
+                  'a':a,
+                  'b':b,
+                  'date':datetime.now()
+                  }  
+            else:
+                  c=request.session["sd"]  
+                  d=request.session["ld"]      
+                  a = "tlist1"            
+                  e = traderreg.objects.filter(mydate__range=(c,d)) 
+                  context = {
+                  'a':a,
+                  'e':e,
+                  'c':c,
+                  'd':d,
+                  'date':datetime.now()
+                  }
+        elif id == 3: 
+            if request.session["sd"] == '' and request.session["ld"] == '':   
+                  c=request.session["sd"]  
+                  d=request.session["ld"]             
+                  a =  "ehlist"
+                  b = eholder.objects.all() 
+                  context = {
+                  'a':a,
+                  'b':b,
+                  'date':datetime.now()
+                  }
+            else:
+                  c=request.session["sd"]  
+                  d=request.session["ld"]      
+                  a = "ehlist1"            
+                  e = eholder.objects.filter(mydate__range=(c,d)) 
+                  context = {
+                  'a':a,
+                  'e':e,
+                  'c':c,
+                  'd':d,
+                  'date':datetime.now()
+                  } 
+        elif id == 4: 
+            if request.session["sd"] == '' and request.session["ld"] == '':   
+                  c=request.session["sd"]  
+                  d=request.session["ld"]            
+                  a = "fplist"
+                  b = uproduct.objects.all() 
+                  context = {
+                  'a':a,
+                  'b':b,
+                  'date':datetime.now()
+                  } 
+            else:
+                  c=request.session["sd"]  
+                  d=request.session["ld"]      
+                  a = "fplist1"            
+                  e = uproduct.objects.filter(mydate__range=(c,d)) 
+                  context = {
+                  'a':a,
+                  'e':e,
+                  'c':c,
+                  'd':d,
+                  'date':datetime.now()
+                  } 
+        elif id == 5:
+            if request.session["sd"] == '' and request.session["ld"] == '':   
+                  c=request.session["sd"]  
+                  d=request.session["ld"]            
+                  a = "tplist"
+                  b = uploadprice.objects.all() 
+                  context = {
+                  'a':a,
+                  'b':b,
+                  'date':datetime.now()
+                  }
+            else:
+                  c=request.session["sd"]  
+                  d=request.session["ld"]      
+                  a = "tplist1"            
+                  e = uploadprice.objects.filter(mydate__range=(c,d)) 
+                  context = {
+                  'a':a,
+                  'e':e,
+                  'c':c,
+                  'd':d,
+                  'date':datetime.now()
+                  } 
+        elif id == 6: 
+            if request.session["sd"] == '' and request.session["ld"] == '':   
+                  c=request.session["sd"]  
+                  d=request.session["ld"]            
+                  a = "helist"
+                  b = uploadequip.objects.all() 
+                  context = {
+                  'a':a,
+                  'b':b,
+                  'date':datetime.now()
+                  } 
+            else:
+                  c=request.session["sd"]  
+                  d=request.session["ld"]      
+                  a = "helist1"            
+                  e = uploadequip.objects.filter(mydate__range=(c,d)) 
+                  context = {
+                  'a':a,
+                  'e':e,
+                  'c':c,
+                  'd':d,
+                  'date':datetime.now()
+                  } 
+        elif id == 7:
+            if request.session["sd"] == '' and request.session["ld"] == '':   
+                  c=request.session["sd"]  
+                  d=request.session["ld"]             
+                  a = "frlist"
+                  b = rentequipment.objects.all() 
+                  j = uploadequip.objects.all()
+                  context = {
+                  'a':a,
+                  'b':b,
+                  'j':j,
+                  'date':datetime.now()
+                  }
+            else:
+                  c=request.session["sd"]  
+                  d=request.session["ld"]      
+                  a = "frlist1" 
+                  j = uploadequip.objects.all()           
+                  e = rentequipment.objects.filter(mydate__range=(c,d)) 
+                  context = {
+                  'a':a,
+                  'e':e,
+                  'c':c,
+                  'd':d,
+                  'j':j,
+                  'date':datetime.now()
+                  }  
+        elif id == 8:
+            if request.session["sd"] == '' and request.session["ld"] == '':   
+                  c=request.session["sd"]  
+                  d=request.session["ld"]             
+                  a ="buylist"
+                  b = buyproduct.objects.all() 
+                  context = {
+                  'a':a,
+                  'b':b,
+                  'date':datetime.now()
+                  } 
+            else:
+                  c=request.session["sd"]  
+                  d=request.session["ld"]      
+                  a = "buylist1"            
+                  e = buyproduct.objects.filter(mydate__range=(c,d)) 
+                  context = {
+                  'a':a,
+                  'e':e,
+                  'c':c,
+                  'd':d,
+                  'date':datetime.now()
+                  }  
+        elif id == 9: 
+            if request.session["sd"] == '' and request.session["ld"] == '':   
+                  c=request.session["sd"]  
+                  d=request.session["ld"]            
+                  a ="rentlist"
+                  b = rentequipment.objects.filter(H_id=request.session["hid"]) 
+                  j = uploadequip.objects.all()
+                  context = {
+                  'a':a,
+                  'b':b,
+                  'j':j,
+                  'date':datetime.now()
+                  } 
+            else:
+                  c=request.session["sd"]  
+                  d=request.session["ld"]      
+                  a = "rentlist1"  
+                  b = rentequipment.objects.filter(H_id=request.session["hid"])          
+                  e = uploadequip.objects.filter(mydate__range=(c,d)) 
+                  context = {
+                  'a':a,
+                  'e':e,
+                  'b':b,
+                  'c':c,
+                  'd':d,
+                  'date':datetime.now()
+                  }    
         template = get_template('pdf.html')      
         html = template.render(context)
         pdf = render_to_pdf('pdf.html', context)

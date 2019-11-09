@@ -31,15 +31,15 @@
 </head>
 <body>
   <div style="margin-top: 0px; background-color: cornsilk;" class="container">
- <center>   <h3 style="color:cornflowerblue">Search Date</h2></center>
+ <center> <h3 style="color:cornflowerblue"><b>Search Date</b></h3></center>
     <form class="form-inline" style="margin-left: 350px;" method="POST">
       {% csrf_token %}
       <div class="form-group">
-        <label for="date">Start date:</label>
+        <label for="date"><b>Start date:</b> </label>
         <input type="date" class="form-control" id="sdate" name="sdate">
       </div>&nbsp;&nbsp;&nbsp;
       <div class="form-group">
-        <label for="date">End date:</label>
+        <label for="date"><b>End date:</b> </label>
         <input type="date" class="form-control" id="ldate" name="ldate">&nbsp;  &nbsp;  
         <button type="submit" class="btn btn-success">Submit</button>      
       </div>      

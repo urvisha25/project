@@ -18,10 +18,11 @@ class equipments(forms.ModelForm):
 class uploadproduct(forms.ModelForm):   
     class Meta: 
             model = uproduct 
-            fields = ['Image','Quantity']   
+            fields = ['Image','Quantity','Grade']   
             labels={               
                 'Image': 'Choose the Image',
-                'Quantity':'Quantity in Mann(1Mann=20kg)'
+                'Quantity':'Quantity in Mann(1Mann=20kg)',
+                'Grade':'Product Grade'
             }             
 
  # upload product price
@@ -29,10 +30,9 @@ class uploadproduct(forms.ModelForm):
 class upldprice(forms.ModelForm):   
     class Meta: 
             model = uploadprice 
-            fields = ['P_name','Price','Gradea','Gradeb','Gradec']   
+            fields = ['P_name','Gradea','Gradeb','Gradec']   
             labels={ 
-                'P_name':'Product Name',               
-                'Price':'Price (Rs In 20kg)',
+                'P_name':'Product Name',  
                 'Gradea':'Price for Grade A (Rs In 20kg)',
                 'Gradeb':'Price for Grade B (Rs In 20kg)',
                 'Gradec':'Price for Grade C (Rs In 20kg)',

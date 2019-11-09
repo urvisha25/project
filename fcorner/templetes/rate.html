@@ -1,0 +1,29 @@
+{% extends 'basic.html' %}{% block content %} {% load static %}
+         
+<body>
+  <center>
+      <div class="card border-info" style="width: 50%; margin-top: 0px;" align="center">
+              <div class="card-header bg-info">
+                      <h3><b>Rating</b></h3> 
+              </div>
+              <div class="card-body">
+                      {% if messages %} {% for message in messages %}
+                      <div class="alert alert-{{message.tags}}">{{ message }}</div>
+                      {% endfor %} {% endif %}
+                  </div>                  
+                  <form class="rating" method="POST" enctype="multipart/form-data">    
+                      {% csrf_token %}
+              <div class="card-block">
+                <input type="radio" name="rate" value="1"> 1<br>
+                <input type="radio" name="rate" value="2"> 2<br>
+                <input type="radio" name="rate" value="3"> 3<br>
+                  <input type="radio" name="rate" value="4"> 4<br>
+                  <input type="radio" name="rate" value="5"> 5<br>
+                  <button type="submit" class="btn btn-info" id="submit">Submit</button>                      
+             </div>
+          </form> 
+      </div>
+  </center>
+  </body>   
+ 
+{% endblock %}

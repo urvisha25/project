@@ -24,6 +24,7 @@
   </style>
 
 <body>
+    {{request.session.rat}}
         <div style="margin-top: 5px; background-color: cornsilk;" class="container">
                 <center>   <h3 style="color:cornflowerblue">Search Date</h2></center>
                    <form class="form-inline" style="margin-left: 350px;" method="POST">
@@ -45,19 +46,23 @@
                           <div class="col-sm-3 sidenav">
                           <CENTER>  <h4>All List</h4> </CENTER>
                             <ul style="width: 130px" class="nav nav-pills nav-stacked">
-                              <li style="margin-bottom: 5px;margin-left: 25px;"><a href="transaction{{9}}"><button type="button" id="{{1}}" class="btn btn-info" style="width: 230px">Rent Transaction</button></a></li>
-                              <li style="margin-bottom: 5px; margin-left: 25px;"><a href="transaction{{10}}"><button type="button" id="{{2}}" class="btn btn-info" style="width: 230px">Trader Buy Product</button></a></li>                             
+                              <li style="margin-bottom: 5px;margin-left: 25px;"><a href="transaction{{9}}.html"><button type="button" id="{{1}}" class="btn btn-info" style="width: 230px">Rent Transaction</button></a></li>
+                              <li style="margin-bottom: 5px; margin-left: 25px;"><a href="transaction{{10}}.html"><button type="button" id="{{2}}" class="btn btn-info" style="width: 230px">Trader Buy Product</button></a></li>                             
                             </ul>
                           <br>      
                           </div>
-
+                          
                           <div class="col-sm-9">
                                 <div class="table-responsive" style="font-size: 15px;">
                                         <table class="table table-hover" id="example">
-                                       
+                                          <div class="card-body">
+                                            {% if messages %} {% for message in messages %}
+                                            <div class="alert alert-{{message.tags}}">{{ message }}</div>
+                                            {% endfor %} {% endif %}
+                                        </div>  
                                       <center>   <h2><small>All Data Lists</small></h2></center>
                                     <hr>
-
+                              
         <!-----------------------Rent in equipments and generate bill list----------------------->
                           {% if request.session.alistt == "translist" %}
                                   <center> <h3 style="color: green">Rent in Equipments and Generate Bill List</h3></center>
@@ -84,7 +89,7 @@
                                        
                                         <td><a href="rentfarmlist{{i.Rb_id}}" target="_blank"><button type="submit" class="btn btn-success" id="submit">Print</button></a> </td>           
                                       {% if i.status == 0 %}
-                                        <td><button data-toggle="modal" data-target="#myModal" type="submit" class="btn btn-info" id="submit">RATE</button></td>           
+                                        <td><a href="rate{{i.Rb_id}}"><button  type="submit" class="btn btn-info" id="submit">RATE</button></a></td>           
                                    {% else %}
                                    <td>Thanks</td>
                                    {% endif %}
@@ -111,8 +116,8 @@
                                               <input type="radio" name="rate" value="3"> 3<br>
                                                 <input type="radio" name="rate" value="4"> 4<br>
                                                 <input type="radio" name="rate" value="5"> 5<br>
-                                                <input type="number" hidden name="eid" value="{{i.E_id}}" >
-                                                <input type="number" hidden name="tid" value="{{i.Rb_id}}" >
+                                                <input type="number"  name="eid" value="{{i.E_id}}" >
+                                                <input type="number"  name="tid" value="{{i.Rb_id}}" >
                                                 <input type="submit" class="btn btn-info" id="submit"  style="margin-right:100px;" value="Submit">
                                               </form>
                                             </div>                                            
@@ -176,7 +181,7 @@
                     <tr align="center">
                         <th>Farmer Name</th>
                         <th>Product Name</th>  
-                        <th>Quantity In Mann</th>         
+                        <th>Quantity In Mann</th>                                 
                         <th>Price In Rs</th>
                         <th>Date</th>
                     </tr>
