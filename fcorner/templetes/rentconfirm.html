@@ -1,0 +1,17 @@
+{% extends 'basic.html' %}  {% block content %} {% load static %}
+<div>
+        <td><img src="{{ b.Image.url }}" class="img-responsive"  style="width: 100%; height:150px; " /></td>
+                                    
+    {{a}}
+    {{b}}
+</div>
+<label style="color: red;">Are you sure delete?</label>  
+<form method="POST" enctype="multipart/form-data">
+{% csrf_token %}
+<input type="text" name="tt1" value="{{request.session.txt1}}" hidden />
+{{request.session.txt1}}
+<button type="submit" class="btn btn-success" ><i class="fas fa-ckeck"></i></button>
+</form>    
+<a href="rentlist.html"><button type="cancel"  class="btn btn-danger" ><i class="fas fa-times"></i></button></a>
+       
+{% endblock %}

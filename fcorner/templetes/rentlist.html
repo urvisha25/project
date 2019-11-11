@@ -30,12 +30,13 @@
             <td>{{i.startdate}}</td>
             <td>{{i.enddate}}</td> 
             <td>{{j.Rent_price}}</td>          
-            <td><a><button type="submit" onclick="return confirm('are u sure?')" value="{{i.R_id}}" id="cancel" class="btn btn-danger" ><i class="fas fa-times"></i></button></a></td>
+           
+        <td><a href="rentconfirm{{i.R_id}}"><button type="submit"  id="confirm" value="{{i.R_id}}" class="btn btn-danger" ><i class="fas fa-times"></i></button></a></td>
         </tr>
         {% endif %} {% endfor %}{% endfor %}
     </table>
     <br>
-    <br>   
+    <br>  
 </div>
 
 <!-----------------Alert Box----------------------->
@@ -53,4 +54,25 @@
             }
 
 </script>
+
+<script type="text/javascript">
+    $('#myModal').on('show', function() {
+    var id = $(this).data('id'),
+        removeBtn = $(this).find('.danger');
+})
+
+$('.confirm-delete').on('click', function(e) {
+    e.preventDefault();
+
+    var id = $(this).data('id');
+    $('#myModal').data('id', id).modal('show');
+});
+
+$('#btnYes').click(function() {
+    // handle deletion here
+  	var id = $('#myModal').data('id');
+  	$('[data-id='+id+']').remove();
+  	$('#myModal').modal('hide');
+});
+  </script>
 {% endblock %}

@@ -52,7 +52,7 @@ urlpatterns=[
     path('rent<int:id>',views.rent, name='Rent'), 
     path('rentlist.html',views.rentlist, name='Rent1'), 
     #path('acpt<int:id>',views.acptrent, name='acceptrent'),
-    path('rjct<int:id>',views.rjctrent, name='rejectrent'),  
+    path('rentconfirm<int:id>',views.rentconfirm, name='rejectrent'),  
     path('rate<int:id>',views.rat, name='rat Product'),
     # Buy Product, bill generate, rent in Equipments
     path('buy<int:id>',views.buyprod, name='Buy Product'),

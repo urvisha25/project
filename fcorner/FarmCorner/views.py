@@ -785,7 +785,7 @@ def equipmentbill(request):
       return render(request,'rprice.html',locals())  
  
 # Equipment holder show rent farmer list
-def rentlist(request):    
+def rentlist(request): 
       c= rentequipment.objects.filter(F_id= request.session["idf"])
       d = uploadequip.objects.all()
       return render(request,'rentlist.html',locals())
@@ -805,10 +805,15 @@ def rentlist(request):
 
 # Equipment holder Reject rent farmer list
 
-def rjctrent(request, id):
-      rentequipment.objects.all()
-      #rentequipment.objects.get(R_id=id).delete()
-      return redirect('rentlist.html')
+def rentconfirm(request, id):
+      request.session["txt1"]=id 
+      a = rentequipment.objects.get(R_id=id)
+      b = uploadequip.objects.get(E_id = a.E_id)
+      tt1=request.POST.get('tt1','')
+      if tt1 != "":  
+            rentequipment.objects.get(R_id=id).delete() 
+            return redirect('rentlist.html')     
+      return render(request,"rentconfirm.html",locals())
 
 # All data list to Admin
 
