@@ -76,8 +76,65 @@
                        </tr>  
                                
                        </tbody>         
+                       {% elif a == "billlist1" %}
             
+                       <!------- Farmer Details---------->
+                   <div>
+                           <span style="color:orange; font-size:15px; font-weight: bold;" >Farmer Details:</span><br><br>
+                           <span><b>Farmer Name:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>{{b.F_name}}</u></span>  <br /> 
+                           <span><b>Address:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>{{y.Address}}</u></span>  <br> 
+                           <span><b>Mobile Number:</b>&nbsp;&nbsp;&nbsp;<u>{{y.Mobileno}}</u></span>  
+                   </div>     
+                  <br>
+                  <br>
+                       <thead>
+                          <tr style="border-bottom: 1px solid black; color: orange;">
+                              <th>Date</th>
+                              <th>Holder Name</th>
+                              <th>Equipment Category</th>
+                              <th>Equipment Name</th>               
+                              <th>Total Price In Rs</th>                              
+                          </tr>         
+                      </thead>   
+                      <hr>
+                      <tbody>  
+                                           
+                              <tr class="danger" style="padding: 5px;">                               
+                                  <td align="center">{{b.mydate|date:'d-m-Y H:i'}}</td> 
+                                  <td align="center">{{b.H_name}}</td>
+                                  <td align="center">{{z.Category}}</td>
+                                  <td align="center">{{b.Name}}</td>                  
+                                  <td align="center">{{b.Total}}</td>                                                                                
+                          </tr>  
+                                  
+                          </tbody>  
                        {% elif a == "tradbill" %}
+                       <!-----------Trader Details------->
+                <div>
+                        <span style="color:orange; font-size:15px; font-weight: bold;" >Trader Details:</span><br><br>
+                        <span><b>Trader Name:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>{{b.T_name}}</u></span>  <br /> 
+                        <span><b>Address:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>{{x.Address}}</u></span>  <br> 
+                        <span><b>Mobile Number:</b>&nbsp;&nbsp;<u>{{x.Mobileno}}</u></span>  
+                </div>  
+                <br>   
+                       <hr>
+                       <thead>
+                       <tr style="border-bottom: 1px solid black; color: orange;">
+                                 <th>Date</th> 
+                                 <th>Product Name</th>                     
+                                 <th>Quantity/Mann</th>
+                                 <th>Price In Rs</th>                        
+                       </tr>
+                           </thead>             
+                            <tbody>
+                            <tr class="danger" style="padding: 5px;">                     
+                                <td align="center">{{b.mydate|date:'d-m-Y H:i'}}</td>  
+                                <td align="center">{{b.P_name}}</td> 
+                                <td align="center">{{b.Quantity}} Mann</td>
+                                <td align="center">{{b.Price}}</td>                                        
+                            </tr> 
+                            </tbody>
+                            {% elif a == "tradbill1" %}
                        <!-----------Trader Details------->
                 <div>
                         <span style="color:orange; font-size:15px; font-weight: bold;" >Trader Details:</span><br><br>

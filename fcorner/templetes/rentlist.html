@@ -30,7 +30,7 @@
             <td>{{i.startdate}}</td>
             <td>{{i.enddate}}</td> 
             <td>{{j.Rent_price}}</td>          
-            <td><a href="rjct{{i.R_id}}"><button type="submit"  value="{{i.R_id}}" id="cancel" class="btn btn-danger" ><i class="fas fa-times"></i></button></a></td>
+            <td><a><button type="submit" onclick="return confirm('are u sure?')" value="{{i.R_id}}" id="cancel" class="btn btn-danger" ><i class="fas fa-times"></i></button></a></td>
         </tr>
         {% endif %} {% endfor %}{% endfor %}
     </table>
@@ -41,15 +41,16 @@
 <!-----------------Alert Box----------------------->
 <script>
     
-    function myFunction() {
-    var txt;
-    if (confirm("Are you sure delete these Types of equipment?","gfgf")) {
-        txt = "You pressed OK!";
-    } else {
-        txt = "You pressed Cancel!";
-    }
-    document.getElementById("demo").innerHTML = txt;
-    }
+    function getConfirmation() {
+               var retVal = confirm("Do you want to continue ?");
+               if( retVal == true ) {
+                  document.write("User wants to continue!");
+                  return true;
+               } else {
+                  document.write("User does not want to continue!");
+                  return false;
+               }
+            }
 
 </script>
 {% endblock %}

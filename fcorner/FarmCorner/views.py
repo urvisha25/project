@@ -611,14 +611,14 @@ def accept(request,F_id):
 # Show product List
 
 def productlist(request):                
-            d= request.session["idf"]          
-            if  d != 0:
-                  upld=uproduct.objects.filter(F_id=d)
-                  return render(request, 'admin/productlist.html', locals()) 
-            else:
-                  upld=uproduct.objects.all() 
-                  return render(request, 'admin/productlist.html', locals()) 
+      d= request.session["idf"]          
+      if  d != 0:
+            upld=uproduct.objects.filter(F_id=d)
             return render(request, 'admin/productlist.html', locals()) 
+      else:
+            upld=uproduct.objects.all() 
+            return render(request, 'admin/productlist.html', locals()) 
+      return render(request, 'admin/productlist.html', locals()) 
             
 # Show Equipments List
 
@@ -806,7 +806,8 @@ def rentlist(request):
 # Equipment holder Reject rent farmer list
 
 def rjctrent(request, id):
-      rentequipment.objects.get(R_id=id).delete()
+      rentequipment.objects.all()
+      #rentequipment.objects.get(R_id=id).delete()
       return redirect('rentlist.html')
 
 # All data list to Admin
@@ -1001,10 +1002,8 @@ def rat(request,id):
       return render(request,'rate.html')
        
 
-def transactionlist(request,id):
-      sdate= request.POST.get('sdate','')
-      ldate = request.POST.get('ldate','')  
-      if sdate== '' and ldate=='' and request.session["tid"] == 0:
+def transactionlist(request,id):       
+      if request.session["tid"] == 0:
             if id== 9:
                   request.session["alistt"] = "translist"
                   translst=transaction.objects.filter(F_id = request.session["idf"])
@@ -1014,21 +1013,13 @@ def transactionlist(request,id):
                   tproductlst= buyproduct.objects.filter(F_id = request.session["idf"])            
             return render(request,'transaction.html',locals())
 
-      elif sdate== '' and ldate=='' and request.session["tid"] != 0:
+      elif request.session["tid"] != 0:
            tprotlst= buyproduct.objects.filter(T_id = request.session["tid"])
            return render(request,'transaction.html',locals())
 
       elif buyproduct.objects.filter(T_id = request.session["tid"]).exists():
             tprotlst= buyproduct.objects.filter(mydate__range=(sdate,ldate)) 
-            return render(request,'transaction.html',locals())      
-      else:
-            if id == 9:
-                  request.session["alistt"] = "translist"                  
-                  translst= rentequipment.objects.filter(mydate__range=(sdate,ldate))  
-            elif id == 10:
-                  request.session["alistt"] = "prolist"
-                  tproductlst= buyproduct.objects.filter(mydate__range=(sdate,ldate))                
-            return render(request,'transaction.html',locals())
+            return render(request,'transaction.html',locals())  
       return render(request,'transaction.html',locals())
 
 # delete rent in Equipments
@@ -1336,38 +1327,3 @@ def delprc(request,id):
       messages.success(request,'Upload Price Delete')
       return redirect('tpricelistt.html')   
 
-def validate_file_size(value):
-    filesize= value.size
-    
-    if filesize > 700000:
-        messages.warning("The maximum file size that can be uploaded is 700kb")
-    else:
-        return value
-
-def list(request):
-    if request.method == 'POST':
-        s= request.POST.get('sdate','')
-        e= request.POST.get('edate','')
-        request.session["diff"]=float(request.POST.get('leave',''))
-        request.session["sdate"]=s
-        request.session["edate"]=e
-        if book.objects.filter(enddate__gt=s):
-            c=book.objects.filter(enddate__gt=s)
-            for i in c:
-              vnm=i.v_num
-              x=vehicle.objects.filter(v_num=vnm).update(bstatus=1)
-             
-        else:
-           c=book.objects.filter(enddate__lt=s)
-           for i in c:
-              vnm=i.v_num
-              x=vehicle.objects.filter(v_num=vnm).update(bstatus=0)          
-            
-        g=vehicle.objects.all()
-        for i in g:
-            if vehicle.objects.filter(bstatus=1):
-                messages.warning(request,'no vehicle available')
-            if vehicle.objects.filter(bstatus=0):
-                d=vehicle.objects.filter(bstatus=0)
-            return render(request,'shop/list.html',locals())   
-    return render(request,'shop/list.html',locals())   

@@ -36,8 +36,12 @@
                 </div>  
             </div>
             <hr>
-      {{c}}
-      {{d}}
+
+            {% if c != null and d != null%}
+           Start Date: <span style="color: coral; margin-top: 0px;"><b>{{c}}</b></span>&nbsp;&nbsp;&nbsp;&nbsp;
+           End Date:  <span style="color: coral; margin-top: 0px;"><b>{{d}}</b></span>
+          {% endif %}
+          
    <table class="table-responsive" style="font-size:11pt;"> 
          <!---------- Farmer Details Table 1 ------------>    
         {% if a == "flist" %}
@@ -137,6 +141,35 @@
         </tr> 
         {% endfor %}
         </tbody>
+        {% elif a == "tlist1" %}
+     <thead>
+        <tr style="border-bottom: 1px solid black; color: orange;">
+            <th>Trader Name</th>
+            <th>Address</th>
+            <th>Mobile no.</th>
+            <th>District</th>           
+            <th>City</th>
+            <th>Email</th>
+            <th>Pincode</th>
+            <th>Date</th>           
+        </tr>
+    </thead>
+    <center> <label style="color: orange;" align="center"><h1>Trader Registration Details List</h1></label></center>
+    <hr>
+    <tbody>
+        {% for i in e %} 
+        <tr class="danger" style="padding-top: 4px;  font-size: 7pt">
+            <td>{{i.T_name}}</td>
+            <td>{{i.Address}}</td>
+            <td>{{i.Mobileno}}</td>
+            <td>{{i.District}}</td>            
+            <td>{{i.City}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.Pincode}}</td>
+            <td>{{i.mydate|date:'d-m-Y H:i'}}</td>   
+        </tr> 
+        {% endfor %}
+        </tbody>
 
            <!----------equipmentholder Details table 3------------>
 
@@ -172,6 +205,38 @@
         {% endfor %}
         </tbody>
 
+        {% elif a == "ehlist1" %}
+     <thead>
+        <tr style="border-bottom: 1px solid black; color: orange;">
+            <th>equipmentholder Name</th>
+            <th>Shop Name</th>
+            <th>Address</th>
+            <th>Mobile no.</th>
+            <th>District</th>            
+            <th>City</th>
+            <th>Email</th>
+            <th>Pincode</th>
+            <th>Date</th>                                   
+        </tr>
+    </thead>
+    <center> <label style="color: orange;" align="center"><h1>equipmentholder Registration Details List</h1></label></center>
+    <hr>
+    <tbody>
+        {% for i in e %} 
+        <tr class="danger" style="padding: 4px; font-size: 7pt;">
+            <td>{{i.H_name}}</td>
+            <td>{{i.shop_name}}</td>
+            <td>{{i.Address}}</td>
+            <td>{{i.Mobileno}}</td>
+            <td>{{i.District}}</td>            
+            <td>{{i.City}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.Pincode}}</td>
+            <td>{{i.mydate|date:'d-m-Y H:i'}}</td>   
+        </tr>
+        {% endfor %}
+        </tbody>        
+
         <!----------Farmer Upload Product table 4------------>
 
         {% elif a == "fplist" %}
@@ -202,6 +267,34 @@
         {% endfor %}
         </tbody>
 
+        {% elif a == "fplist1" %}
+     <thead>
+        <tr style="border-bottom: 1px solid black; color: orange;">            
+            <th>Farmer Name</th>
+            <th>Product Name</th>
+            <th>Mobile no.</th>
+            <th>City</th>
+            <th>Email</th>
+            <th>Quantity/mann</th>  
+            <th>Date</th>                                 
+        </tr>
+    </thead>
+    <center> <label style="color: orange;" align="center"><h1>Farmer Upload Product List</h1></label></center>
+    <hr>
+    <tbody>
+        {% for i in e %} 
+        <tr class="danger" style="padding: 4px;font-size: 7pt;">            
+            <td>{{i.F_name}}</td>
+            <td>{{i.P_name}}</td>
+            <td>{{i.Mobileno}}</td>
+            <td>{{i.City}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.Quantity}} mann</td>
+            <td>{{i.mydate|date:'d-m-Y H:i'}}</td>                       
+        </tr> 
+        {% endfor %}
+        </tbody>
+
         <!----------Trader Upload Product Price  table 5 ------------>
 
         {% elif a == "tplist" %}
@@ -209,7 +302,9 @@
         <tr style="border-bottom: 1px solid black; color: orange;">
             <th>Trader Name</th>
             <th>Product Name</th>                                   
-            <th>Price/Rs</th>
+            <th>GradeA Price in Rs</th>
+            <th>GradeB Price in Rs</th>
+            <th>GradeC Price in Rs</th>
             <th>Date</th>
         </tr>
     </thead>
@@ -220,12 +315,39 @@
         <tr class="danger" style="padding: 4px; font-size: 7pt;">
             <td>{{i.T_name}}</td>
             <td>{{i.P_name}}</td>                                    
-            <td>{{i.Price}}/Rs</td>
+            <td>{{i.Gradea}}</td>
+            <td>{{i.Gradeb}}</td>
+            <td>{{i.Gradec}}</td>
             <td>{{i.mydate|date:'d-m-Y H:i'}}</td>
         </tr>
         {% endfor %}
         </tbody>
 
+        {% elif a == "tplist1" %}
+     <thead>
+        <tr style="border-bottom: 1px solid black; color: orange;">
+            <th>Trader Name</th>
+            <th>Product Name</th>                                   
+            <th>GradeA Price in Rs</th>
+            <th>GradeB Price in Rs</th>
+            <th>GradeC Price in Rs</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <center> <label style="color: orange;" align="center"><h1>Trader Upload Product Price List</h1></label></center>
+    <hr>
+    <tbody>
+        {% for i in e %} 
+        <tr class="danger" style="padding: 4px; font-size: 7pt;">
+            <td>{{i.T_name}}</td>
+            <td>{{i.P_name}}</td>                                    
+            <td>{{i.Gradea}}</td>
+            <td>{{i.Gradeb}}</td>
+            <td>{{i.Gradec}}</td>
+            <td>{{i.mydate|date:'d-m-Y H:i'}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
         <!----------EquipmentHolder Upload Equipment table 6 ------------>
 
         {% elif a == "helist" %}
@@ -258,7 +380,35 @@
         </tr>
         {% endfor %}
         </tbody>
-
+        {% elif a == "helist1" %}
+     <thead>
+        <tr style="border-bottom: 1px solid black; color: orange;">            
+            <th>Holder Name</th>
+            <th>Equipment Name</th>
+            <th>Category</th>
+            <th>mobile no.</th>
+            <th>City</th>
+            <th>Email</th>
+            <th>Price in Rs</th>   
+            <th>Date</th>                                                                   
+        </tr>
+    </thead>
+    <center> <label style="color: orange;" align="center"><h1>EquipmentHolder Upload Equipments List</h1></label></center>
+    <hr>
+    <tbody>
+        {% for i in e %} 
+        <tr class="danger" style="padding: 4px; font-size: 7pt;">
+            <td>{{i.H_name}}</td>
+            <td>{{i.E_name}}</td>
+            <td>{{i.Category}}</td>
+            <td>{{i.Mobileno}}</td>
+            <td>{{i.City}}</td>
+            <td>{{i.email}}</td>
+            <td>{{i.Rent_price}}</td> 
+            <td>{{i.mydate|date:'d-m-Y H:i'}}</td>               
+        </tr>
+        {% endfor %}
+        </tbody>
          <!----------Farmer Rent in Equipments table 7 ------------>
 
         {% elif a == "frlist" %}
@@ -296,7 +446,41 @@
         {% endfor %}
         {% endfor %}
         </tbody>
-
+        {% elif a == "frlist1" %}
+     <thead>
+        <tr style="border-bottom: 1px solid black; color: orange;" align="center">
+            <th>Farmer Name</th>   
+            <th colspan="2">Address</th>        
+            <th>Mobile no.</th>
+            <th>Category</th>
+            <th>Equipment Name</th>
+            <th>City</th>           
+            <th>Pincode</th>
+            <th>Startdate</th>
+            <th>Enddate</th>                                                         
+        </tr>
+    </thead>
+   <center> <label style="color: orange;" align="center"><h1>Farmer Rent in Equipments List</h1></label></center>
+    <hr>
+    <tbody>
+        {% for i in e %} 
+        {% for j in j %}
+        {% if i.E_id == j.E_id %}
+        <tr class="danger" style="padding: 4px; font-size: 7pt;">                        
+            <td>{{i.Name}}</td> 
+            <td colspan="2">{{i.Address}}</td>          
+            <td>{{i.Mobileno}}</td>
+            <td>{{j.Category}}</td>
+            <td>{{j.E_name}}</td>
+            <td>{{i.City}}</td>           
+            <td>{{i.Pincode}}</td>
+            <td>{{i.startdate}}</td>
+            <td>{{i.enddate}}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+        </tbody>
         <!----------Trader Buy Farmer Product table 8------------>
         {% elif a == "buylist" %}
      <thead>

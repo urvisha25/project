@@ -24,22 +24,7 @@
   </style>
 
 <body>
-    {{request.session.rat}}
-        <div style="margin-top: 5px; background-color: cornsilk;" class="container">
-                <center>   <h3 style="color:cornflowerblue">Search Date</h2></center>
-                   <form class="form-inline" style="margin-left: 350px;" method="POST">
-                     {% csrf_token %}
-                     <div class="form-group">
-                       <label for="date">Start date:</label>
-                       <input type="date" class="form-control" id="sdate" name="sdate">
-                     </div>&nbsp;&nbsp;&nbsp;
-                     <div class="form-group">
-                       <label for="date">End date:</label>
-                       <input type="date" class="form-control" id="ldate" name="ldate">&nbsp;  &nbsp;  
-                       <button type="submit" class="btn btn-success">Submit</button>      
-                     </div>      
-                   </form> 
-                 </div>
+    
         {% if request.session.lgnf %}
                  <div class="container-fluid">
                         <div class="row content">
