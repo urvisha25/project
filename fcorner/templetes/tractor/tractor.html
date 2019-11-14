@@ -1,4 +1,5 @@
 {% extends 'basic.html' %} {% load static %} {% block content %}
+<html>
 <style>
     .col-sm-3 img {
         display: block;
@@ -11,7 +12,7 @@
         margin: 0px 5px 0px 5px;
         font-size: 15pt;
     }
-    .footer {
+    .footer1 {
         float: left;
         margin: 0px 5px 0px 10px;
     }
@@ -43,7 +44,7 @@
       {% if i.H_id == j.H_id %}
         <div class="col-sm-4">
             <div class="thumbnail" style="width:350px; height:auto;">
-                <div><img src="/media/{{i.Image}}" alt="{{i.P_name}}" width="350" height="270">
+                <div style="margin-top: 10px;"><img src="/media/{{i.Image}}" alt="{{i.P_name}}" width="350" height="270">
                     <div class="text-block">
                         <i class="fas fa-star" aria-hidden="true"></i>
                       </div>
@@ -58,9 +59,9 @@
                 <div style="height:40px;background-color:whitesmoke">
                     
                     {% if request.session.lgnf == null %}
-                  <div class="footer"><a href="hlogin" style="color: red">Rent Now</a></div>
+                  <div class="footer1"><a href="hlogin" style="color: red">Rent Now</a></div>
                   {% else %}
-                  <div class="footer"><a href="equipmentlist" style="color: red">Rent Now</a></div>
+                  <div class="footer1"><a href="equipmentlist" style="color: red">Rent Now</a></div>
                   {% endif %}
                     <div class="footerl">{{i.Rent_price}} Rs Per Day</div>
                 </div>                
@@ -94,4 +95,5 @@
         localStorage.setItem('cart', JSON.stringify(cart));
     });
 </script>
+</html>
 {% endblock %}

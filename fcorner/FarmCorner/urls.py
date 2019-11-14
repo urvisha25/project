@@ -21,7 +21,7 @@ urlpatterns=[
     path("traderregis",views.traderegis, name='Tregister'),
 
     # about, contact,logout
-    path("about.html",views.about, name='about'),
+    path("about",views.about, name='about'),
     path("contact.html",views.contact, name='contact'),
     path('logout',views.logout,name='Logout'),  
 

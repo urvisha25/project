@@ -58,17 +58,18 @@ class eholder(models.Model):
 
 cat = (
     ('Tractor','Tractor'),
-    ('Tiller', 'Tiller'),
+    ('Tillage', 'Tillage'),
     ('Harvesters','Harvesters'),
-    ('Sowing and Planting Equipments','Sowing and Planting Equipments'),
-    ('Pesticide Applicators','Pesticide Applicators'),   
+    ('Seeding and Plantation','Seeding and Plantation'),
+    ('Crop Protection','Crop Protection'),   
     ('Landscaping Equipments','Landscaping Equipments'),
     ('postharvest Equipments','postharvest Equipments'),
+    ('Haulage','Haulage'),
     ('Others','Others')
      )
-
+cond=(('Use','Use'),('New','New'))
 # Equipmentholder upload equipments
-class uploadequip(models.Model):
+class uploadequip(models.Model):   
        E_id= models.AutoField(primary_key=True)    
        H_id= models.IntegerField(default=0)  
        H_name= models.CharField(max_length=40, default="")
@@ -78,7 +79,8 @@ class uploadequip(models.Model):
        Category=models.CharField(max_length=50, choices=cat,default="")  
        email= models.EmailField(max_length=50, default="") 
        year= models.CharField(default="",max_length=12)   
-       hp = models.FloatField(default="")
+       hp = models.IntegerField(default="")
+       Condition = models.CharField(max_length=3,choices=cond,default="")      
        Image= models.ImageField(upload_to="Image", default="",validators=[validate_file_size])       
        Rent_price= models.IntegerField(default="") 
        mydate = models.DateTimeField(default=datetime.now())

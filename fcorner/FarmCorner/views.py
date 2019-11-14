@@ -43,6 +43,8 @@ def home(request):
       }
       return render(request, 'home.html',context)
 
+# basic page in select equipments
+
 # Farmer Registration 
 
 def farmerregis(request):
@@ -357,7 +359,7 @@ def hlogin(request):
 # about
 
 def about(request):
-    return render(request,'home.html')
+    return render(request,'about.html')
 
 # contact
 
@@ -676,13 +678,13 @@ def tractors(request,id):
             nam="Harvesters"
             d=uploadequip.objects.filter(Category=nam)
       elif id==3:
-            nam="Tiller"
+            nam="Tillage"
             d=uploadequip.objects.filter(Category=nam)
       elif id==4:
-            nam="Sowing and Planting Equipments"
+            nam="Seeding and Plantation"
             d=uploadequip.objects.filter(Category=nam)
       elif id==5:
-            nam="Pesticide Applicators"
+            nam="Crop Protection"
             d=uploadequip.objects.filter(Category=nam)
       elif id==6:
             nam="Landscaping Equipments"
@@ -691,6 +693,9 @@ def tractors(request,id):
             nam="postharvest Equipments"
             d=uploadequip.objects.filter(Category=nam)
       elif id==8:
+            nam="Haulage"
+            d=uploadequip.objects.filter(Category=nam)
+      elif id==9:
             nam="Others"
             d=uploadequip.objects.filter(Category=nam)
       context={

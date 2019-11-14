@@ -9,16 +9,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-
-     
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script> 
   </head>
 <style>
-
-/*********************************
-3.6 Logo
-*********************************/
-
+/**3.6 Logo**/
 .logo_container {
     position: absolute;
     top: 50%;
@@ -29,20 +23,85 @@
     transform: translateY(-50%);
     left: 15px;
 }
-
 .logo_container a {
     font-size: 24px;
     color: #1e1e27;
     font-weight: 700;
     text-transform: uppercase;
 }
-
 .logo_container a span {
     color: #fe4c50;
 }
 </style>
+
+<!--------footer-------->
+<style>
+  .footer{
+	padding: 15px 0;
+    width: 100%;
+    background:black;
+    color: #fff;
+    opacity: 0.75;
+   }
+.footer-title{
+	position: relative;
+    color: #fff;
+	font-size: 24px;
+    font-weight: 600;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #4e4e4e;
+}
+.footer-title:after{
+	position: absolute;
+	content: '';
+	left: 0;
+	bottom: 0;
+	width: 35px;
+	height: 4px;
+	background: #ff304d;
+}
+.footer-links a{
+	padding: 10px 0;
+	border-bottom: 1px solid #404040;
+	color: #fff;
+	display: block;
+	transition: color 0.5s ease-in-out;
+   text-decoration:none;
+}
+.footer-links a:hover{
+	color: #ff304d;
+}
+.footer-social-links li{
+	display: inline-block;
+}
+.footer-social-links a{
+	width: 40px;
+	height: 40px;
+	font-size: 16px;
+	float: left;
+	margin-right: 10px;
+	padding: 7px;
+	border: 1px solid #404040;
+	border-radius: 50px;
+	text-align: center;
+	color: #fff;
+}
+.footer-social-links a:hover{
+	background: #ff304d;
+}
+/* g. Footer bottom section */
+.footer-bottom{
+	width: 100%;
+	padding: 2px 0;
+	text-align: center;
+	color: black;
+	background: white;
+}
+</style>
   <body>    
    <div>
+      <!--------First navigation bar---------->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="float: right; width: 100%; padding:0px;">      
         <button class="navbar-toggler ml-3 navbar-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -73,7 +132,7 @@
         </ul>        
       </div>
     </nav>
-
+      <!--------Second navigation bar---------->
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top:50px; height:100px; width: 100%; margin-bottom: 0px; padding:0px;">      
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -89,7 +148,7 @@
               <a class="nav-link" href="home.html">HOME</a>
           </li>
           <li class="nav-item active">
-              <a class="nav-link" href="#">ABOUT </a>
+              <a class="nav-link" href="about">ABOUT </a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="contact.html">CONTACT </a>
@@ -184,16 +243,85 @@
       </div>
     </nav>
   </div>
-  
-  
-     
-      
-
-       <!---- main block ---->
+       <!------ main block ------->
        <div style="margin-top: 30px; padding-top:0px;">
           {% block content %} {% endblock %}
       </div>
+      <br>
+      <br>
+      <br>
+      
+<!------Footer------->
 
-  </BODY>
-  
+<div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <footer class="footer">				
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="footer-title m-t-5 m-b-20 ">
+                      Contact Us
+                    </div>	
+                    <p class="white-text">
+                      <i class="fas fa-map-marker-alt"></i> Laxminagar-7,<br>
+                      Trishul Chowk,Rajkot-360004,<br>
+                      (Gujarat),India
+                    </p>
+                    <span style="color: dimgray; font-weight: bolder;"><i class="fa fa-phone" aria-hidden="true"></i> +91 9429292340
+                    </span><br>
+                    <span style="color: dimgray; font-weight: bolder;"><i class="fa fa-envelope" aria-hidden="true"></i> sanganiurvisha6@gmail.com
+                    </span>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="footer-title m-t-5 m-b-20">
+                      Products
+                    </div>	
+                    <div class="footer-links">
+                      <a href="tractors{{1}}">
+                        Tractor
+                      </a>
+                      <a href="tractors{{3}}">
+                        Tillage
+                      </a>
+                      <a href="tractors{{2}}">
+                        Harvest
+                      </a>
+                      <a href="tractors{{6}}">
+                        Landscaping
+                      </a>
+                    </div>
+                  </div>
+                  <div class="col-md-4 ">
+                    <div class="footer-title m-t-5 m-b-20">
+                      Products
+                    </div>	
+                    <div class="footer-links">
+                      <a href="tractors{{4}}">
+                      Seeding and Plantation
+                      </a>
+                      <a href="tractors{{7}}">
+                        Postharvest
+                      </a>
+                      <a href="tractors{{8}}">
+                        Haulage
+                      </a>
+                      <a href="tractors{{5}}">
+                        Crop Protection
+                      </a>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </footer>
+            <div class="footer-bottom">
+              Copyright © 2019, Sangani Urvisha
+            </div>
+                </div>
+            </div>
+          </div>
+  </div>
+</body>
 </html>

@@ -1,0 +1,45 @@
+{% extends 'basic.html' %}  {% block content %} {% load static %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js"></script>
+<script type="text/javascript">
+var app = angular.module("angularapp", ["ngAnimate"]);
+</script>
+<style>
+box1
+{
+transition: all linear 0.5s;
+width: 100%;
+border:1px solid black;
+margin: 50px 00px 00px 100px;
+}
+.ng-hide {
+opacity:0;
+}
+</style>
+<div>
+    <h2 style="margin-left: 50px;">Farm Corner Services</h2>
+    <hr style="margin: 5px 230px 5px 50px;">
+    <div style="width: 80%; margin: 25px 10px 80px 50px;">
+    <p>Farm Corner Services is increase easy access to farm mechanization solutions
+         through rental of tractors and farm equipment for small and large farms.
+    </p>
+    <p>
+        Small and marginal farmers, who hold more than 80% of the land holdings in India may 
+        not be able to afford ownership of tractors or implements.</p>
+    <p> Farm Corner Services bridges this gap by connecting these farmers with tractor 
+        and equipment owners through its Equipmentholder-2-Farmer platform.</p>
+        </div>
+</div>
+<h2 style="margin-left: 50px;">How does Farm Corner is Work?</h2>
+<hr style="margin: 5px 230px 5px 50px;">
+<body ng-app="angularapp">
+    <div style="margin-left: 50px;">
+  <b>Show / Hide</b>  <input type="checkbox" ng-model="chkselct"><br /><br />
+<div ng-hide='chkselct' style="clear:both;" class="box1">
+<img src="static/about.PNG">
+</div>
+</div>
+</body>
+
+{% endblock %}

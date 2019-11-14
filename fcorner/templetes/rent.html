@@ -8,6 +8,23 @@
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <style type=text/css> 
+    .leftdiv 
+    { 
+    float: left;
+    width: 85%;
+    height: 180px;     
+    margin: 00px 5px 00px 20px;
+    } 
+    .rightdiv 
+    { 
+    float: left;
+    width: 45%; 
+    height: auto;    
+    border: solid 2px black;
+    margin: 00px 00px 10px 450px;              
+    }          
+ </style> 
   <script>
   $( function() {
     
@@ -115,7 +132,6 @@
   } );
 
   </script>
-
 </head>
 <body style="border-width: 1px solid black;">
 
@@ -123,14 +139,14 @@
               {% if messages %} {% for message in messages %}
               <div class="alert alert-{{message.tags}}">{{ message }}</div>
               {% endfor %} {% endif %}
-      </div>
-  <center>  
+      </div>  
+
+<div class="leftdiv">
     <form method="POST" class="col-md-4" style="border: 1px black solid;">
-      <label><h2 style="color: cornflowerblue;">Farmer Rent In Equipments</h2>
-      </label>
-      {{request.session.unqt}}
+    <center>  <label><h2 style="color: cornflowerblue;">Farmer Rent In Equipments</h2>
+      </label> </center>    
       <hr>
-            {% csrf_token %}
+          {% csrf_token %}
           <label for="from">Start Date</label>
           <input type="text" class="form-control" readonly width="100px" id="from" name="A">
           <label for="to">End Date</label>
@@ -140,7 +156,45 @@
           <hr>
           <input type="submit" value="Submit" class="btn btn-success" style="margin-bottom: 5px;">
           <input type="reset" value="Cancel" class="btn btn-primary" style="margin-bottom: 5px;">
-    </form></center>
+    </form>
+</div>
+  <div class="rightdiv">
+      <label style="margin-left: 40px; font-weight: bolder;">Specifications</label>
+      <div class="table-responsive" style="font-size: 15px;">
+          <!--Farmer Rent Products --> 
+          <table class="table table-hover">             
+              <tr align="center" style="color: dimgray;">
+                  <th>Manufacturer</th>
+                  <th>Equipment Category</th>   
+                  <th>Equipment Name</th>                  
+              </tr>            
+              <tr class="danger" align="center" style="color:dimgray;">
+                  <td>{{a.H_name}}</td> 
+                  <td>{{a.Category}}</td>
+                 <td>{{a.E_name}}</td>                     
+              </tr>
+          </table>
+          <br>
+          <br>  
+      </div>
+      <div class="table-responsive" style="font-size: 15px;">
+          <!--Farmer Rent Products --> 
+          <table class="table table-hover">             
+              <tr align="center" style="color: dimgray;">    
+                  <th>Manufacturing Year</th>  
+                  <th>Condition</th>          
+                  <th>Horsepower</th>
+              </tr>            
+              <tr class="danger" align="center" style="color: dimgray;">
+                  <td>{{a.year}}</td>
+                 <td>{{a.Condition}}</td>
+                  <td>{{a.hp}} HP</td>                      
+              </tr>
+          </table>
+          <br>
+          <br>  
+      </div>
+    </div>
 </body>
 </html>
 {% endblock %}

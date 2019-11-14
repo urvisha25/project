@@ -1,17 +1,58 @@
 {% extends 'basic.html' %}  {% block content %} {% load static %}
-<div>
-        <td><img src="{{ b.Image.url }}" class="img-responsive"  style="width: 100%; height:150px; " /></td>
-                                    
-    {{a}}
-    {{b}}
-</div>
-<label style="color: red;">Are you sure delete?</label>  
-<form method="POST" enctype="multipart/form-data">
-{% csrf_token %}
-<input type="text" name="tt1" value="{{request.session.txt1}}" hidden />
-{{request.session.txt1}}
-<button type="submit" class="btn btn-success" ><i class="fas fa-ckeck"></i></button>
-</form>    
-<a href="rentlist.html"><button type="cancel"  class="btn btn-danger" ><i class="fas fa-times"></i></button></a>
-       
+<html>
+    <head>
+            <style type=text/css> 
+                .leftdiv 
+                { 
+                float: left;
+                width: 20%;
+                height: 180px; 
+                border: solid black; 
+                margin: 0px 20px 10px 20px;
+                } 
+                .middlediv 
+                { 
+                float: left; 
+                margin: 0px 20px 10px 20px;              
+                }   
+                .rightdiv 
+                { 
+                float: left; 
+                margin: 0px 20px 10px 20px;
+                }              
+             </style> 
+    </head>
+    <body>
+
+    <div class="leftdiv">
+        <img src="{{ b.Image.url }}" class="img-responsive"  style="width:100%; height:175px;" /> 
+    </div>
+    <div class="middlediv">
+            <div class="table-responsive" style="font-size: 17px;">                  
+                    <table class="table table-hover">
+                        <center>
+                            <h3 style="color: green">Farmer Rent Form Table</h3>
+                        </center>                                                
+                            <tr><b>Equipment Category :</b> {{b.Category}}</tr>  <br> 
+                            <tr><b>Equipment Name :</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{b.E_name}}</tr><br>
+                            <tr><b>Horse Power :</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{b.hp}} HP</tr><br>
+                            <tr><b>Duration :</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{b.year}}</tr>  <br>
+                            <tr><b>Price in Rs :</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{b.Rent_price}} Rs</tr>   
+                    </table>                   
+                </div>
+    </div>
+    <div class="rightdiv">
+            <label style="color: red; font-size: 20px;">Are you sure you want to delete this equipment?</label>  <br>
+           <label>If you will cancel the rental equipment then you will 500 Rs fine</label>
+            <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" name="tt1" value="{{request.session.txt1}}" hidden /><br>
+            <button type="submit" class="btn btn-success">Submit</button>
+            </form>  <br>  
+            <a href="rentlist.html">
+            <button type="cancel" class="btn btn-danger">Cancel</button></a>
+    </div>
+   
+    </body>
+</html>  
 {% endblock %}

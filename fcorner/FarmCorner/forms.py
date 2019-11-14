@@ -5,12 +5,12 @@ from .models import *
 class equipments(forms.ModelForm):   
     class Meta: 
         model = uploadequip 
-        fields = ['E_name','Category','Image','year','hp','Rent_price']   
+        fields = ['E_name','Category','Image','year','Condition','hp','Rent_price']   
         labels={               
                 'E_name': 'Equipment Name',  
                 'Rent_price': 'Rent Price in Per Day',
-                'hp':'Horsepower in Watts',
-                'year':'Year of Equipment'  
+                'hp':'Tractor Power in HP',
+                'year':'Year of Equipment',               
             }
 
 # upload product images
