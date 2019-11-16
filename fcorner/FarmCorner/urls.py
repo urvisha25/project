@@ -7,10 +7,11 @@ from . import views
 from .forms import *
 
 urlpatterns=[    
-    # home
+    # home,Product show all
     path("",views.home, name='home'),  
     path("home.html",views.home, name='home'), 
-    
+    path('tractors<int:id>',views.tractors, name='tractors'),
+
     # Logins, forgotpassword  
     path("hlogin",views.hlogin, name='holderlogin'),
     path("forgotpassword",views.forgotpass, name='forgot password'), 
@@ -20,54 +21,51 @@ urlpatterns=[
     path("holderregister",views.holderregis, name='Hregister'),
     path("traderregis",views.traderegis, name='Tregister'),
 
-    # about, contact,logout
+    # about, contact,logout,profile
     path("about",views.about, name='about'),
     path("contact.html",views.contact, name='contact'),
-    path('logout',views.logout,name='Logout'),  
+    path('logout',views.logout,name='Logout'),
+    path('profile',views.edit_profile, name='edit_profile'), 
 
-    # Farmer upload products,Trader upload prices, Holder upload equipments
-    path("uploadequipment", views.equipmentupload, name = 'image_upload'),    
-    path('productupload<int:id>', views.productupload, name = 'productupload'), 
-    path('priceupload', views.priceupload, name = 'priceupload'), 
+    # Farmer upload product, show,show trader price, show equipmentlist,
+    # rent in equipments,list equipments, rate in equipments
 
-    # Profile   
-    path('profile',views.edit_profile, name='edit_profile'),     
+    path('productupload<int:id>', views.productupload, name = 'farmer upload farm product'), 
+    path('pricelist',views.pricelist, name='trader upload pricelist'),
+    path('productlist',views.productlist, name='farmer upload productlist'), 
+    path('equipmentlist',views.equipmentlist, name='equipment holder upload equipment list'),
+    path('rent<int:id>',views.rent, name='farmer rent in equipments'), 
+    path('rentlist.html',views.rentlist, name='farmer rent in equipments list'),
+    path('rprice.html', views.equipmentbill, name="Farmer rent in equipment then its give Bill"),   
+    path('rentconfirm<int:id>',views.rentconfirm, name='farmer delete rent in equipments'),  
+    path('rate<int:id>',views.rat, name='rat Product'),
+    path('rentfarmlist<int:id>',views.rentfarmlist, name='rent bill print(PDF),trader buy product bill PDF'),
+    path('delrentequip<int:id>',views.delrentequip, name='rent Equipment delete'),
+    path('transaction<int:id>.html',views.transactionlist, name='rent bill list,trader buy product price list'),
+    # Trader upload Price, show, show Farmer Product, Buy product,edit
 
-    # Accept/reject via admin and trader
-    path('authorized.html',views.authorized, name='Authorized'),
-    path('accept<int:F_id>',views.accept, name='accept'),
-    path('authorized<int:F_id>',views.reject, name='reject'),    
+    path('priceupload', views.priceupload, name = 'Trader upload price'),
+    path('tpricelistt.html',views.tpricelistt, name='Tpricelist particular Trader'),
+    path('tpricelist',views.tpricelist, name='Tpricelist'),     
+    path('buy<int:id>',views.buyprod, name='Buy Product'),
+    path('GeneratePDF<int:id>',views.GeneratePDF, name='rent bill generate'),
+    path('editprice<int:id>',views.editprice, name="edit product price by Trader"), 
 
-    # List of prices and admin show all list
-    path('pricelist',views.pricelist, name='pricelist'), 
-    path('productlist',views.productlist, name='productlist'), 
-    path('equipmentlist',views.equipmentlist, name='equipmentlist'),
+    # Equipmentholder upload equipment,edit,list,give bill
+     
+    path("uploadequipment", views.equipmentupload, name = 'image_upload'),
     path('equiplist<int:id>',views.equipmentlisth, name='equipmentlist particular Holder'),    
     path('equiplist.html<int:id>',views.equipmentlisth, name='equipmentlist particular Holder'), 
-    path('tpricelist',views.tpricelist, name='Tpricelist'),     
-    path('tpricelistt.html',views.tpricelistt, name='Tpricelist particular Trader'), 
+    path('editequipment<int:id>',views.edit_profiles, name="edit upload equipments by Holder"), 
+    path('rentbill',views.rentprolist, name='farmer rent in equipments list'),
+      
 
-    # list of all categorywise products and rent
-    path('tractors<int:id>',views.tractors, name='tractors'), 
-    path('rent<int:id>',views.rent, name='Rent'), 
-    path('rentlist.html',views.rentlist, name='Rent1'), 
-    #path('acpt<int:id>',views.acptrent, name='acceptrent'),
-    path('rentconfirm<int:id>',views.rentconfirm, name='rejectrent'),  
-    path('rate<int:id>',views.rat, name='rat Product'),
-    # Buy Product, bill generate, rent in Equipments
-    path('buy<int:id>',views.buyprod, name='Buy Product'),
-    path('rentbill',views.rentprolist, name='rent bill generate'),
-    path('transaction<int:id>.html',views.transactionlist, name='rent bill list'), 
-    path('GeneratePDF<int:id>',views.GeneratePDF, name='rent bill generate'),
-    path('rentfarmlist<int:id>',views.rentfarmlist, name='rent bill print(PDF)'),
-    path('delrentequip<int:id>',views.delrentequip, name='rent Equipmetn delete'),
-    path('rprice.html', views.equipmentbill, name="Farmer rent in equipment then its give Bill"),
-    path('editequipment<int:id>',views.edit_profiles, name="edit upload equipments by Holder"),
-    path('editprice<int:id>',views.editprice, name="edit product price by Trader"),
-
-    # Admin upload Districts, and Show all list
+    # Admin upload Districts, and Show all list,accepr/reject all
     path('list<int:id>',views.listall),
     path('districtupld.html',views.updisttrict, name='Admin upload Districts'),
     path('deletedis<int:id>',views.deletedis),
     path('delprc<int:id>',views.delprc),
+    path('authorized.html',views.authorized, name='Authorized'),
+    path('accept<int:F_id>',views.accept, name='accept'),
+    path('authorized<int:F_id>',views.reject, name='reject'), 
 ] #+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
