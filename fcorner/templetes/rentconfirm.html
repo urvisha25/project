@@ -1,8 +1,6 @@
-{% extends 'basic.html' %}  {% block content %} {% load static %}
-<html>
-    <head>
+{% extends 'basic.html' %}  {% block content %} 
             <style type=text/css> 
-                .leftdiv 
+                .leftdivi 
                 { 
                 float: left;
                 width: 20%;
@@ -10,24 +8,22 @@
                 border: solid black; 
                 margin: 0px 20px 10px 20px;
                 } 
-                .middlediv 
+                .middledivi 
                 { 
                 float: left; 
                 margin: 0px 20px 10px 20px;              
                 }   
-                .rightdiv 
+                .rightdivi 
                 { 
                 float: left; 
                 margin: 0px 20px 10px 20px;
                 }              
-             </style> 
-    </head>
-    <body>
-
-    <div class="leftdiv">
+             </style>   
+<div style="width: 100%; height: auto;">
+    <div class="leftdivi">
         <img src="{{ b.Image.url }}" class="img-responsive"  style="width:100%; height:175px;" /> 
     </div>
-    <div class="middlediv">
+    <div class="middledivi">
             <div class="table-responsive" style="font-size: 17px;">                  
                     <table class="table table-hover">
                         <center>
@@ -41,7 +37,7 @@
                     </table>                   
                 </div>
     </div>
-    <div class="rightdiv">
+    <div class="rightdivi">
             <label style="color: red; font-size: 20px;">Are you sure you want to delete this equipment?</label>  <br>
            <label>If you will cancel the rental equipment then you will 500 Rs fine</label>
             <form method="POST" enctype="multipart/form-data">
@@ -52,7 +48,6 @@
             <a href="rentlist.html">
             <button type="cancel" class="btn btn-danger">Cancel</button></a>
     </div>
-   
-    </body>
-</html>  
+</div>
+  <br><br><br><br><br><br><br><br>
 {% endblock %}

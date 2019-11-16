@@ -46,11 +46,11 @@
             <tr align="center">
                 <th>Image of Equipments</th>                
                 <th>Equipment Name</th>
-                <th>Category</th>                
+                <th width="100">Category</th>                
                 <th>Rating</th>
-                <th>Price per day</th> 
-                <th>Edit</th> 
-                <th>Delete</th>
+                <th width="100">Price per day</th> 
+                <th width="80">Edit</th> 
+                <th width="80">Delete</th>
                 
             </tr>
         </thead>
@@ -59,11 +59,11 @@
             <tr class="danger" align="center">
                 <td><img src="{{ i.Image.url }}" class="img-responsive" style="width: 70%; height:160px; margin-left:30px; float:inline-start;" /></td>        
                 <td>{{i.E_name}}</td>
-                <td>{{i.Category}}</td>                
+                <td width="100">{{i.Category}}</td>                
                 <td>{{i.Rating|floatformat:1}}<i class="fas fa-star" aria-hidden="true" style="color: red;"></i></td>
-                <td>{{i.Rent_price}} Rs per day</td>
-                <td><a href="editequipment{{i.E_id}}"><button type="submit" id="edit" class="btn btn-danger" >Edit</button></a></td>
-                <td><a href="authorized{{i.E_id}}"><button type="submit" value="{{i.E_id}}" id="cancel" class="btn btn-danger" ><i class="fas fa-times"></i></button></a></td>
+                <td width="100">{{i.Rent_price}} Rs per day</td>
+                <td width="80"><a href="editequipment{{i.E_id}}"><button type="submit" id="edit" class="btn btn-danger" >Edit</button></a></td>
+                <td width="80"><a href="authorized{{i.E_id}}"><button type="submit" value="{{i.E_id}}" id="cancel" class="btn btn-danger" ><i class="fas fa-times"></i></button></a></td>
              </tr>       
             {% endfor %}
         </tbody>

@@ -23,21 +23,14 @@
         #msg {
                 display:none;
                 color:red;
-                }
-        .capt{
-            background-color:gainsboro;
-            width: auto;
-            height:80px;
-            margin-bottom:20px;	
-        }
+                }        
     </style>
     
 </head>
 
-<body onload="Captcha();">
+<body>
     <form method="POST" id="abc">
-        {% csrf_token %}
-        {{recaptcha|safe}}
+        {% csrf_token %}       
         <div class="container">
             <!-- Modal content-->
             <center>
@@ -61,18 +54,12 @@
                             <div class="form-group">
                                 <label for="psw"><span class="fa fa-key"></span> Password</label>
                                 <input type="password" class="form-control" id="psw" name="password" placeholder="Enter Password">
-                            </div>
-                        <!--    <div class="capt"> 
-                                <h2 type="text" id="mainCaptcha"></h2>
-                                <span><input type="text" id="txtInput"/></span>
-                                <span><button id="refresh" onclick="Captcha();"><i class="fa fa-refresh" aria-hidden="true"></i></button></span>                                    
-                                
-                            </div>-->
-                           
+                            </div>                      
 
                              <button type="submit" id="Button1" class="btn btn-success btn-block" onclick="alert(ValidCaptcha());"><span class="glyphicon glyphicon-off"></span> Login</button>
-                    
+                    <hr>                    
                         </div>
+
                     <div class="modal-footer">
                          <p>Forgot <a href="forgotpassword" style="color:cornflowerblue;"><b>Password?</b></a></p>
                     </div>
@@ -85,7 +72,7 @@
 </body>
 </html>
 
-<!----------------Captcha Validation----------------------->
+
 
 
 <!-----------Capslock On or Off -------------->

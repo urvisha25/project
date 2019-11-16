@@ -119,7 +119,7 @@
 
                                 {% elif request.session.alistt == "prolist" %}
                                 <center>  <h3 style="color: green"><b>Trader Buy Products</b></h3></center>
-                                <hr>
+                               
                                 <thead>
                                 <tr align="center">
                                           <th>Trader Name</th>
@@ -127,7 +127,8 @@
                                           <th>Email</th>
                                           <th>Quantity In Mann</th>
                                           <th>Price In Rs</th>
-                                          <th>Date</th>   
+                                          <th>Date</th> 
+                                          <th>Bill</th>  
                                 </tr>
                                     </thead>
                                       {% for i in tproductlst %}
@@ -139,7 +140,7 @@
                                           <td>{{i.Quantity}}</td>
                                           <td>{{i.Price}}</td>
                                           <td>{{i.mydate}}</td>   
-                                          <td><a href="rentfarmlist{{i.B_id}}" target="_blank"><button type="submit" class="btn btn-success" id="submit">Print</button></a> </td>           
+                                          <td><a href="rentfarmlist{{i.B_id}}" target="_blank"><button type="submit" class="btn btn-success" id="submit">Bill</button></a> </td>           
                                       </tr>
                                     </tbody>
                                       {% endfor %}

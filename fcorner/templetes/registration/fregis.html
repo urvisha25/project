@@ -1,8 +1,9 @@
 {% extends 'basic.html' %} {% block content %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <body style="background-color:whitesmoke;">
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <center>
             <div class="container">
@@ -61,10 +62,13 @@
                                     <div class="form-group">
                                         <input type="password"  id="confirm_password" class="form-control" name="password1" placeholder="Confirm Password" required aria-describedby="pass"  required pattern="(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
                                         <span id='message'></span>
-                                    </div>
-
-                                    <button class="btn btn-primary text-uppercase" type="submit">Submit</button>
+                                    </div>                                    
+                                    <hr> 
+                                    <div class="form-group">
+                                        <div class="g-recaptcha" data-sitekey="6Lev4sIUAAAAANL3_dV5MVSemjlF2dV3bIA3yeh_"></div><br>
+                                        <button class="btn btn-success text-uppercase" type="submit">Submit</button>
                                     <button class="btn btn-primary text-uppercase" type="reset">Cancel</button>
+                                     </div>                                  
                                     <hr>
                                     <a class="d-block text-center mt-2 small" href="hlogin">Sign In</a>
                                 </form>
