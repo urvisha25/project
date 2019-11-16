@@ -11,10 +11,11 @@
     <!--Farmer Upload Products -->
 
 
-    <table class="table table-hover">
+    <table  id="dt-basic-checkbox" class="table table-striped table-bordered" cellspacing="0" width="100%">
         <center>
             <h3 style="color: green">Trader Upload Price List</h3>
         </center>
+        <thead>
         <tr>
             <th>Trader Name</th>
             <th>Product Name</th> 
@@ -24,6 +25,8 @@
             <th>Upload Product</th>
 
         </tr>
+    </thead>
+    <tbody>
         {% for i in prolist %}
         <tr class="danger">
             <td>{{i.T_name}}</td>
@@ -33,9 +36,35 @@
             <td>{{i.Gradec}}</td> 
             <td><a href="productupload{{i.P_id}}"><button type="submit" id="submit"  class="btn btn-success" >Upload Product</button></a></td>
 
-        </tr>
+        </tr>  
         {% endfor %}
+    </tbody>
     </table>
 
 </div>
+
+<!--*******************************************************************************************-->
+<!--Search the data and record find-->
+
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" language="javascript" src="//cdn.datatables.net/responsive/1.0.2/js/dataTables.responsive.js"></script>
+<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
+<script type="text/javascript" language="javascript" src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+<!-- DataTables Select JS -->
+<script href="js/addons/datatables-select.min.js" rel="stylesheet"></script>
+<script>
+ $('#dt-basic-checkbox').dataTable({
+
+columnDefs: [{
+orderable: false,
+className: 'select-checkbox',
+targets: 0
+}],
+select: {
+style: 'os',
+selector: 'td:first-child'
+}
+});
+</script>
 {% endblock %}

@@ -16,6 +16,7 @@ from datetime import *
 from django.db.models import Q
 from django.views.decorators.cache import cache_control
 import datetime
+import json
 from django.http import HttpResponse
 from django.template import Context
 from django.template.loader import get_template
@@ -25,9 +26,7 @@ from datetime import *
 from dateutil import parser
 from django.core.exceptions import ValidationError
 
-
 # Create your views here..
-
 # Home page 
 
 def home(request):
@@ -227,8 +226,11 @@ def traderegis(request):
        else: 
           messages.warning(request,'Password not matching!')
           return render(request,'registration/traderregis.htmt',locals())  
-    else:       
+      else: 
+        messages.warning(request,'please verify yourself!')         
         return render(request,'registration/traderregis.html',locals())
+    else:     
+      return render(request,'registration/traderregis.html',locals())
 
 # Equipmentholder Registration
 
@@ -330,53 +332,67 @@ def hlogin(request):
       request.session["idf"]=0
       request.session["tid"]=0
       if request.method == 'POST':
-         #holder
-        if eholder.objects.filter(email=request.POST['email'], password=request.POST['password']).exists():
-            hold = eholder.objects.get(email=request.POST['email'], password=request.POST['password'])  
-            if hold.status==0:
-                  messages.warning(request,'Your Approval is still panding please wait')
-                  return render(request,'login/hlogin.html')
-            else:      
-              request.session["lgnh"] ='Welcome' + " " +hold.H_name                 
-              request.session['prff']=hold.email 
-              request.session["hnm"] =hold.H_name 
-              request.session["hid"] =hold.H_id
-              request.session["city"] =hold.City            
-              return redirect('home.html')
+            #recaptcha .....................................
+            clientkey=request.POST['g-recaptcha-response']
+            secretkey='6Lev4sIUAAAAAA9VzwPoicSZ81pIcTI9T2648iqM'
+            captchadata={
+                        'secret':secretkey,
+                        'response':clientkey
+            }
+            r=requests.post('https://www.google.com/recaptcha/api/siteverify',data=captchadata)
+            response=json.loads(r.text)
+            verify=response["success"]
+            if verify:      
+                  #holder
+                  if eholder.objects.filter(email=request.POST['email'], password=request.POST['password']).exists():
+                        hold = eholder.objects.get(email=request.POST['email'], password=request.POST['password'])  
+                        if hold.status==0:
+                              messages.warning(request,'Your Approval is still panding please wait')
+                              return render(request,'login/hlogin.html')
+                        else:      
+                              request.session["lgnh"] ='Welcome' + " " +hold.H_name                 
+                              request.session['prff']=hold.email 
+                              request.session["hnm"] =hold.H_name 
+                              request.session["hid"] =hold.H_id
+                              request.session["city"] =hold.City            
+                              return redirect('home.html')
         
-          #farmer
-        elif Farmerreg.objects.filter(email=request.POST['email'], password=request.POST['password']).exists():
-             hold = Farmerreg.objects.get(email=request.POST['email'], password=request.POST['password'])   
-             if hold.status==0:
-                  messages.warning(request,'Your Approval is still panding please wait')
+                  #farmer
+                  elif Farmerreg.objects.filter(email=request.POST['email'], password=request.POST['password']).exists():
+                        hold = Farmerreg.objects.get(email=request.POST['email'], password=request.POST['password'])   
+                        if hold.status==0:
+                              messages.warning(request,'Your Approval is still panding please wait')
+                              return render(request,'login/hlogin.html')
+                        else:  
+                              request.session["lgnf"] ='Welcome' + " " +hold.F_name 
+                              request.session["idf"]=hold.F_id
+                              request.session['prff']=hold.email   
+                              request.session["fname"] =hold.F_name                    
+                              return redirect('home.html')
+                  # trader
+                  elif traderreg.objects.filter(email=request.POST['email'], password=request.POST['password']).exists():
+                        hold = traderreg.objects.get(email=request.POST['email'], password=request.POST['password'])  
+                        if hold.status==0:
+                              messages.warning(request,'Your Approval is still panding please wait')
+                              return render(request,'login/hlogin.html')
+                        else: 
+                              request.session["lgnt"] ='Welcome' + " " +hold.T_name
+                              request.session['prff']=hold.email  
+                              request.session["tname"] =hold.T_name    
+                              request.session["tid"] =hold.T_id                       
+                              return redirect('home.html')
+                  #admin
+                  elif authorize.objects.filter(Email=request.POST['email'], Password=request.POST['password']).exists():
+                        hold = authorize.objects.get(Email=request.POST['email'], Password=request.POST['password']) 
+                        request.session["lgna"] ='Welcome' + " " +hold.A_name  
+                        request.session['prff']=hold.Email                        
+                        return redirect('home.html')
+                  else:
+                        messages.warning(request,'Invalid username and Password!') 
+                        return render(request,'login/hlogin.html') 
+            else:
+                  messages.warning(request,'please verify yourself!') 
                   return render(request,'login/hlogin.html')
-             else:  
-              request.session["lgnf"] ='Welcome' + " " +hold.F_name 
-              request.session["idf"]=hold.F_id
-              request.session['prff']=hold.email   
-              request.session["fname"] =hold.F_name                    
-              return redirect('home.html')
-        # trader
-        elif traderreg.objects.filter(email=request.POST['email'], password=request.POST['password']).exists():
-             hold = traderreg.objects.get(email=request.POST['email'], password=request.POST['password'])  
-             if hold.status==0:
-                  messages.warning(request,'Your Approval is still panding please wait')
-                  return render(request,'login/hlogin.html')
-             else: 
-              request.session["lgnt"] ='Welcome' + " " +hold.T_name
-              request.session['prff']=hold.email  
-              request.session["tname"] =hold.T_name    
-              request.session["tid"] =hold.T_id                       
-              return redirect('home.html')
-        #admin
-        elif authorize.objects.filter(Email=request.POST['email'], Password=request.POST['password']).exists():
-            hold = authorize.objects.get(Email=request.POST['email'], Password=request.POST['password']) 
-            request.session["lgna"] ='Welcome' + " " +hold.A_name  
-            request.session['prff']=hold.Email                        
-            return redirect('home.html')
-        else:
-          messages.warning(request,'Invalid username and Password!') 
-          return render(request,'login/hlogin.html')        
       return render(request,'login/hlogin.html' )
 
 # about
