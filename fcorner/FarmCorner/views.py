@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render,redirect
 from django.db import models
 from django.contrib.auth import *
 from django.shortcuts import *
@@ -820,7 +820,7 @@ def equipmentbill(request):
                   uploadequip.objects.filter(E_id=rn.E_id).update(status=1)
                   rentequipment.objects.filter(R_id=rn.R_id).update(status=1)
                   messages.success(request,'Equipment booking Successfully')
-                  return redirect("equipmentlist")
+                  return redirect('equipmentlist.html')
             else: 
                   return render(request, "rprice.html", {'form':details}) 
       else: 
@@ -855,7 +855,8 @@ def rentconfirm(request, id):
       b = uploadequip.objects.get(E_id = a.E_id)
       tt1=request.POST.get('tt1','')
       if tt1 != "":  
-            rentequipment.objects.get(R_id=id).delete() 
+            rentequipment.objects.get(R_id=id).delete()
+            transaction.objects.get(R_id=id).delete() 
             return redirect('rentlist.html')     
       return render(request,"rentconfirm.html",locals())
 
@@ -1073,7 +1074,7 @@ def transactionlist(request,id):
 
 # delete rent in Equipments
 def delrentequip(request,id):
-      transaction.objects.get(Rb_id=id).delete()            
+      transaction.objects.get(Rb_id=id).delete() 
       messages.success(request,'Rent in Equipments is  Delete')
       return render(request,'transaction.html')
 # Generate PDF 
