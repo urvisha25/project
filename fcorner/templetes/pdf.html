@@ -44,14 +44,13 @@
         {% if a == "flist" %}
         <thead>
             <tr style="border-bottom: 1px solid black; color: orange; padding-right: 0px;">
-                <th>Farmer Name</th>
-                <th>Address</th>
-                <th>Mobile no.</th>
-                <th>District</th>               
-                <th>City</th>
-                <th>Email</th>                
-                <th>Area</th>
-                <th>Pincode</th>
+                <th colspan="2">Farmer Name</th>
+                <th colspan="2">Address</th>
+                <th colspan="2">Mobile no.</th>
+                <th colspan="2">District</th>               
+                <th colspan="2">City</th>
+                <th colspan="2">Email</th>                
+                <th colspan="2">Area</th>               
                 <th>Date</th>               
             </tr>
         </thead>
@@ -61,14 +60,13 @@
         {% for i in b %} 
             <tr class="info">
                 <tr class="danger" style="padding-top:0px; font-size: 7pt">
-                    <td>{{i.F_name}}</td>
-                    <td>{{i.Address}}</td>
-                    <td>{{i.Mobileno}}</td>
-                    <td>{{i.District}}</td>                    
-                    <td>{{i.City}}</td>
-                    <td>{{i.email}}</td>                    
-                    <td>{{i.Area}}</td>  
-                    <td>{{i.Pincode}}</td>  
+                    <td colspan="2">{{i.F_name}}</td>
+                    <td colspan="2">{{i.Address}}</td>
+                    <td colspan="2">{{i.Mobileno}}</td>
+                    <td colspan="2">{{i.District}}</td>                    
+                    <td colspan="2">{{i.City}}</td>
+                    <td colspan="2">{{i.email}}</td>                    
+                    <td colspan="2">{{i.Area}}</td>                        
                     <td>{{i.mydate|date:'d-m-Y H:i'}}</td> 
                 </tr>               
             </tr>  
@@ -77,14 +75,13 @@
         {% elif a == "flist1" %}
         <thead>
             <tr style="border-bottom: 1px solid black; color: orange; padding-right: 0px;">
-                <th>Farmer Name</th>
-                <th>Address</th>
-                <th>Mobile no.</th>
-                <th>District</th>               
-                <th>City</th>
-                <th>Email</th>                
-                <th>Area</th>
-                <th>Pincode</th>
+                <th colspan="2">Farmer Name</th>
+                <th colspan="2">Address</th>
+                <th colspan="2">Mobile no.</th>
+                <th colspan="2">District</th>               
+                <th colspan="2">City</th>
+                <th colspan="2">Email</th>                
+                <th colspan="2">Area</th>               
                 <th>Date</th>               
             </tr>
         </thead>
@@ -94,14 +91,13 @@
         {% for i in e %} 
             <tr class="info">
                 <tr class="danger" style="padding-top:0px; font-size: 7pt">
-                    <td>{{i.F_name}}</td>
-                    <td>{{i.Address}}</td>
-                    <td>{{i.Mobileno}}</td>
-                    <td>{{i.District}}</td>                    
-                    <td>{{i.City}}</td>
-                    <td>{{i.email}}</td>                    
-                    <td>{{i.Area}}</td>  
-                    <td>{{i.Pincode}}</td>  
+                    <td colspan="2">{{i.F_name}}</td>
+                    <td colspan="2">{{i.Address}}</td>
+                    <td colspan="2">{{i.Mobileno}}</td>
+                    <td colspan="2">{{i.District}}</td>                    
+                    <td colspan="2">{{i.City}}</td>
+                    <td colspan="2">{{i.email}}</td>                    
+                    <td colspan="2">{{i.Area}}</td> 
                     <td>{{i.mydate|date:'d-m-Y H:i'}}</td> 
                 </tr>               
             </tr>  
@@ -112,13 +108,12 @@
      {% elif a == "tlist" %}
      <thead>
         <tr style="border-bottom: 1px solid black; color: orange;">
-            <th>Trader Name</th>
-            <th>Address</th>
-            <th>Mobile no.</th>
+            <th colspan="2">Trader Name</th>
+            <th colspan="2">Address</th>
+            <th colspan="2">Mobile no.</th>
             <th>District</th>           
-            <th>City</th>
-            <th>Email</th>
-            <th>Pincode</th>
+            <th colspan="2">City</th>
+            <th colspan="2">Email</th>            
             <th>Date</th>           
         </tr>
     </thead>
@@ -127,13 +122,12 @@
     <tbody>
         {% for i in b %} 
         <tr class="danger" style="padding-top: 4px;  font-size: 7pt">
-            <td>{{i.T_name}}</td>
-            <td>{{i.Address}}</td>
-            <td>{{i.Mobileno}}</td>
+            <td colspan="2">{{i.T_name}}</td>
+            <td colspan="2">{{i.Address}}</td>
+            <td colspan="2">{{i.Mobileno}}</td>
             <td>{{i.District}}</td>            
-            <td>{{i.City}}</td>
-            <td>{{i.email}}</td>
-            <td>{{i.Pincode}}</td>
+            <td colspan="2">{{i.City}}</td>
+            <td colspan="2">{{i.email}}</td>           
             <td>{{i.mydate|date:'d-m-Y H:i'}}</td>   
         </tr> 
         {% endfor %}
@@ -141,14 +135,13 @@
         {% elif a == "tlist1" %}
      <thead>
         <tr style="border-bottom: 1px solid black; color: orange;">
-            <th>Trader Name</th>
-            <th>Address</th>
-            <th>Mobile no.</th>
-            <th>District</th>           
-            <th>City</th>
-            <th>Email</th>
-            <th>Pincode</th>
-            <th>Date</th>           
+                <th colspan="2">Trader Name</th>
+                <th colspan="2">Address</th>
+                <th colspan="2">Mobile no.</th>
+                <th>District</th>           
+                <th colspan="2">City</th>
+                <th colspan="2">Email</th>            
+                <th>Date</th>            
         </tr>
     </thead>
     <center> <label style="color: orange;" align="center"><h1>Trader Registration Details List</h1></label></center>
@@ -156,14 +149,13 @@
     <tbody>
         {% for i in e %} 
         <tr class="danger" style="padding-top: 4px;  font-size: 7pt">
-            <td>{{i.T_name}}</td>
-            <td>{{i.Address}}</td>
-            <td>{{i.Mobileno}}</td>
-            <td>{{i.District}}</td>            
-            <td>{{i.City}}</td>
-            <td>{{i.email}}</td>
-            <td>{{i.Pincode}}</td>
-            <td>{{i.mydate|date:'d-m-Y H:i'}}</td>   
+                <td colspan="2">{{i.T_name}}</td>
+                <td colspan="2">{{i.Address}}</td>
+                <td colspan="2">{{i.Mobileno}}</td>
+                <td>{{i.District}}</td>            
+                <td colspan="2">{{i.City}}</td>
+                <td colspan="2">{{i.email}}</td>           
+                <td>{{i.mydate|date:'d-m-Y H:i'}}</td>    
         </tr> 
         {% endfor %}
         </tbody>
@@ -179,8 +171,7 @@
             <th>Mobile no.</th>
             <th>District</th>            
             <th>City</th>
-            <th>Email</th>
-            <th>Pincode</th>
+            <th colspan="2">Email</th>           
             <th>Date</th>                                   
         </tr>
     </thead>
@@ -195,8 +186,7 @@
             <td>{{i.Mobileno}}</td>
             <td>{{i.District}}</td>            
             <td>{{i.City}}</td>
-            <td>{{i.email}}</td>
-            <td>{{i.Pincode}}</td>
+            <td colspan="2">{{i.email}}</td>            
             <td>{{i.mydate|date:'d-m-Y H:i'}}</td>   
         </tr>
         {% endfor %}
@@ -211,8 +201,7 @@
             <th>Mobile no.</th>
             <th>District</th>            
             <th>City</th>
-            <th>Email</th>
-            <th>Pincode</th>
+            <th colspan="2">Email</th>            
             <th>Date</th>                                   
         </tr>
     </thead>
@@ -227,8 +216,7 @@
             <td>{{i.Mobileno}}</td>
             <td>{{i.District}}</td>            
             <td>{{i.City}}</td>
-            <td>{{i.email}}</td>
-            <td>{{i.Pincode}}</td>
+            <td colspan="2">{{i.email}}</td>            
             <td>{{i.mydate|date:'d-m-Y H:i'}}</td>   
         </tr>
         {% endfor %}
@@ -244,7 +232,7 @@
             <th>Mobile no.</th>
             <th>City</th>
             <th>Email</th>
-            <th>Quantity/mann</th>  
+            <th>Quantity in mann</th>  
             <th>Date</th>                                 
         </tr>
     </thead>
@@ -351,11 +339,11 @@
      <thead>
         <tr style="border-bottom: 1px solid black; color: orange;">            
             <th>Holder Name</th>
-            <th>Equipment Name</th>
-            <th>Category</th>
+            <th colspan="2">Equipment Name</th>
+            <th colspan="2">Category</th>
             <th>mobile no.</th>
-            <th>City</th>
-            <th>Email</th>
+            <th colspan="2">City</th>
+            <th colspan="2">Email</th>
             <th>Prices/Rs</th>   
             <th>Date</th>                                                                   
         </tr>
@@ -366,11 +354,11 @@
         {% for i in b %} 
         <tr class="danger" style="padding: 4px; font-size: 7pt;">
             <td>{{i.H_name}}</td>
-            <td>{{i.E_name}}</td>
-            <td>{{i.Category}}</td>
+            <td colspan="2">{{i.E_name}}</td>
+            <td colspan="2">{{i.Category}}</td>
             <td>{{i.Mobileno}}</td>
-            <td>{{i.City}}</td>
-            <td>{{i.email}}</td>
+            <td colspan="2">{{i.City}}</td>
+            <td colspan="2">{{i.email}}</td>
             <td>{{i.Rent_price}}</td> 
             <td>{{i.mydate|date:'d-m-Y H:i'}}</td>
                
@@ -380,14 +368,14 @@
         {% elif a == "helist1" %}
      <thead>
         <tr style="border-bottom: 1px solid black; color: orange;">            
-            <th>Holder Name</th>
-            <th>Equipment Name</th>
-            <th>Category</th>
-            <th>mobile no.</th>
-            <th>City</th>
-            <th>Email</th>
-            <th>Price in Rs</th>   
-            <th>Date</th>                                                                   
+                <th>Holder Name</th>
+                <th colspan="2">Equipment Name</th>
+                <th colspan="2">Category</th>
+                <th>mobile no.</th>
+                <th colspan="2">City</th>
+                <th colspan="2">Email</th>
+                <th>Prices/Rs</th>   
+                <th>Date</th>                                                                    
         </tr>
     </thead>
     <center> <label style="color: orange;" align="center"><h1>EquipmentHolder Upload Equipments List</h1></label></center>
@@ -395,14 +383,14 @@
     <tbody>
         {% for i in e %} 
         <tr class="danger" style="padding: 4px; font-size: 7pt;">
-            <td>{{i.H_name}}</td>
-            <td>{{i.E_name}}</td>
-            <td>{{i.Category}}</td>
-            <td>{{i.Mobileno}}</td>
-            <td>{{i.City}}</td>
-            <td>{{i.email}}</td>
-            <td>{{i.Rent_price}}</td> 
-            <td>{{i.mydate|date:'d-m-Y H:i'}}</td>               
+                <td>{{i.H_name}}</td>
+                <td colspan="2">{{i.E_name}}</td>
+                <td colspan="2">{{i.Category}}</td>
+                <td>{{i.Mobileno}}</td>
+                <td colspan="2">{{i.City}}</td>
+                <td colspan="2">{{i.email}}</td>
+                <td>{{i.Rent_price}}</td> 
+                <td>{{i.mydate|date:'d-m-Y H:i'}}</td>               
         </tr>
         {% endfor %}
         </tbody>
@@ -486,7 +474,7 @@
             <th>Trader Name</th>                                 
             <th>Product Name</th>            
             <th>Qyantity/Mann</th>
-            <th>Trader Email</th>
+            <th colspan="2">Trader Email</th>
             <th>Total Price/Rs</th>      
             <th>Date</th>                                                                                                
         </tr>
@@ -500,7 +488,7 @@
             <td>{{i.T_name}}</td>
             <td>{{i.P_name}}</td>            
             <td>{{i.Quantity}} Mann</td>
-            <td>{{i.email}}</td>
+            <td colspan="2">{{i.email}}</td>
             <td>{{i.Price}} Rs</td>    
             <td>{{i.mydate|date:'d-m-Y H:i'}}</td>                                  
         </tr>
