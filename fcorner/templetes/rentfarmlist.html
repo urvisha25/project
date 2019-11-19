@@ -3,12 +3,9 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">      
-    
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
         <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.15.4/dist/bootstrap-table.min.css">
-        
-      
             <style>
                     .header{
                         width: 100%;
@@ -22,9 +19,7 @@
                     }                       
                     </style>
     </head>
-
     <body>
-
             <div class="table-responsive" style="font-size: 15px;">
               
                 <!------ Header ------->
@@ -66,15 +61,13 @@
                    </thead>   
                    <hr>
                    <tbody>  
-                                        
-                           <tr class="danger" style="padding: 5px;">                               
+                       <tr class="danger" style="padding: 5px;">                               
                                <td align="center">{{b.mydate|date:'d-m-Y H:i'}}</td> 
                                <td align="center">{{b.H_name}}</td>
                                <td align="center">{{z.Category}}</td>
                                <td align="center">{{b.Name}}</td>                  
                                <td align="center">{{b.Total}}</td>                                                                                
-                       </tr>  
-                               
+                       </tr>    
                        </tbody>         
                        {% elif a == "billlist1" %}
             

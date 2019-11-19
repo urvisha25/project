@@ -25,6 +25,8 @@
             <th>Email</th>
             <th>Quantity in Mann</th>
             <th>Image of Products</th>
+            <th>Edit</th>            
+            <th>Delete</th>
             
         </tr>
     </thead>
@@ -39,6 +41,9 @@
             <td>{{i.email}}</td>
             <td>{{i.Quantity}}</td>
             <td><img src="{{ i.Image.url }}" class="img-responsive" style="width: 70%; height:150px; " /></td>           
+            <td> <a href="editproduct{{i.S_id}}"><button type="submit" id="edit" class="btn btn-danger" >Edit</button></a>          </td>
+            <td><a href="delprc{{i.S_id}}"><button type="submit" class="btn btn-danger"><i class="fas fa-times"></i></button></a></td>
+
         </tr>  
     </tbody>            
         {% endfor %}    

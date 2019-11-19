@@ -706,6 +706,23 @@ def editprice(request,id):
             form = editeprodprice()       
       return render(request, 'editprice.html', {'form': form})
 
+# Edit Farm Product by Farmer
+def editproduct(request,id):  
+      user = uproduct.objects.get(S_id=id)
+      form = editeproduct(instance=user)
+      if request.method == "POST":
+        form = editeproduct(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+          update = form.save(commit=False)               
+          update.user = user
+          update.save()  
+          messages.success(request,'Your Product Quantity Update Successfully')    
+          return redirect('productlist.html')
+        else:
+            form = editeproduct()       
+      return render(request, 'editprice.html', {'form': form})
+
+
 # All equipments list in home page
 
 def tractors(request,id):
@@ -1356,7 +1373,13 @@ def deletedis(request,id):
 # Trader Delete Price 
              
 def delprc(request,id):
-      uploadprice.objects.get(P_id=id).delete()
-      messages.success(request,'Upload Price Delete')
-      return redirect('tpricelistt.html')   
+      if uploadprice.objects.filter(P_id=id).exists():
+            uploadprice.objects.get(P_id=id).delete()        
+            return redirect('tpricelistt.html') 
+            messages.success(request,'Delete Product Price')     
+      else:  
+            uproduct.objects.get(S_id=id).delete()          
+            messages.success(request,'Delete Farm Product')
+            return redirect('productlist.html')
+     
 

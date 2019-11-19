@@ -8,6 +8,7 @@
         </style>
     </head>
     <body>
+        {% if request.session.lgnt %}
               <center>
                     <div class="card border-info" style="width: 40%; margin-top: 0px;" align="center">
                         <div class="card-header bg-info">
@@ -31,6 +32,31 @@
                             </form>                        
                         </div>
                </center>
+            {% elif request.session.lgnf %}
+            <center>
+                    <div class="card border-info" style="width: 40%; margin-top: 0px;" align="center">
+                        <div class="card-header bg-info">
+                            <h1><b>Edit Farm Product</b></h1>
+                        </div>
+                        <div class="card-body">
+                                {% if messages %} {% for message in messages %}
+                                        <div class="alert alert-{{message.tags}}">{{ message }}</div>
+                                {% endfor %} {% endif %}
+                        </div>  
+                            <form class="form-horizontal inline"  role="form" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="card-block">                                                                                                 
+                                    <fieldset class="form-group col-md-10" >    
+                                        {{form|crispy}}
+                                         <br>
+                                        <button type="submit" class="btn btn-success" id="submit">Submit</button>&nbsp;&nbsp;
+                                        <button type="reset" class="btn btn-primary" id="reset">Cancel</button>                      
+                                    </fieldset> 
+                               </div>   
+                            </form>                        
+                        </div>
+               </center>
+               {% endif %}
     </body>       
 </html>
 

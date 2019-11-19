@@ -112,6 +112,13 @@ class editeprodprice(forms.ModelForm):
                 'Gradec':'Grade C Price in 20kg'
                  } 
 
+#Edit Farm Productby Farmer
+
+class editeproduct(forms.ModelForm):
+    class Meta:
+        model=uproduct
+        fields=['Quantity']
+
 # rent
 
 class DateInput(forms.DateInput):

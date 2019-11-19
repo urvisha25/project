@@ -32,7 +32,7 @@ urlpatterns=[
 
     path('productupload<int:id>', views.productupload, name = 'farmer upload farm product'), 
     path('pricelist',views.pricelist, name='trader upload pricelist'),
-    path('productlist',views.productlist, name='farmer upload productlist'), 
+    path('productlist.html',views.productlist, name='farmer upload productlist'), 
     path('equipmentlist.html',views.equipmentlist, name='equipment holder upload equipment list'),
     path('rent<int:id>',views.rent, name='farmer rent in equipments'), 
     path('rentlist.html',views.rentlist, name='farmer rent in equipments list'),
@@ -42,6 +42,8 @@ urlpatterns=[
     path('rentfarmlist<int:id>',views.rentfarmlist, name='rent bill print(PDF),trader buy product bill PDF'),
     path('delrentequip<int:id>',views.delrentequip, name='rent Equipment delete'),
     path('transaction<int:id>.html',views.transactionlist, name='rent bill list,trader buy product price list'),
+    path('editproduct<int:id>',views.editproduct, name="edit Farm product by Farmer"),
+
     # Trader upload Price, show, show Farmer Product, Buy product,edit
 
     path('priceupload', views.priceupload, name = 'Trader upload price'),
