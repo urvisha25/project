@@ -1,0 +1,52 @@
+{% extends 'basic.html' %} {% load static %} {% block content %}
+<style>
+.container .row .col-md-5:hover{
+    -ms-transform: scale(1.1); 
+    -webkit-transform: scale(1.1); 
+    transform: scale(1.1); 
+
+}
+</style>
+  <div class="container">
+      <div class="row">
+          <div class="col-md-5" >
+            <img src="{{ a.Image.url }}" class="img-responsive" style="width:99%; height:auto;border: 2px solid black;" />
+            </div>
+          <div class="col-md-7" style="border: 2px solid black;margin-left: 00px;">
+                <label style="margin-left: 40px; font-weight: bolder;">Specifications</label>
+                <div class="table-responsive" style="font-size: 15px;">
+                    <!--Farmer Rent Products --> 
+                    <table class="table table-hover">             
+                        <tr align="center" style="color: dimgray;">
+                            <th>Manufacturer</th>
+                            <th>Equipment Category</th>   
+                            <th>Equipment Name</th>                  
+                        </tr>            
+                        <tr class="danger" align="center" style="color:dimgray;">
+                            <td>{{a.H_name}}</td> 
+                            <td>{{a.Category}}</td>
+                           <td>{{a.E_name}}</td>                     
+                        </tr>
+                    </table>
+                    <br>
+                    <br>  
+                </div>
+                <div class="table-responsive" style="font-size: 15px;">
+                    <!--Farmer Rent Products --> 
+                    <table class="table table-hover">             
+                        <tr align="center" style="color: dimgray;">    
+                            <th>Manufacturing Year</th>  
+                            <th>Condition</th>          
+                            <th>Horsepower</th>
+                        </tr>            
+                        <tr class="danger" align="center" style="color: dimgray;">
+                            <td>{{a.year}}</td>
+                           <td>{{a.Condition}}</td>
+                            <td>{{a.hp}} HP</td>                      
+                        </tr>
+                    </table>            
+                </div>
+          </div>
+      </div>
+  </div>
+{% endblock %}

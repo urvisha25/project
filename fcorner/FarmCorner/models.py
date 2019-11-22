@@ -78,7 +78,7 @@ class uploadequip(models.Model):
        Mobileno= models.CharField(max_length=13, default="")  
        Category=models.CharField(max_length=50, choices=cat,default="")  
        email= models.EmailField(max_length=50, default="") 
-       year= models.CharField(default="",max_length=12)   
+       year= models.CharField(default="",max_length=4)   
        hp = models.IntegerField(default="")
        Condition = models.CharField(max_length=3,choices=cond,default="")      
        Image= models.ImageField(upload_to="Image", default="",validators=[validate_file_size])       

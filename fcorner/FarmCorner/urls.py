@@ -11,6 +11,7 @@ urlpatterns=[
     path("",views.home, name='home'),  
     path("home.html",views.home, name='home'), 
     path('tractors<int:id>',views.tractors, name='tractors'),
+    path('quikview<int:id>', views.quikview, name="Farmer show all equipment details"),
 
     # Logins, forgotpassword  
     path("hlogin",views.hlogin, name='holderlogin'),

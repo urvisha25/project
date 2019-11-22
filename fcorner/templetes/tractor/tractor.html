@@ -58,12 +58,7 @@
                 <div align="left"><b>{{j.shop_name}}</b></div>   
                 </div>
                 <div style="height:40px;background-color:whitesmoke">
-                    
-                    {% if request.session.lgnf == null %}
-                  <div class="footer1"><a href="hlogin" style="color: red">Rent Now</a></div>
-                  {% else %}
-                  <div class="footer1"><a href="equipmentlist" style="color: red">Rent Now</a></div>
-                  {% endif %}
+                    <div class="footer1"><a href="quikview{{i.E_id}}" style="color: red">Quikview</a></div>  
                     <div class="footerl">{{i.Rent_price}} Rs Per Day</div>
                 </div>                
             </div>

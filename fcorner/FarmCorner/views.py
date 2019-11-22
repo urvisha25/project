@@ -36,6 +36,11 @@ def home(request):
       }
       return render(request, 'home.html',context)
 
+# quikview
+def quikview(request,id):
+      a=uploadequip.objects.get(E_id=id)
+      return render(request,'quikview.html',locals())
+
 # basic page in select equipments
 
 # Farmer Registration 
