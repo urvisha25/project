@@ -46,5 +46,24 @@
 </div>
 </body>
 </html>
+
+<!------ First latter is UpperCase ------>
+<script>
+    jQuery(document).ready(function() {
+
+         // Capitalize string every 1st chacter of word to uppercase
+         jQuery('#dist').keyup(function() 
+         {
+             var str = jQuery('#dist').val();
+             var spart = str.split(" ");
+             for ( var i = 0; i < spart.length; i++ )
+             {
+                 var j = spart[i].charAt(0).toUpperCase();
+                 spart[i] = j + spart[i].substr(1);
+             }
+         jQuery('#dist').val(spart.join(" "));             
+         });
+        });
+        </script>
     {% endblock %}
     

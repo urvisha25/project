@@ -852,7 +852,9 @@ def equipmentbill(request):
  
 # Equipment holder show rent farmer list
 def rentlist(request): 
-      c= rentequipment.objects.filter(F_id= request.session["idf"])
+      now=date.today()
+      c= rentequipment.objects.filter(F_id= request.session["idf"],startdate=now)
+      e= rentequipment.objects.filter(F_id= request.session["idf"],startdate__gt=now)
       d = uploadequip.objects.all()
       return render(request,'rentlist.html',locals())
 
@@ -1371,10 +1373,34 @@ def updisttrict(request):
 # Admin Delete Districts
 
 def deletedis(request,id): 
+      if districts.objects.filter(D_id=id).exists():
             districts.objects.get(D_id=id).delete()            
             messages.success(request,'District Delete')
-            return redirect('districtupld.html')  
-     
+            return redirect('districtupld.html') 
+      else:
+            talukas.objects.get(t_id=id).delete()            
+            messages.success(request,'Taluka Delete')
+            return redirect('taluka.html')              
+
+# upload Talukas
+
+def upldtaluka(request):
+      d=districts.objects.all()
+      t=talukas.objects.all()
+      if request.method == 'POST':
+            tt= request.POST.get('taluka','')
+            dt=request.POST.get('dist','')
+            s1=districts.objects.filter(District=dt)
+            sc=districts.objects.get(District=dt)
+            #if talukas.objects.filter(Taluka=tt).exists():
+                  #messages.warning(request,'This point is already exist please enter another!')  
+            #else: 
+            c = talukas(Taluka=tt,D_id=sc)
+            c.save()
+            messages.success(request,'sucessfully added')
+      return render(request,'taluka.html',locals())
+
+
 # Trader Delete Price 
              
 def delprc(request,id):

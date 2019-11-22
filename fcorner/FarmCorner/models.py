@@ -17,6 +17,14 @@ class districts(models.Model):
    def __str__(self):
         return self.District
 
+class talukas(models.Model):
+   t_id=models.AutoField(primary_key=True)
+   D_id = models.ForeignKey(districts, on_delete=models.CASCADE)
+   Taluka=models.CharField(max_length=15, default="")
+
+   def __str__(self):
+        return self.Taluka
+
 # Farmer Registration form
 class Farmerreg(models.Model):
    F_id= models.AutoField(primary_key=True)

@@ -14,5 +14,6 @@ admin.site.register(rentequipment)
 admin.site.register(buyproduct)
 admin.site.register(transaction)
 admin.site.register(districts)
+admin.site.register(talukas)
 
 

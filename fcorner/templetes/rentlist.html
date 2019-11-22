@@ -34,8 +34,23 @@
             <td><a href="rentconfirm{{i.R_id}}"><button type="submit"  id="confirm" value="{{i.R_id}}" class="btn btn-danger" ><i class="fas fa-times"></i></button></a></td>
             </tr>
             {% endif %} {% endfor %}{% endfor %}
-        </table>
-        <br>
-        <br>  
+            
+        
+       
+          
+            {% for i in e %}{% for j in d %} {% if i.E_id == j.E_id %}
+            <tr class="danger" align="center">
+                <td>{{i.Name}}</td> 
+                <td>{{j.Category}}</td>
+            <td>{{j.E_name}}</td>
+                <td>{{i.startdate}}</td>
+                <td>{{i.enddate}}</td> 
+                <td>{{j.Rent_price}}</td>          
+            
+            <td><a href="rentconfirm{{i.R_id}}"><button type="submit"  id="confirm" value="{{i.R_id}}" class="btn btn-danger" ><i class="fas fa-times"></i></button></a></td>
+            </tr>
+            {% endif %} {% endfor %}{% endfor %}
+        </table> 
+        
     </div>
 {% endblock %}
