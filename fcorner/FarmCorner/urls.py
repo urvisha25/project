@@ -70,6 +70,7 @@ urlpatterns=[
     path('delprc<int:id>',views.delprc),
     path('authorized.html',views.authorized, name='Authorized'),
     path('taluka',views.upldtaluka, name='upload taluka'),
+    path('talukalist',views.listtaluka, name='taluka list'),
     path('accept<int:F_id>',views.accept, name='accept'),
     path('authorized<int:F_id>',views.reject, name='reject'), 
 ] #+ static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

@@ -148,4 +148,9 @@ class rentbill(forms.ModelForm):
         model = transaction
         fields=[]
 
+class uploadtaluka(forms.ModelForm):
+    class Meta:
+        model = talukas
+        fields=["Taluka"]
+
 

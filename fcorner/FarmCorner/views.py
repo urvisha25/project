@@ -1370,7 +1370,7 @@ def updisttrict(request):
                         messages.success(request,'Upload Successfully')
       return render(request,'uplddistrict.html',locals())  
 
-# Admin Delete Districts
+# Admin Delete Districts and Talukas
 
 def deletedis(request,id): 
       if districts.objects.filter(D_id=id).exists():
@@ -1380,26 +1380,56 @@ def deletedis(request,id):
       else:
             talukas.objects.get(t_id=id).delete()            
             messages.success(request,'Taluka Delete')
-            return redirect('taluka.html')              
+            return redirect('listtaluka.html')              
 
-# upload Talukas
+# Admin upload Talukas
 
 def upldtaluka(request):
       d=districts.objects.all()
-      t=talukas.objects.all()
+      t=talukas.objects.all()      
       if request.method == 'POST':
-            tt= request.POST.get('taluka','')
-            dt=request.POST.get('dist','')
-            s1=districts.objects.filter(District=dt)
-            sc=districts.objects.get(District=dt)
-            #if talukas.objects.filter(Taluka=tt).exists():
-                  #messages.warning(request,'This point is already exist please enter another!')  
-            #else: 
-            c = talukas(Taluka=tt,D_id=sc)
-            c.save()
-            messages.success(request,'sucessfully added')
-      return render(request,'taluka.html',locals())
+            dist = request.POST.get("dist","")
+            dr = districts.objects.get(District=dist)
+            did = dr.D_id  
+            form = uploadtaluka(request.POST, request.FILES)   
+            if form.is_valid():                
+                upldtaluka= form.save(commit=False)
+                upldtaluka.D_id= did             
+                upldtaluka.save()                 
+                messages.success(request,'Successfully Taluka Upload!!')
+                return render(request,'taluka.html')     
+            else:
+                 messages.warning(request,'Not Upload Price!')               
+      else: 
+            form = uploadtaluka()              
+      return render(request, 'taluka.html',locals(), {'form' : form}) 
+      
+# List of Taluka
 
+def listtaluka(request):
+      d=districts.objects.all()
+      t=talukas.objects.all()
+      if request.method == "POST":
+            updt=request.POST.get('updt','')
+            request.session["updt"] = updt
+            upid= request.POST.get('tid','') 
+            if updt != "" and upid != "":
+                  talukas.objects.filter(t_id=upid).update(Taluka=updt)
+                  messages.success(request,'upload Taluka successfully')
+            return render(request, 'listtaluka.html', locals())
+      else:
+            t=talukas.objects.all()
+            d=districts.objects.all()
+            #pricel=uploadprice.objects.filter(T_id = request.session["tid"])  
+            if request.method == 'POST':
+                  updt=request.POST.get('updt','')
+                  request.session["updt"] = updt
+                  upid= request.POST.get('tid','') 
+                  if updt != "" and upid != "":
+                        talukas.objects.filter(t_id=upid).update(Taluka=updt)
+                        messages.success(request,'upload Taluka successfully')
+            return render(request, 'listtaluka.html', locals())
+      return render(request,'listtaluka.html', locals())
 
 # Trader Delete Price 
              
