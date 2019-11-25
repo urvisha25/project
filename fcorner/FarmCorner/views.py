@@ -836,7 +836,7 @@ def equipmentbill(request):
                   rentprolist.F_name=rn.Name
                   rentprolist.H_name=e.H_name      
                   rentprolist.Name=f.E_name   
-                  rentprolist.Total= total                                    
+                  rentprolist.Total=request.session["tot"]                                    
                   rentprolist.save() 
                   del request.session["tot"]
                   uploadequip.objects.filter(E_id=rn.E_id).update(status=1)
