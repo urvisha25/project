@@ -1,45 +1,39 @@
 {% extends 'basic.html' %} {% load render_table from django_tables2 %} {% render_table table %} {% block content %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  
- 
+<head>  
   <style>
     /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
     .row.content {
         height: auto;
         margin-top: 50px;
     }
-    
     /* Set gray background color and 100% height */
     .sidenav {
       background-color: #f1f1f1;
-      height: 100%;
-    }
-       
-    
+      height: 98%;
+    }     
     /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 700px) {
+    @media screen and (max-width: 690px) {
       .sidenav {
-        height: auto;
-        padding: 10px;
+        height: auto;     
       }
       .row.content {height: auto;} 
     }
   </style>
 </head>
 <body>
-  <div style="margin-top: 0px; background-color: cornsilk;" class="container">
- <center> <h3 style="color:cornflowerblue"><b>Search Date</b></h3></center>
+
+  <div style="margin-top: 0px; background-color: cornsilk; height:120px ;" class="container">
+ <center> <h3 style="color:cornflowerblue"><b>Search Date</b></h3></center><br>
     <form class="form-inline" style="margin-left: 350px;" method="POST">
       {% csrf_token %}
       <div class="form-group">
-        <label for="date"><b>Start date:</b> </label>
+        <label for="date"><b>Start date: </b> </label>&nbsp;&nbsp;
         <input type="date" class="form-control" id="sdate" name="sdate">
       </div>&nbsp;&nbsp;&nbsp;
       <div class="form-group">
-        <label for="date"><b>End date:</b> </label>
+        <label for="date"><b>End date:</b> </label>&nbsp;&nbsp;
         <input type="date" class="form-control" id="ldate" name="ldate">&nbsp;  &nbsp;  
         <button type="submit" class="btn btn-success">Submit</button>      
       </div>      
@@ -49,8 +43,9 @@
 <div class="container-fluid">
   <div class="row content">
     <div class="col-sm-3 sidenav">
+    <div class="card border-info" style="width: 105%;" align="center">
     <CENTER>  <h4>All List</h4> </CENTER>
-      <ul style="width: 140px" class="nav nav-pills nav-stacked">
+      <ul style="width: 140px; margin-bottom: 10px;" class="nav nav-pills nav-stacked">
         <li style="margin-bottom: 5px;margin-left: 25px;"><a href="list{{1}}"><button type="button" id="{{1}}" class="btn btn-info" style="width: 245px">FARMER REGISTER</button></a></li>
         <li style="margin-bottom: 5px; margin-left: 25px;"><a href="list{{2}}"><button type="button" id="{{2}}" class="btn btn-info" style="width: 245px">TRADER REGISTER</button></a></li>
         <li style="margin-bottom: 5px;margin-left: 25px;"><a href="list{{3}}"><button type="button" id="{{3}}" style="width: 245px" class="btn btn-info">EQUIPMENTHOLDER REGISTER</button></a></li>
@@ -59,20 +54,22 @@
         <li style="margin-bottom: 5px;margin-left: 25px;"><a href="list{{6}}"><button type="button" id="{{6}}" class="btn btn-info" style="width: 245px">HOLDER UPLOAD EQUIPMENTS</button></a></li>
         <li style="margin-bottom: 5px;margin-left: 25px;"><a href="list{{7}}"><button type="button" class="btn btn-info" id="{{7}}" style="width: 245px">FARMER RENT IN EQUIPMENTS</button></a></li>
         <li style="margin-left: 25px;"><a href="list{{8}}"><button type="button" class="btn btn-info" id="{{8}}" style="width: 245px">TRADER BUY PRODUCT</button></a></li>
-      
+        <br>
       </ul>
+      
+      </div>
     <br>      
     </div>
 
     <div class="col-sm-9">
+        <div class="card border-info" style="width: 100%; margin-top: 0px;" align="center">      
             <div class="table-responsive" style="font-size: 15px;">
                     <table class="table table-hover">
-                      {% if request.session.alist == "flist" %}
-                  <center>   <h2><small>All Data Lists</small></h2></center>
-                <hr>
+                      {% if request.session.alist == "flist" %}     
       <!-------------FARMER REGISTER 1---------->
-      
-              <center>  <h2 style="float:center"><small><b>FARMER REGISTER</b></small></h2></center>
+      <div class="card-header bg-info">
+          <h3><b>FARMER REGISTER</b></h3>
+      </div>
                       <tr>
                             <th>Farmer Name</th>
                             <th>Address</th>
@@ -100,12 +97,15 @@
                             <td>{{i.mydate}}</td> 
                         </tr>
                         {% endfor %}
+                        <br>
                         <a href="GeneratePDF{{1}}" target="_blank"> <button id="button" class="btn btn-info" name="submit">PRINT</button></a>
   
                         <!----------TRADER REGISTER 2------------>
 
                         {% elif request.session.alist == "tlist" %}
-                      <center>  <h2><small><b>TRADER REGISTER</b></small></h2></center>
+                        <div class="card-header bg-info">
+                          <h3><b>TRADER REGISTER</b></h3>
+                      </div>                      
                         <tr>
                                 <th>Trader Name</th>
                                 <th>Address</th>
@@ -131,12 +131,16 @@
                                 <td>{{i.mydate}}</td>   
                             </tr>
                             {% endfor %}
+                            <br>
                             <a href="GeneratePDF{{2}}" target="_blank"> <button id="button" class="btn btn-info" name="submit">PRINT</button></a>
    
                       <!-----------EQUIPMENTHOLDER REGISTER 3----------->        
 
                             {% elif request.session.alist == "ehlist" %}
-                           <center> <h2><small><b>EQUIPMENTHOLDER REGISTER</b></small></h2> </center>
+                            <div class="card-header bg-info">
+                              <h3><b>EQUIPMENTHOLDER REGISTER</b></h3>
+                          </div>
+                          
                             <tr>
                                     <th>equipmentholder Name</th>
                                     <th>Shop Name</th>
@@ -163,12 +167,15 @@
                                     <td>{{i.mydate}}</td>   
                                 </tr>
                                 {% endfor %}
+                                <br>
                                 <a href="GeneratePDF{{3}}" target="_blank"> <button id="button" class="btn btn-info" name="submit">PRINT</button></a>
    
                         <!------------FARMER UPLOAD PRODUCTS LIST 4------------>
 
                             {% elif request.session.alist == "fplist" %}
-                         <center>   <h2><small><b>FARMER UPLOAD PRODUCTS LIST</b></small></h2>  </center>
+                            <div class="card-header bg-info">
+                              <h3><b>FARMER UPLOAD PRODUCTS LIST</b></h3>
+                          </div>                        
                             <tr>
                                     <th>Image</th>
                                     <th>Farmer Name</th>
@@ -191,12 +198,15 @@
                                     <td>{{i.mydate}}</td>                       
                                 </tr>
                             {% endfor %}
+                            <br>
                             <a href="GeneratePDF{{4}}" target="_blank"> <button id="button" class="btn btn-info" name="submit">PRINT</button></a>
   
                         <!-----------TRADER UPLOAD PRICE LIST 5------------->
 
                             {% elif request.session.alist == "tplist" %}
-                           <center> <h2><small><b>TRADER UPLOAD PRICE LIST</b></small></h2>  </center>
+                            <div class="card-header bg-info">
+                              <h3><b>TRADER UPLOAD PRICE LIST</b></h3>
+                          </div>                            
                             <tr>
                                     <th>Holder Name</th>
                                     <th>Equipment Name</th> 
@@ -216,13 +226,16 @@
                                     <td>{{i.mydate}}</td>
                                 </tr>
                             {% endfor %}
+                            <br>
                             <a href="GeneratePDF{{5}}" target="_blank"> <button id="button" class="btn btn-info" name="submit">PRINT</button></a>
  
                         <!-----------EQUIPMENTHOLDER UPLOAD EQUIPMENTS LIST 6-------------> 
 
                             {% elif request.session.alist == "helist" %}
-                           <center> <h2><small><b>EQUIPMENTHOLDER UPLOAD EQUIPMENTS LIST</b></small></h2>  </center>
-                            <tr>
+                            <div class="card-header bg-info">
+                              <h3><b>EQUIPMENTHOLDER UPLOAD EQUIPMENTS LIST</b></h3>
+                          </div> 
+                           <tr>
                                     <th>Image</th> 
                                     <th>Holder Name</th>
                                     <th>Equipment Name</th>
@@ -248,12 +261,15 @@
                                        
                                 </tr>
                             {% endfor %}
+                            <br>
                             <a href="GeneratePDF{{6}}" target="_blank"> <button id="button" class="btn btn-info" name="submit">PRINT</button></a>
     
                           <!-------------FARMER RENT IN EQUIPMENT LIST 7--------------->
 
                             {% elif request.session.alist == "frlist" %}
-                          <center>  <h2><small><b>FARMER RENT IN EQUIPMENT LIST</b></small></h2> </center>
+                            <div class="card-header bg-info">
+                              <h3><b>FARMER RENT IN EQUIPMENT LIST</b></h3>
+                          </div>                           
                             <tr>
                                     <th>Farmer Name</th>
                                     <th>Address</th>   
@@ -285,13 +301,16 @@
                             {% endif %}
                             {% endfor %}
                             {% endfor %}
+                            <br>
                             <a href="GeneratePDF{{7}}" target="_blank"> <button id="button" class="btn btn-info" name="submit">PRINT</button></a>
  
                           <!-------------TRADER BUY PRODUCT LIST 8-------------->
 
                             {% elif request.session.alist == "buylist" %}
-                          <center>  <h2><small><b>TRADER BUY PRODUCT LIST</b></small></h2> </center>
-                            <tr>
+                            <div class="card-header bg-info">
+                              <h3><b>TRADER BUY PRODUCT LIST</b></h3>
+                          </div>
+                           <tr>
                                     <th>Farmer Name</th>
                                     <th>Trader Name</th>                                 
                                     <th>Product Name</th>
@@ -312,12 +331,15 @@
                                     <td>{{i.mydate}}</td>                                  
                                 </tr>                                
                             {% endfor %}
+                            <br>
                             <a href="GeneratePDF{{8}}" target="_blank"> <button id="button" class="btn btn-info" name="submit">PRINT</button></a>
                     
                             <!-------------FARMER RENT IN EQUIPMENT LIST 9--------------->
 
                             {% elif request.session.alist == "rentlist" %}
-                          <center>  <h2><small><b>FARMER RENT IN EQUIPMENT LIST</b></small></h2> </center>
+                            <div class="card-header bg-info">
+                              <h3><b>FARMER RENT IN EQUIPMENT LIST</b></h3>
+                          </div>
                             <tr>
                                     <th>Farmer Name</th>
                                     <th>Address</th>   
@@ -347,10 +369,9 @@
                             {% endif %}
                             {% endfor %}
                             {% endfor %}
+                            <br>
                             <a href="GeneratePDF{{9}}" target="_blank"> <button id="button" class="btn btn-info" name="submit">PRINT</button></a>
- 
-                    
-                            {% endif %}                             
+                    {% endif %}                             
                 </table>    
               </div>      
             </div>

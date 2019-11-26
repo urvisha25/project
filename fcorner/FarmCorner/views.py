@@ -62,7 +62,8 @@ def farmerregis(request):
       
       #recaptcha .....................................
       clientkey=request.POST['g-recaptcha-response']
-      secretkey='6Lev4sIUAAAAAA9VzwPoicSZ81pIcTI9T2648iqM'
+      secretkey='6LfEo8QUAAAAAIWy8cnKnvpV2qEqX0gt3HKwY5Uy'
+      #secretkey='6Le6m8QUAAAAACG3-7e5nNP23V6n_gcP2IAa7num'
       captchadata={
                   'secret':secretkey,
                   'response':clientkey
@@ -158,7 +159,8 @@ def traderegis(request):
 
       #recaptcha .....................................
       clientkey=request.POST['g-recaptcha-response']
-      secretkey='6Lev4sIUAAAAAA9VzwPoicSZ81pIcTI9T2648iqM'
+      secretkey='6LfEo8QUAAAAAIWy8cnKnvpV2qEqX0gt3HKwY5Uy'
+      #secretkey='6Le6m8QUAAAAACG3-7e5nNP23V6n_gcP2IAa7num'
       captchadata={
                   'secret':secretkey,
                   'response':clientkey
@@ -256,7 +258,8 @@ def holderregis(request):
 
       #recaptcha .....................................
       clientkey=request.POST['g-recaptcha-response']
-      secretkey='6Lev4sIUAAAAAA9VzwPoicSZ81pIcTI9T2648iqM'
+      secretkey='6LfEo8QUAAAAAIWy8cnKnvpV2qEqX0gt3HKwY5Uy'
+      #secretkey='6Le6m8QUAAAAACG3-7e5nNP23V6n_gcP2IAa7num'
       captchadata={
                   'secret':secretkey,
                   'response':clientkey
@@ -339,7 +342,8 @@ def hlogin(request):
       if request.method == 'POST':
             #recaptcha .....................................
             clientkey=request.POST['g-recaptcha-response']
-            secretkey='6Lev4sIUAAAAAA9VzwPoicSZ81pIcTI9T2648iqM'
+            secretkey='6LfEo8QUAAAAAIWy8cnKnvpV2qEqX0gt3HKwY5Uy'
+            #secretkey='6Le6m8QUAAAAACG3-7e5nNP23V6n_gcP2IAa7num'
             captchadata={
                         'secret':secretkey,
                         'response':clientkey
@@ -807,7 +811,8 @@ def rent(request,id):
                 productupload.Address = add
                 productupload.Pincode = pin
                 productupload.unumber = request.session["unq"]
-                productupload.save()  
+                productupload.save()
+                
                 return redirect('rprice.html') 
       else: 
         form = rentequipments()       
@@ -1054,7 +1059,7 @@ def transactions(request):
             return render(request, 'rentbill.html', {'form':form}) 
 
 # Transaction List show in Farmer with Rating
-def rat(request,id):
+def rat(request,id):  
       du = transaction.objects.get(Rb_id = id)
       rate=request.POST.get('rate','')
       if request.method == "POST":           
@@ -1062,7 +1067,7 @@ def rat(request,id):
             if dd.Rating == 0:
                 request.session["rat"] = rate
                 uploadequip.objects.filter(E_id = dd.E_id).update(Rating = rate)               
-                transaction.objects.filter(Rb_id=id).update(status=1)
+                transaction.objects.filter(Rb_id=id).update(status=2)
                 messages.success(request,"Thanks For Rating!")
                 return redirect('transaction9.html')
             else:
@@ -1070,17 +1075,26 @@ def rat(request,id):
                 rs = dr/2
                 request.session["rat"] = rs
                 uploadequip.objects.filter(E_id = dd.E_id).update(Rating = rs)                
-                transaction.objects.filter(Rb_id=id).update(status=1)
+                transaction.objects.filter(Rb_id=id).update(status=2)
                 messages.success(request,"Thanks For Rating!")
                 return redirect('transaction9.html')
       return render(request,'rate.html')
        
 
-def transactionlist(request,id):       
+def transactionlist(request,id):  
+      
       if request.session["tid"] == 0:
             if id== 9:
                   request.session["alistt"] = "translist"
                   translst=transaction.objects.filter(F_id = request.session["idf"])
+                  '''for i in translst:
+                        ds =  rentequipment.objects.get(R_id = i.R_id)
+                        enddt = ds.enddate
+                        dd = datetime.now()  
+                        context = {
+                                    'dd':dd,
+                                    'enddt':enddt
+                              }'''
                   return render(request,'transaction.html',locals())
             elif id == 10:
                   request.session["alistt"] = "prolist"

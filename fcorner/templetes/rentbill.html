@@ -1,18 +1,14 @@
 {% extends 'basic.html' %} {% load render_table from django_tables2 %} {% render_table table %} {% block content %} {% load static %}
-<div class="message" style="margin-top: 10px">
-    {% if messages %} {% for message in messages %}
-    <div class="alert alert-{{message.tags}}">
-        {{message}}
-    </div>
-    {% endfor %} {% endif %}</div>
 
+    <div class="card border-info" style="width: 100%; margin-top: 0px;" align="center">
+            
 <div class="table-responsive" style="font-size: 15px;">
 
     <!--Farmer Rent Products --> 
     <table class="table table-hover">
-        <center>
-            <h3 style="color: green">Farmer Rent In Equipment's List</h3>
-        </center>        
+            <div class="card-header bg-info">
+                    <h3><b>Farmer Rent In Equipment's List</b></h3>
+            </div>           
         <tr align="center">
             <th>Farmer Name</th>   
             <th>Address</th>        
@@ -43,7 +39,7 @@
         <a href="GeneratePDF{{9}}" target="_blank"><button id="button" name="submit" class="btn btn-info">Print</button></a>
     </div>
 </div>
-
+</div>
 {% endblock %}
            <!-- {% if i.status == 1 %} 
                     

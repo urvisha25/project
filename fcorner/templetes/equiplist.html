@@ -2,19 +2,20 @@
       
         <!--Equipmentholder Upload Equipments-->
 
-<div class="table-responsive" style="font-size: 15px; margin-top: 10px;">
-        <div class="card-body">
-                {% if messages %} {% for message in messages %}
-                <div class="alert alert-{{message.tags}}">{{ message }}</div>
-                {% endfor %} {% endif %}
-            </div> 
-            {% if request.session.lgna != null %}
-            <table class="table table-striped table-bordered" id="example" cellspacing="20px">
-                <center>
-                    <h3 style="color: green">Equipmentholder Upload Equipments List</h3>
-                </center>
-                <hr>
-                <thead>
+        <div class="card border-info" style="width: 100%;" align="center">     
+            <div class="table-responsive" style="font-size: 15px; margin-top: 00px;">         
+                        {% if request.session.lgna != null %}
+                        <table class="table table-striped table-bordered" id="example" cellspacing="20px">
+                                <div class="card-header bg-info">
+                                        <h3><b>Equipmentholder Upload Equipments List</b></h3>
+                                </div> 
+                                <div class="card-body">
+                                        {% if messages %} {% for message in messages %}
+                                        <div class="alert alert-{{message.tags}}">{{ message }}</div>
+                                        {% endfor %} {% endif %}
+                                    </div>
+                            <br>
+                            <thead>
                 <tr align="center">
                     <th>Holder Name</th>
                     <th>Equipment Name</th>
@@ -40,8 +41,15 @@
     
     {% elif request.session.lgnh %}
     <table class="table table-striped table-bordered" id="example" cellspacing="15px" style="margin-top: 60px;">            
-            <center> <h3 style="color: green">Equipmentholder Upload Equipments List</h3></center>            
-            <hr>
+        <div class="card-header bg-info">
+            <h3><b>Equipmentholder Upload Equipments List</b></h3>
+    </div>  
+    <div class="card-body">
+            {% if messages %} {% for message in messages %}
+            <div class="alert alert-{{message.tags}}">{{ message }}</div>
+            {% endfor %} {% endif %}
+        </div>   
+<br>
             <thead>
             <tr align="center">
                 <th>Image of Equipments</th>                
@@ -72,10 +80,15 @@
     {% else %}
     {{request.session.dtt}}
     <table class="table table-striped table-bordered" id="example" cellspacing="20px">
-        <center>
-            <h3 style="color: green">Equipmentholder Upload Equipments List</h3>
-        </center>
-        <hr>
+        <div class="card-header bg-info">
+            <h3><b>Equipmentholder Upload Equipments List</b></h3>
+    </div>  
+    <div class="card-body">
+            {% if messages %} {% for message in messages %}
+            <div class="alert alert-{{message.tags}}">{{ message }}</div>
+            {% endfor %} {% endif %}
+        </div>   
+<br>
         <thead>
         <tr align="center">
             <th>Image of Equipments</th> 
@@ -113,7 +126,7 @@
     </table>
     {% endif %}
 </div>
-
+</div>
 
 <!--*******************************************************************************************-->
 <!--Search the data and record find-->
