@@ -2,6 +2,11 @@
 {% load crispy_forms_tags %} 
 {% block content %} 
 {% load static %}
+<style>
+label{
+                        font-weight: bold;
+                    }
+</style>
  <center>
  <div>
     <form  role="form" method="POST" enctype="multipart/form-data">
@@ -27,7 +32,7 @@
             {% csrf_token %}
             <div class="card-block">                   
                    <fieldset class="form-group col-md-10" >                     
-                    <label for="city"><b>District</b></label>
+                    <label for="city">District</label>
                     <select id="dist" name="dist" class="form-control">
                             {% for entry in d %}
                             <option value="{{ entry.District }}">{{ entry.District }}</option>
