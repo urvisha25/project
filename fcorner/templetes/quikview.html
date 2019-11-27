@@ -11,6 +11,9 @@
       <div class="row">
           <div class="col-md-5" >
             <img src="{{ a.Image.url }}" class="img-responsive" style="width:99%; height:auto;border: 2px solid black;" />
+            {% for i in b %}
+           <p style="margin-top:3%; font-size:xx-large; "> <b>{{i.shop_name}}</b></p>
+            {% endfor %}
             </div>
           <div class="col-md-7" style="border: 2px solid black;margin-left: 00px;">
                 <label style="margin-left: 40px; font-weight: bolder;">Specifications</label>

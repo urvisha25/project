@@ -37,8 +37,9 @@ def home(request):
       return render(request, 'home.html',context)
 
 # quikview
-def quikview(request,id):
+def quikview(request,id):       
       a=uploadequip.objects.get(E_id=id)
+      b=eholder.objects.filter(H_id=a.H_id)
       return render(request,'quikview.html',locals())
 
 # basic page in select equipments
@@ -62,8 +63,8 @@ def farmerregis(request):
       
       #recaptcha .....................................
       clientkey=request.POST['g-recaptcha-response']
-      secretkey='6LfEo8QUAAAAAIWy8cnKnvpV2qEqX0gt3HKwY5Uy'
-      #secretkey='6Le6m8QUAAAAACG3-7e5nNP23V6n_gcP2IAa7num'
+      #secretkey='6LfEo8QUAAAAAIWy8cnKnvpV2qEqX0gt3HKwY5Uy'
+      secretkey='6Le6m8QUAAAAACG3-7e5nNP23V6n_gcP2IAa7num'
       captchadata={
                   'secret':secretkey,
                   'response':clientkey
@@ -159,8 +160,8 @@ def traderegis(request):
 
       #recaptcha .....................................
       clientkey=request.POST['g-recaptcha-response']
-      secretkey='6LfEo8QUAAAAAIWy8cnKnvpV2qEqX0gt3HKwY5Uy'
-      #secretkey='6Le6m8QUAAAAACG3-7e5nNP23V6n_gcP2IAa7num'
+      #secretkey='6LfEo8QUAAAAAIWy8cnKnvpV2qEqX0gt3HKwY5Uy'
+      secretkey='6Le6m8QUAAAAACG3-7e5nNP23V6n_gcP2IAa7num'
       captchadata={
                   'secret':secretkey,
                   'response':clientkey
@@ -258,8 +259,8 @@ def holderregis(request):
 
       #recaptcha .....................................
       clientkey=request.POST['g-recaptcha-response']
-      secretkey='6LfEo8QUAAAAAIWy8cnKnvpV2qEqX0gt3HKwY5Uy'
-      #secretkey='6Le6m8QUAAAAACG3-7e5nNP23V6n_gcP2IAa7num'
+      #secretkey='6LfEo8QUAAAAAIWy8cnKnvpV2qEqX0gt3HKwY5Uy'
+      secretkey='6Le6m8QUAAAAACG3-7e5nNP23V6n_gcP2IAa7num'
       captchadata={
                   'secret':secretkey,
                   'response':clientkey
@@ -342,8 +343,8 @@ def hlogin(request):
       if request.method == 'POST':
             #recaptcha .....................................
             clientkey=request.POST['g-recaptcha-response']
-            secretkey='6LfEo8QUAAAAAIWy8cnKnvpV2qEqX0gt3HKwY5Uy'
-            #secretkey='6Le6m8QUAAAAACG3-7e5nNP23V6n_gcP2IAa7num'
+            #secretkey='6LfEo8QUAAAAAIWy8cnKnvpV2qEqX0gt3HKwY5Uy'
+            secretkey='6Le6m8QUAAAAACG3-7e5nNP23V6n_gcP2IAa7num'
             captchadata={
                         'secret':secretkey,
                         'response':clientkey
@@ -1067,7 +1068,7 @@ def rat(request,id):
             if dd.Rating == 0:
                 request.session["rat"] = rate
                 uploadequip.objects.filter(E_id = dd.E_id).update(Rating = rate)               
-                transaction.objects.filter(Rb_id=id).update(status=2)
+                transaction.objects.filter(Rb_id=id).update(status=1)
                 messages.success(request,"Thanks For Rating!")
                 return redirect('transaction9.html')
             else:
@@ -1075,7 +1076,7 @@ def rat(request,id):
                 rs = dr/2
                 request.session["rat"] = rs
                 uploadequip.objects.filter(E_id = dd.E_id).update(Rating = rs)                
-                transaction.objects.filter(Rb_id=id).update(status=2)
+                transaction.objects.filter(Rb_id=id).update(status=1)
                 messages.success(request,"Thanks For Rating!")
                 return redirect('transaction9.html')
       return render(request,'rate.html')
@@ -1132,7 +1133,7 @@ def GeneratePDF(request,id,*args, **kwargs):
             else:
                   c=request.session["sd"]  
                   d=request.session["ld"]      
-                  a = "flist1"            
+                  a = "flist"            
                   e = Farmerreg.objects.filter(mydate__range=(c,d)) 
                   context = {
                   'a':a,
