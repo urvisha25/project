@@ -44,7 +44,8 @@ urlpatterns=[
     path('delrentequip<int:id>',views.delrentequip, name='rent Equipment delete'),
     path('transaction<int:id>.html',views.transactionlist, name='rent bill list,trader buy product price list'),
     path('editproduct<int:id>',views.editproduct, name="edit Farm product by Farmer"),
-
+    path('ajax/dist_taluka/',views.dist_taluka, name="ajax_dist_taluka"),
+    path('dist.html', views.dist, name="dist"),
     # Trader upload Price, show, show Farmer Product, Buy product,edit
 
     path('priceupload', views.priceupload, name = 'Trader upload price'),

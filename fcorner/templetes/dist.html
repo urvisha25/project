@@ -1,0 +1,28 @@
+{% extends 'basic.html' %} {% block content %} {% load static %}{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <script src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript" language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<body style="background-color:whitesmoke;">
+        <form name="myform" id="myForm">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://www.appelsiini.net/projects/chained/jquery.chained.js?v=0.9.10"></script>
+<select id="id_country" name="country">
+        {% for i in d %}
+        <option value="{{i.D_id}}">{{i.District}}</option>  
+        {% endfor %} 
+   
+</select>
+<select id="id_city" name="city">
+        {% for i in b %}
+        <option value="{{i.t_id}}" class="{{i.D_id}}">{{i.Taluka}}</option>  
+        {% endfor %}  
+    
+</select>
+<script>$("#id_city").chained("#id_country");</script>
+</html>
+
+
+{% endblock %}

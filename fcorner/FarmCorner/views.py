@@ -36,6 +36,10 @@ def home(request):
       }
       return render(request, 'home.html',context)
 
+def dist(request):
+      d=districts.objects.all()
+      b=talukas.objects.all()
+      return render(request,'dist.html',locals())
 # quikview
 def quikview(request,id):       
       a=uploadequip.objects.get(E_id=id)
@@ -44,103 +48,111 @@ def quikview(request,id):
 
 # basic page in select equipments
 
+def dist_taluka(request):
+      d= request.GET.get('District')
+      t= talukas.objects.filter(d=d).order_by('Taluka')
+      return render(request,'fregis.html',{'t':t})
+
 # Farmer Registration 
 
-def farmerregis(request):
-    a= districts.objects.all()
-    if request.method=="POST":      
-      name= request.POST.get('name','')   
-      address= request.POST.get('address','')
-      mobileno= request.POST.get('mobileno','')
-      dist= request.POST.get('dist','')
-      taluka= request.POST.get('taluka','')
-      city= request.POST.get('city','')    
-      email1= request.POST.get('email','')
-      area= request.POST.get('area','')
-      pincode= request.POST.get('pincode','')      
-      password= request.POST.get('password','')   
-      password1= request.POST.get('password1','')  
+def farmerregis(request,*args,**kwargs):
+      a= districts.objects.all()
+      b= talukas.objects.all()      
+      if request.method=="POST":      
+            name= request.POST.get('name','')   
+            address= request.POST.get('address','')
+            mobileno= request.POST.get('mobileno','')
+            dis = request.POST.get('dist','')
+            tal = request.POST.get('taluka','')                
+            city= request.POST.get('city','')    
+            email1= request.POST.get('email','')
+            area= request.POST.get('area','')
+            pincode= request.POST.get('pincode','')      
+            password= request.POST.get('password','')   
+            password1= request.POST.get('password1','') 
+                                
       
       #recaptcha .....................................
-      clientkey=request.POST['g-recaptcha-response']
-      #secretkey='6LfEo8QUAAAAAIWy8cnKnvpV2qEqX0gt3HKwY5Uy'
-      secretkey='6Le6m8QUAAAAACG3-7e5nNP23V6n_gcP2IAa7num'
-      captchadata={
-                  'secret':secretkey,
-                  'response':clientkey
-      }
-      r=requests.post('https://www.google.com/recaptcha/api/siteverify',data=captchadata)
-      response=json.loads(r.text)
-      verify=response["success"]
-      if verify:
+            clientkey=request.POST['g-recaptcha-response']
+            #secretkey='6LfEo8QUAAAAAIWy8cnKnvpV2qEqX0gt3HKwY5Uy'
+            secretkey='6Le6m8QUAAAAACG3-7e5nNP23V6n_gcP2IAa7num'
+            captchadata={
+                        'secret':secretkey,
+                        'response':clientkey
+            }
+            r=requests.post('https://www.google.com/recaptcha/api/siteverify',data=captchadata)
+            response=json.loads(r.text)
+            verify=response["success"]
+            if verify:
     #...............................................
 
   # check mobile number and email already exist or not!
-            if password==password1:
-            # mobile number and email check
-                  if eholder.objects.filter(email=email1).exists():
-                        if eholder.objects.filter(Mobileno=mobileno).exists():
-                              messages.warning(request,'mobile number and Email already exists as a Equipmentholder!') 
-                              return render(request,'registration/fregis.html')             
-                        else:
-                              messages.warning(request,'Email already exists as a Equipmentholder!') 
-                        return render(request,'registration/fregis.html') 
+                  if password==password1:
+                  # mobile number and email check
+                        if eholder.objects.filter(email=email1).exists():
+                              if eholder.objects.filter(Mobileno=mobileno).exists():
+                                    messages.warning(request,'mobile number and Email already exists as a Equipmentholder!') 
+                                    return render(request,'registration/fregis.html')             
+                              else:
+                                    messages.warning(request,'Email already exists as a Equipmentholder!') 
+                              return render(request,'registration/fregis.html') 
+                        
+                  # mobile number and email check
+                        elif traderreg.objects.filter(email=email1).exists():
+                              if traderreg.objects.filter(Mobileno=mobileno).exists():
+                                    messages.warning(request,'mobile number and Email already exists as a Trader!') 
+                                    return render(request,'registration/fregis.html')             
+                              else:
+                                    messages.warning(request,'Your email already exists as a Trader! please enter another email!') 
+                              return render(request,'registration/fregis.html') 
+
+                  # mobile number and email check              
+                        elif Farmerreg.objects.filter(email=email1).exists():
+                              if Farmerreg.objects.filter(Mobileno=mobileno).exists():
+                                          messages.warning(request,'mobile number and Email already exists as a Farmer!')  
+                                          return render(request,'registration/fregis.html')            
+                              else:
+                                    messages.warning(request,'Your email already exists as a  Farmer! please enter another email!') 
+                              return render(request,'registration/fregis.html')  
+
+                  # mobile number check
+                        elif Farmerreg.objects.filter(Mobileno=mobileno).exists():
+                              messages.warning(request,'mobile number already exists as a Farmer!')
+                              return render(request,'registration/fregis.html') 
+                        elif traderreg.objects.filter(Mobileno=mobileno).exists():
+                              messages.warning(request,'mobile number already exists as a Trader!')
+                              return render(request,'registration/fregis.html') 
+                        elif eholder.objects.filter(Mobileno=mobileno).exists():
+                              messages.warning(request,'mobile number already exists as a Equipmentholder!')
+                              return render(request,'registration/fregis.html')                  
+
+                  # email number check
+                        elif Farmerreg.objects.filter(email=email1).exists():
+                              messages.warning(request,'Your email already exists as a Farmer! please enter another email!')
+                              return render(request,'registration/fregis.html')
+                        elif Farmerreg.objects.filter(email=email1).exists():
+                              messages.warning(request,'Your email already exists as a Farmer! please enter another email!')
+                              return render(request,'registration/fregis.html')
+                        elif Farmerreg.objects.filter(email=email1).exists():
+                              messages.warning(request,'Your email already exists as a Farmer! please enter another email!')
+                              return render(request,'registration/fregis.html')           
                   
-            # mobile number and email check
-                  elif traderreg.objects.filter(email=email1).exists():
-                        if traderreg.objects.filter(Mobileno=mobileno).exists():
-                              messages.warning(request,'mobile number and Email already exists as a Trader!') 
-                              return render(request,'registration/fregis.html')             
                         else:
-                              messages.warning(request,'Your email already exists as a Trader! please enter another email!') 
-                        return render(request,'registration/fregis.html') 
-
-            # mobile number and email check              
-                  elif Farmerreg.objects.filter(email=email1).exists():
-                        if Farmerreg.objects.filter(Mobileno=mobileno).exists():
-                                    messages.warning(request,'mobile number and Email already exists as a Farmer!')  
-                                    return render(request,'registration/fregis.html')            
-                        else:
-                              messages.warning(request,'Your email already exists as a  Farmer! please enter another email!') 
-                        return render(request,'registration/fregis.html')  
-
-            # mobile number check
-                  elif Farmerreg.objects.filter(Mobileno=mobileno).exists():
-                        messages.warning(request,'mobile number already exists as a Farmer!')
-                        return render(request,'registration/fregis.html') 
-                  elif traderreg.objects.filter(Mobileno=mobileno).exists():
-                        messages.warning(request,'mobile number already exists as a Trader!')
-                        return render(request,'registration/fregis.html') 
-                  elif eholder.objects.filter(Mobileno=mobileno).exists():
-                        messages.warning(request,'mobile number already exists as a Equipmentholder!')
-                        return render(request,'registration/fregis.html')                  
-
-            # email number check
-                  elif Farmerreg.objects.filter(email=email1).exists():
-                        messages.warning(request,'Your email already exists as a Farmer! please enter another email!')
-                        return render(request,'registration/fregis.html')
-                  elif Farmerreg.objects.filter(email=email1).exists():
-                        messages.warning(request,'Your email already exists as a Farmer! please enter another email!')
-                        return render(request,'registration/fregis.html')
-                  elif Farmerreg.objects.filter(email=email1).exists():
-                        messages.warning(request,'Your email already exists as a Farmer! please enter another email!')
-                        return render(request,'registration/fregis.html')           
-            
-                  else:
-                        reg= Farmerreg(F_name=name,Address=address,Mobileno=mobileno,District=dist,Taluka=taluka,City=city,email=email1,Area=area,Pincode=pincode,password=password)
-                        reg.save() 
-                        subject = 'Thank you for registering to our site'
-                        message = ' it  means a world to us '
-                        email_from = settings.EMAIL_HOST_USER
-                        recipient_list = [email1]
-                        send_mail( subject, message, email_from, recipient_list )
-                        messages.success(request,'Successfully Register!')
-                        return render(request,'registration/fregis.html')
-            else:  
-                  messages.warning(request,'email already exists!')   
+                              reg= Farmerreg(F_name=name,Address=address,Mobileno=mobileno,District=dis,Taluka=tal,City=city,email=email1,Area=area,Pincode=pincode,password=password)
+                              reg.save()                               
+                              subject = 'Thank you for registering to our site'
+                              message = ' it  means a world to us '
+                              email_from = settings.EMAIL_HOST_USER
+                              recipient_list = [email1]
+                              send_mail( subject, message, email_from, recipient_list )
+                              messages.success(request,'Successfully Register!')
+                              return render(request,'registration/fregis.html')
+                  else:  
+                        messages.warning(request,'email already exists!')   
+                  return render(request,'registration/fregis.html',locals())
+      else: 
+                        
             return render(request,'registration/fregis.html',locals())
-    else:       
-        return render(request,'registration/fregis.html',locals())
 
 # Trader Registration
 

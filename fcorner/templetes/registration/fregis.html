@@ -1,9 +1,14 @@
-{% extends 'basic.html' %} {% block content %} {% load static %}
+{% extends 'basic.html' %} {% block content %} {% load static %}{% load crispy_forms_tags %}
 <!DOCTYPE html>
 <html lang="en">
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <script src="//cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+        <script type="text/javascript" language="javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script src="https://www.appelsiini.net/projects/chained/jquery.chained.js?v=0.9.10"></script>
 <body style="background-color:whitesmoke;">
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST" enctype="multipart/form-data"  id="fregis" data-point-url="{% url 'ajax_dist_taluka' %}"  novalidate action="" class="form-signin" >
         {% csrf_token %}
         <center>
             <div class="container">
@@ -16,7 +21,7 @@
                                 <div class="alert alert-{{message.tags}}">{{ message }}</div>
                                 {% endfor %} {% endif %}
                                 <h1 class="card-title text-center">Farmer Registration</h1><br>
-                                <form class="form-signin">
+                                
                                     <div class="form-group">                                           
                                         <input type="text" id="name" class="form-control" placeholder="User Name" name="name" pattern='[A-Za-z\\s]*' required autofocus>
                                         
@@ -26,18 +31,21 @@
                                     </div>
                                     <div class="form-group">
                                         <input type="tel" class="form-control" id="mob" name="mobileno" placeholder="Mobile number" maxlength="10" required required pattern="^[6-9]\d{9}$">
-                                    </div>
+                                    </div>   
                                     <div class="form-group">
-                                        <select class="form-control" id="district" name="dist" placeholder="District" required>
-                                           {% for i in a %}
-                                            <option>{{i.District}}</option>  
-                                            {% endfor %}                                         
-                                          </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="taluka" name="taluka" placeholder="Taluka name" pattern='[A-Za-z\\s]*' required>
-
-                                    </div>
+                                            <select class="form-control" id="district" name="dist" placeholder="District"  required>
+                                                    {% for i in a %}
+                                                    <option value="{{i.D_id}}">{{i.District}}</option>  
+                                                    {% endfor %}                                              
+                                              </select> </div>
+                                        <div class="form-group">
+                                                <select class="form-control" id="taluka" name="taluka" placeholder="Taluka" required>
+                                                        {% for i in b %}
+                                                        <option value="{{i.t_id}}" class="{{i.D_id}}">{{i.Taluka}}</option>  
+                                                     {% endfor %}                                          
+                                                      </select>                                            
+                                        </div>  
+                                        <script>$("#taluka").chained("#district");</script>                        
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="city" name="city" placeholder="City/Village name" pattern='[A-Za-z\\s]*' required>
                                     </div>
@@ -62,7 +70,10 @@
                                     <div class="form-group">
                                         <input type="password"  id="confirm_password" class="form-control" name="password1" placeholder="Confirm Password" required aria-describedby="pass"  required pattern="(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
                                         <span id='message'></span>
-                                    </div>                                    
+                                    </div>  
+                                    <form method="POST" enctype="multipart/form-data" id="fregis" data-point-url="{% url 'ajax_dist_taluka' %}"  novalidate action="">
+                                        
+                                </form>                                  
                                     <hr> 
                                     <div class="form-group">
                                        <div class="g-recaptcha" data-sitekey="6Le6m8QUAAAAAMnX7caVrlG2IS_ebQjOnFbFXhLu"></div><br>
@@ -72,12 +83,13 @@
                                      </div>                                  
                                     <hr>
                                     <a class="d-block text-center mt-2 small" href="hlogin">Sign In</a>
-                                </form>
+                                
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </form>
 </body>
 
 </html>
@@ -151,4 +163,21 @@ $('#password, #confirm_password').on('keyup', function () {
         this.value = newValue;
         }
 </script>
+<!--------------Dropdown selected---------------->
+<script>
+    $("#district").change(function () {
+      var url = $("#fregis").attr("data-point-url");  
+      var c= $(this).val();
+      $.ajax({                      
+        url: url,                  
+        data: {
+          'c': c       
+        },
+        success: function (data) {   
+          $("#taluka").html(data);  
+        }
+      });
+    });
+  </script>
+  
 {% endblock %}
