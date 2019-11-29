@@ -69,9 +69,11 @@ def farmerregis(request,*args,**kwargs):
             area= request.POST.get('area','')
             pincode= request.POST.get('pincode','')      
             password= request.POST.get('password','')   
-            password1= request.POST.get('password1','') 
-                                
-      
+            password1= request.POST.get('password1','')
+            d= districts.objects.get(D_id = dis)
+            dnm = d.District
+            t= talukas.objects.get(t_id= tal)
+            tnm= t.Taluka
       #recaptcha .....................................
             clientkey=request.POST['g-recaptcha-response']
             #secretkey='6LfEo8QUAAAAAIWy8cnKnvpV2qEqX0gt3HKwY5Uy'
@@ -135,10 +137,9 @@ def farmerregis(request,*args,**kwargs):
                               return render(request,'registration/fregis.html')
                         elif Farmerreg.objects.filter(email=email1).exists():
                               messages.warning(request,'Your email already exists as a Farmer! please enter another email!')
-                              return render(request,'registration/fregis.html')           
-                  
+                              return render(request,'registration/fregis.html')  
                         else:
-                              reg= Farmerreg(F_name=name,Address=address,Mobileno=mobileno,District=dis,Taluka=tal,City=city,email=email1,Area=area,Pincode=pincode,password=password)
+                              reg= Farmerreg(F_name=name,Address=address,Mobileno=mobileno,District=dnm,Taluka=tnm,City=city,email=email1,Area=area,Pincode=pincode,password=password)
                               reg.save()                               
                               subject = 'Thank you for registering to our site'
                               message = ' it  means a world to us '
@@ -157,7 +158,8 @@ def farmerregis(request,*args,**kwargs):
 # Trader Registration
 
 def traderegis(request): 
-    a= districts.objects.all()   
+    a= districts.objects.all()
+    b= talukas.objects.all()   
     if request.method=="POST":      
       name= request.POST.get('name','')   
       address= request.POST.get('address','')
@@ -169,7 +171,10 @@ def traderegis(request):
       pincode= request.POST.get('pincode','')
       password= request.POST.get('password','')   
       password1= request.POST.get('password1','') 
-
+      d= districts.objects.get(D_id = dist)
+      dnm = d.District
+      t= talukas.objects.get(t_id= taluka)
+      tnm= t.Taluka
       #recaptcha .....................................
       clientkey=request.POST['g-recaptcha-response']
       #secretkey='6LfEo8QUAAAAAIWy8cnKnvpV2qEqX0gt3HKwY5Uy'
@@ -234,7 +239,7 @@ def traderegis(request):
                   return render(request,'registration/traderregis.html')           
  
             else:
-                  reg= traderreg(T_name=name,Address=address,Mobileno=mobileno,District=dist,Taluka=taluka,City=city,email=email1,Pincode=pincode,password=password)
+                  reg= traderreg(T_name=name,Address=address,Mobileno=mobileno,District=dnm,Taluka=tnm,City=city,email=email1,Pincode=pincode,password=password)
                   reg.save() 
                   subject = 'Thank you for registering to our site'
                   message = ' it  means a world to us '
@@ -256,6 +261,7 @@ def traderegis(request):
 
 def holderregis(request):   
     a= districts.objects.all()
+    b= talukas.objects.all()
     if request.method=="POST":     
       name= request.POST.get('hname','')
       shopname= request.POST.get('shopname','')
@@ -268,7 +274,7 @@ def holderregis(request):
       email1= request.POST.get('hemail','')
       password= request.POST.get('hpassword','')  
       password1= request.POST.get('hpassword1','')
-
+      
       #recaptcha .....................................
       clientkey=request.POST['g-recaptcha-response']
       #secretkey='6LfEo8QUAAAAAIWy8cnKnvpV2qEqX0gt3HKwY5Uy'
@@ -744,11 +750,10 @@ def editproduct(request,id):
             form = editeproduct()       
       return render(request, 'editprice.html', {'form': form})
 
-
 # All equipments list in home page
 
 def tractors(request,id):
-      a= eholder.objects.all()
+      a= eholder.objects.all()      
       if id==1:
             nam="Tractor"
             d=uploadequip.objects.filter(Category=nam)

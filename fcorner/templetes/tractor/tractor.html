@@ -17,8 +17,10 @@
 </style>
 <body> 
 <div>  
-        <div class="card-header bg-info" style="margin: 5px 85px 10px 85px"> 
-            <h3>Helo</h3>
+        <div class="card-header bg-info" align="center" style="margin: 5px 85px 10px 85px"> 
+                {% for i in d %}
+            <h3>{{i.Category}}</h3>
+            {% endfor %}
         </div>
 <div class="row" style="margin-left: 5%;margin-right: 5%;">
         {% for i in d|slice:"0:" %}
