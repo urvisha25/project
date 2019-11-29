@@ -5,7 +5,27 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
  </head>
-
+ <!------------No back Button------------>
+ <script type="text/javascript">
+  window.history.forward();
+  function noBack() {
+      window.history.forward();
+  }
+  window.location.hash = "no-back-button";
+  window.location.hash = "Again-No-back-button"; //again because google chrome don't insert first hash into history
+  window.onhashchange = function() {
+      window.location.hash = "no-back-button";
+  }
+  $(document).ready(function() {
+      function disableBack() {
+          window.history.forward()
+      }
+      window.onload = disableBack();
+      window.onpageshow = function(evt) {
+          if (evt.persisted) disableBack()
+      }
+  });
+</script>
 <style>
     /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
     .row.content {
@@ -83,7 +103,7 @@
     }
 </style>
 
-
+<body onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
 <!---------- Banner ------------->
 <div class="container-fluid">
     <div class="row content" style="margin-bottom: 0px; margin-left: 10px;">
@@ -100,15 +120,15 @@
         <!--Slides-->
         <div class="carousel-inner" role="listbox">
           <!--First slide-->
-          <div class="carousel-item active">
-              <img src="/media/{{plist.0.Image}}" style="width: 99%; height:600px;">
+          <div class="carousel-item active" style="border: 2px solid black;">
+              <img src="/media/{{plist.0.Image}}" style="width: 100%; height:600px;">
               <div class="carousel-caption">
                 <h3>{{i.E_name}}</h3>                                                             
               </div>
           </div>
           {% for i in plist|slice:"1:" %}
-          <div class="carousel-item">
-              <img src="/media/{{i.Image}}" style="width: 99%;height:600px;">
+          <div class="carousel-item" style="border: 2px solid black;">
+              <img src="/media/{{i.Image}}" style="width: 100%;height:600px;">
               <div class="carousel-caption">
                 <h3>{{i.E_name}}</h3>                                                             
               </div>
@@ -204,6 +224,7 @@
             </div>
           </div>     
         </div>
-      </div>    
+      </div>
+    </body>    
   </html>
 {% endblock %}

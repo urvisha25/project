@@ -15,16 +15,18 @@
   <div class="container-fluid">
     <div class="row content">
       <div class="col-sm-2 sidenav" style="background-color: cornsilk;">        
-            
-                      <center>   <h3 style="color:cornflowerblue">Search Date</h2></center>
+        <div class="card-header bg-info col-sm-12">
+          <h4><b>Search Date</b></h4>
+      </div>
+                     <br>
                         <form class="form-group" method="POST">
                           {% csrf_token %}
                           <div class="form-group">
-                            <label for="date">Start date:</label>
+                            <label for="date"><b>Start date:</b></label>
                             <input type="date" class="form-control" id="sdate" name="sdate">
                           </div>&nbsp;&nbsp;&nbsp;
                           <div class="form-group">
-                            <label for="date">End date:</label>
+                            <label for="date"><b>End date:</b></label>
                             <input type="date" class="form-control" id="ldate" name="ldate">&nbsp;  &nbsp;  <br>
                           <center><button type="submit" class="btn btn-success">Submit</button></center>
                           </div>      

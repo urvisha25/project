@@ -27,6 +27,8 @@ class uploadproduct(forms.ModelForm):
 
  # upload product price
 
+# upload product Price
+
 class upldprice(forms.ModelForm):   
     class Meta: 
             model = uploadprice 
@@ -119,7 +121,7 @@ class editeproduct(forms.ModelForm):
         model=uproduct
         fields=['Quantity']
 
-# rent
+# rent in equipments
 
 class DateInput(forms.DateInput):
     input_type = 'date'

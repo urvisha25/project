@@ -757,30 +757,48 @@ def tractors(request,id):
       if id==1:
             nam="Tractor"
             d=uploadequip.objects.filter(Category=nam)
+            for i in d:
+                  request.session["cnm"]=i.Category
       elif id==2:
             nam="Harvesters"
             d=uploadequip.objects.filter(Category=nam)
+            for i in d:
+                  request.session["cnm"]=i.Category
       elif id==3:
             nam="Tillage"
             d=uploadequip.objects.filter(Category=nam)
+            for i in d:
+                  request.session["cnm"]=i.Category
       elif id==4:
             nam="Seeding and Plantation"
             d=uploadequip.objects.filter(Category=nam)
+            for i in d:
+                  request.session["cnm"]=i.Category
       elif id==5:
             nam="Crop Protection"
             d=uploadequip.objects.filter(Category=nam)
+            for i in d:
+                  request.session["cnm"]=i.Category
       elif id==6:
             nam="Landscaping Equipments"
             d=uploadequip.objects.filter(Category=nam)
+            for i in d:
+                  request.session["cnm"]=i.Category
       elif id==7:
             nam="postharvest Equipments"
             d=uploadequip.objects.filter(Category=nam)
+            for i in d:
+                  request.session["cnm"]=i.Category
       elif id==8:
             nam="Haulage"
             d=uploadequip.objects.filter(Category=nam)
+            for i in d:
+                  request.session["cnm"]=i.Category
       elif id==9:
             nam="Others"
             d=uploadequip.objects.filter(Category=nam)
+            for i in d:
+                  request.session["cnm"]=i.Category
       context={
             'a':a,
             'd':d
@@ -1097,8 +1115,7 @@ def rat(request,id):
                 messages.success(request,"Thanks For Rating!")
                 return redirect('transaction9.html')
       return render(request,'rate.html')
-       
-
+ 
 def transactionlist(request,id):  
       
       if request.session["tid"] == 0:
@@ -1133,7 +1150,8 @@ def delrentequip(request,id):
       transaction.objects.get(Rb_id=id).delete() 
       messages.success(request,'Rent in Equipments is  Delete')
       return render(request,'transaction.html')
-# Generate PDF 
+
+# Generate PDF in Admin
 
 def GeneratePDF(request,id,*args, **kwargs):                
         if id == 1:    
@@ -1463,7 +1481,7 @@ def listtaluka(request):
             return render(request, 'listtaluka.html', locals())
       return render(request,'listtaluka.html', locals())
 
-# Trader Delete Price 
+# Trader Delete Price  and Famrer delete farm product
              
 def delprc(request,id):
       if uploadprice.objects.filter(P_id=id).exists():

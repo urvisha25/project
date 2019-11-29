@@ -45,19 +45,20 @@
     
 <!--------------only Enter Number ----------------->   
     <script>
-            var userName = document.querySelector('#id_Price');
-
+        var userName = document.querySelector('#id_Price');
         userName.addEventListener('input', restrictNumber);
         function restrictNumber (e) {  
         var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
         this.value = newValue;
         }
+
         var grda = document.querySelector('#id_Gradea');            
         grda.addEventListener('input', restrictNumber);
         function restrictNumber (e) {  
         var newValue = this.value.replace(new RegExp(/[^\d]/,'ig'), "");
         this.value = newValue;
         }
+        
         var grdb = document.querySelector('#id_Gradeb');            
         grdb.addEventListener('input', restrictNumber);
         function restrictNumber (e) {  
